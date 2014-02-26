@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../css/class.css"/>
+	</head>
+	<body>
+		<div class="class-container">
+			<div class="class-label">命名空间：NPMapLib&nbsp;&nbsp;&nbsp;&nbsp;(PS：力图精简，以下描述皆省略命名空间，详见相关类的说明页面)</div>
+			<div class="class-label">构造函数</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">构造函数</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">Map(container:String|HTMLElement, opts:Array)</td>
+					<td class="grey">在指定的容器内创建地图实例。</br>
+									opts={</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minZoom: 0, 	//地图允许展示的最小级别 </br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxZoom: 10		//地图允许展示的最大级别 </br>
+								    };
+					</td>
+				</tr>
+			</table>
+			<div class="class-label">属性</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">属性</th>
+					<th width="90">类型</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">id</td>
+					<td class="green">Number</td>
+					<td class="grey">唯一标识。</td>
+				</tr>
+			</table>
+			<div class="class-label">地图配置</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">enableScrollWheelZoom()</td>
+					<td class="green">none</td>
+					<td class="grey">启用鼠标滚轮放大缩小，默认启用。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">disableScrollWheelZoom()</td>
+					<td class="green">none</td>
+					<td class="grey">禁用鼠标滚轮放大缩小。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">enableDoubleClickZoom()</td>
+					<td class="green">none</td>
+					<td class="grey">启用双击放大，默认启用。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">disableDoubleClickZoom()</td>
+					<td class="green">none</td>
+					<td class="grey">禁用双击放大。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">enableKeyboard()</td>
+					<td class="green">none</td>
+					<td class="grey">启用键盘操作，默认启用。键盘的上、下、左、右键可连续移动地图。同时按下其中两个键可使地图进行对角移动。PgUp、PgDn、Home和End键会使地图平移其1/2的大小。+、-键会使地图放大或缩小一级。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">disableKeyboard()</td>
+					<td class="green">none</td>
+					<td class="grey">禁用键盘操作。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">enableInertialDragging()</td>
+					<td class="green">none</td>
+					<td class="grey">启用地图惯性拖拽，默认禁用。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">disableInertialDragging()</td>
+					<td class="green">none</td>
+					<td class="grey">禁用地图惯性拖拽。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setCursor(cursor:String)</td>
+					<td class="green">none</td>
+					<td class="grey">设置地图鼠标指针样式。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getCursor()</td>
+					<td class="green">String</td>
+					<td class="grey">返回地图鼠标指针样式。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setMinZoom(zoom:Nnmber)</td>
+					<td class="green">none</td>
+					<td class="grey">设置地图允许的最小级别。取值不得小于地图类型所允许的最小级别。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">setMaxZoom(zoom:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">设置地图允许的最大级别。取值不得大于地图类型所允许的最大级别。</td>
+				</tr>
+			</table>
+
+			<div class="class-label">地图状态方法</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">getExtent()</td>
+					<td class="green">Extent</td>
+					<td class="grey">返回地图可视区域，以地理坐标表示。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getCenter()</td>
+					<td class="green">Point</td>
+					<td class="grey">返回地图当前中心点。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">getDistance(start:Point, end:Point)</td>
+					<td class="green">Number</td>
+					<td class="grey">返回两点之间的距离，单位是米。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">getSize()</td>
+					<td class="green">Size</td>
+					<td class="grey">返回地图视图的大小，以像素表示。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getZoom()</td>
+					<td class="green">Number</td>
+					<td class="grey">返回地图当前缩放级别。</td>
+				</tr>
+			</table>
+
+			<div class="class-label">修改地图状态</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">centerAndZoom(center:Point,zoom:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">地图根据指定的点和级别进行对中。center只能在地图的fullExtent范围内，zoom只能在地图的最大显示级别和最小显示级别之间。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">pan()</td>
+					<td class="green">none</td>
+					<td class="grey">地图平移。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">panTo(center:Point)</td>
+					<td class="green">none</td>
+					<td class="grey">将地图的中心点更改为给定的点。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">panByPixel(x:Number,y:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">将地图在水平位置上移动x像素，垂直位置上移动y像素。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">reset()</td>
+					<td class="green">none</td>
+					<td class="grey">重新设置地图，恢复地图初始化时的中心点和级别</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setCenter(center:Point)</td>
+					<td class="green">none</td>
+					<td class="grey">设置地图中心点。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">switchLayer(index:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">切换图层。</br>index为添加到地图时的顺序。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setZoom(zoom:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">将地图缩放到指定的缩放等级，中心点坐标不变。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">fullExtent()</td>
+					<td class="green">none</td>
+					<td class="grey">全图。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">zoomIn()</td>
+					<td class="green">none</td>
+					<td class="grey">拉框放大。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">zoomOut()</td>
+					<td class="green">none</td>
+					<td class="grey">拉框缩小。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">zoomInFixed()</td>
+					<td class="green">none</td>
+					<td class="grey">固定放大一个级别。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">zoomOutFixed()</td>
+					<td class="green">none</td>
+					<td class="grey">固定缩小一个级别。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">zoomToExtent(extent:Extent)</td>
+					<td class="green">none</td>
+					<td class="grey">地图缩放到指定范围</td>
+				</tr>
+			</table>
+
+			<div class="class-label">控件</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">addControl(control:Control)</td>
+					<td class="green">none</td>
+					<td class="grey">将控件添加到地图，一个控件实例只能向地图中添加一次。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">removeControl(control:Control)</td>
+					<td class="green">none</td>
+					<td class="grey">从地图中移除控件。如果控件从未被添加到地图中，则该移除不起任何作用。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">getContainer()</td>
+					<td class="green">HTMLElement</td>
+					<td class="grey">返回地图的容器元素</td>
+				</tr>
+			</table>
+
+			<div class="class-label">覆盖物</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">addOverlay(overlay:Overlay)</td>
+					<td class="green">none</td>
+					<td class="grey">将覆盖物添加到地图中，一个覆盖物实例只能向地图中添加一次。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">addOverlays(overlays:Array<Overlay>)</td>
+					<td class="green">none</td>
+					<td class="grey">将多个覆盖物添加到地图中。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">removeOverlay(overlay:Overlay)</td>
+					<td class="green">none</td>
+					<td class="grey">从地图中移除覆盖物。如果覆盖物从未被添加到地图中，则该移除不起任何作用。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">removeOverlays(overlays:Array<Overlay>)</td>
+					<td class="green">none</td>
+					<td class="grey">从地图中移除覆盖物。如果覆盖物从未被添加到地图中，则该移除不起任何作用。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">getOverlays()</td>
+					<td class="green">Array<Overlay></td>
+					<td class="grey">返回地图上的所有覆盖物。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">clearOverlays()</td>
+					<td class="green">none</td>
+					<td class="grey">清除地图上所有覆盖物。</td>
+				</tr>
+			</table>
+
+			<div class="class-label">地图图层</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">addLayer(layer:Layer)</td>
+					<td class="green">none</td>
+					<td class="grey">添加一个图层。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">addLayers(layers:Array<Layer>)</td>
+					<td class="green">none</td>
+					<td class="grey">添加图层组。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">removeLayer(id:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">移除一个图层，根据图层id。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getLayer(id:Number)</td>
+					<td class="green">Layer</td>
+					<td class="grey">获取图层，根据图层id。</td>
+				</tr>
+			</table>
+
+			<div class="class-label">坐标变换</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">pixelToPoint(pix:Pixel)</td>
+					<td class="green">Point</td>
+					<td class="grey">像素坐标转换为经纬度坐标。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">pointToPixel(point:Point)</td>
+					<td class="green">Pixel</td>
+					<td class="grey">经纬度坐标转换为像素坐标。</td>
+				</tr>
+			</table>
+
+			<div class="class-label">其他</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">addEventListener(event:enum, handle:Function)</td>
+					<td class="green">none</td>
+					<td class="grey">添加事件。<br/>event:事件类型。</br>handle:回调函数。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">removeEventListener(event:enum)</td>
+					<td class="green">none</td>
+					<td class="grey">移除事件</td>
+				</tr>
+			</table>
+
+			<div class="class-label">事件 </div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">事件类型</th>
+					<th width="150">回调函数</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">NPMapLib.MAP_EVENT_CLICK</td>
+					<td class="green">target(point:Point)</td>
+					<td class="grey">左键单击地图时触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_DBLCLICK</td>
+					<td class="green">target(point:Point)</td>
+					<td class="grey">双击地图时会触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_RIGHT_CLICK</td>
+					<td class="green">target(point:Point)</td>
+					<td class="grey">右键单击地图时触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_MOUSE_MOVE</td>
+					<td class="green">target(point:Point)</td>
+					<td class="grey">鼠标在地图区域移动过程中触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_MOUSE_OVER</td>
+					<td class="green">target(point:Point)</td>
+					<td class="grey">鼠标移入地图区域时触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_MOUSE_OUT</td>
+					<td class="green">target(point:Point)</td>
+					<td class="grey">鼠标移出地图区域时触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_ZOOM_START</td>
+					<td class="green">target(zoomLevel:Number)</td>
+					<td class="grey">地图更改缩放级别开始时触发触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_ZOOM_END</td>
+					<td class="green">target(zoomLevel:Number)</td>
+					<td class="grey">地图更改缩放级别结束时触发触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_ADD_OVERLAY</td>
+					<td class="green">target()</td>
+					<td class="grey">当使用Map.addOverlay()方法向地图中添加单个覆盖物时会触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_REMOVE_OVERLAY</td>
+					<td class="green">target()</td>
+					<td class="grey">当使用Map.removeOverlay()方法移除单个覆盖物时会触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_CLEAR_OVERLAYS</td>
+					<td class="green">target()</td>
+					<td class="grey">当使用Map.clearOverlays()方法一次性移除全部覆盖物时会触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_ADD_CONTROL</td>
+					<td class="green">target()</td>
+					<td class="grey">当使用Map.addControl()方法向地图中添加单个控件时会触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_REMOVE_CONTROL</td>
+					<td class="green">target()</td>
+					<td class="grey">当使用Map.removeControl()方法移除单个控件时会触发此事件。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_DRAG_START</td>
+					<td class="green">target()</td>
+					<td class="grey">开始拖拽地图时触发。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_DRAG_END</td>
+					<td class="green">target()</td>
+					<td class="grey">停止拖拽地图时触发。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">NPMapLib.MAP_EVENT_RESIZE</td>
+					<td class="green">target(size:Size)</td>
+					<td class="grey">地图可视区域大小发生变化时会触发此事件。</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,173 @@
+v\:*{behavior: url(#default#VML)}
+*{margin-top: 0;padding: 0;font-size:12px;font-family: 'Microsoft Yahei'!important;}
+html,body{height:100%;overflow: hidden;}
+#gismap{width: 100%;height:100%;}
+#mousepoint{position: absolute;}
+#mousepoint .icon{position:absolute;width: 25px;height: 21px;background: transparent url(../images/SetPosition.png) 0 0 no-repeat;}
+#mousepoint .text{position: absolute;top:22px;left: 18px;width: 110px; background: #FFF;border: 1px solid #666;padding: 2px 5px;color: #333;font-size: 12px;}
+#centerPoint{position:absolute; top:-200px;width: 50px;height: 50px;background: transparent url(../images/Locate.png) 0 0 no-repeat;}
+.loading{text-align: center;height:20px;font-size: 14px;position: absolute;top: 50%;left:50%;color: #ff0000;font-weight:bold;}
+.loading p{position: relative;top: -50%;left:-50%;}
+.loading img{height:12px;width:70px;background-image: url(../images/Loading.gif);}
+.loading .warn{height:20px;padding-left: 2px;background: transparent url(../images/Warning.png) 0 center no-repeat;}
+
+ul {
+	list-style-type:none;
+}
+.contextMenu {
+	position:absolute;
+	top:-9999px;
+	left:-9999px;
+}
+.contextMenu ul {
+	width: 130px;
+	float:left;
+	border:1px solid #979797;
+	background:url(../images/ContextMenu_line.png) 24px 0 repeat-y #f1f1f1;
+	padding:4px;
+	box-shadow:2px 2px 2px rgba(0, 0, 0, .6);
+	font:12px/1.5 \5fae\8f6f\96c5\9ed1;
+}
+.contextMenu ul li {
+	width: 100%;
+	float:left;
+	/*clear:both;*/
+	height:22px;
+	cursor:pointer;
+	line-height:22px;
+	white-space:nowrap;
+	/*padding:0 30px;*/
+	border: 1px solid transparent;
+	padding: 0px;
+	margin: 0px; 
+	text-decoration: none;
+}
+.contextMenu ul li.active {
+	background-color:#f1f3f6;
+	border-radius:3px;
+	border:1px solid #aecff7;
+	height:22px;
+	line-height:22px;
+	/*padding:0 29px;*/
+}
+.contextMenu ul ul {
+	display:none;
+	position:absolute;
+}
+/*text ico*/
+.contextMenu ul li a.contextMenu-a{
+	text-decoration: none;
+	display: block;
+	padding: 0px 0px 0px 30px;
+	color: #000;
+}
+.contextMenu ul li a .contextMenu-text{
+	width: 90px;
+	float: left;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.contextMenu ul li a .contextMenu-ico{
+	background: url("../images/ContextMenu_arrow.png") no-repeat;
+	width: 10px;
+	height: 10px;
+	background-position:0px 0px;
+	position: static;
+	float: right;
+	overflow: hidden;
+	margin-top: 8px;
+}
+/*分割线*/
+.contextMenu ul li.li-seperate{
+	width: 100%;
+	padding: 0px;
+	height: 1px;
+	line-height: 1px;
+	cursor: none;
+}
+.contextMenu ul li .menu-seperate{
+	height: 1px;
+	background-color: #9A9A9A;
+	margin: 1px 5px 1px 30px; 
+}
+
+/*****add by lidan 2013/11/20 改造导航**********/
+.NPMap-standPan{
+	width: 44px;
+	height: 44px;
+	overflow: hidden;
+	background: url('../images/navigator.png') no-repeat;
+	background-position: (0,0);
+	position: absolute;
+}
+.NPMap-standPan div{
+	position: absolute;
+}
+.NPMap-button{
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+}
+/*center*/
+.NPMap-panC{
+
+}
+/*north*/
+.NPMap-panN{
+	top: 0px;
+	left: 14px;
+}
+/*east*/
+.NPMap-panE{
+	top: 12px;
+	left: 27px;
+}
+/*south*/
+.NPMap-panS{
+	top: 25px;
+	left: 14px;
+}
+/*west*/
+.NPMap-panW{
+	top: 12px;
+	left: 1px;
+}
+/*zoom-plus*/
+.NPMap-panZoomplus{
+	width: 22px;
+	height: 21px;
+	top: 50px;
+	left: 11px;
+	background: url('../images/navigator.png') no-repeat;
+	background-position: 0px -221px;
+}
+/*zoom-minus*/
+.NPMap-panZoomminus{
+	width: 22px;
+	height: 21px;
+	left: 11px;
+	background: url('../images/navigator.png') no-repeat;
+	background-position: 0px -265px;
+}
+.NPMap-zoomslider{
+	width: 19px;
+	left: 12px;
+	top: 68px;
+	position: absolute;
+}
+.NPMap-sliderbar{
+	width: 19px;
+	height: 11px;
+	position: absolute;
+	background: url('../images/navigator.png') no-repeat;
+	background-position: 0px -309px;
+}
+.NPMap-slidermask{
+	height: 100%;
+	margin-left: 5px;
+	width: 10px;
+	background: url('../images/navigator.png') no-repeat;
+	background-position: -23px -226px;
+}
+/********************结束***********************/

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>东方网力 地图API-DEMO示例</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css" type="text/css"/>
+	<style type="text/css">
+		p{text-align: left;}
+		.top-nav li{padding:14px 20px;}
+	</style>
+</head>
+<body class="main-body"  style="text-align:center;overflow:hidden;">
+	<div class="gis-container">
+		<div class="gis-top" id="gisTop">
+			<ul class="top-nav">
+				<li class="logo"><img src="css/images/logo.png" /></li>
+				<li><a href="home.html" class="nav-item">首页</a></li>
+				<li><a href="guide.html" class="nav-item">入门指导</a></li>
+				<li><a href="class.html" class="nav-item">类参考</a></li>
+				<li><a href="#" class="nav-item-hover">DEMO示例</a></li>
+				<li><a href="all_demos.html" class="nav-item">综合示例</a></li>
+				<li><a href="download.html" class="nav-item">下载中心</a></li>
+			</ul>
+		</div>
+		<div class="gis-middle" id="gisMiddle">
+			<div class="right demo-container">
+				<iframe id="demoIframe" class="demo-iframe" frameborder="no" marginheight="0" marginwidth="0"></iframe>
+			</div>
+			<div class="left demo-tree">
+				<ul class="ztree" id="ztree"></ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="gis-bottom" id="gisBottom">版权所有：东方网力科技股份有限公司 </div>
+	</div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.ztree.core-3.5.min.js"></script>
+	<script type="text/javascript" src="js/demotree.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var $top = $("#gisTop"),$middle = $("#gisMiddle"),$bottom = $("#gisBottom");
+			var $demoTree = $(".demo-tree"),$demoContainer = $(".demo-container");
+			var $demoIframe = $("#demoIframe");
+			resize();
+			$(window).resize(function(){
+				resize();
+			});
+			function resize(){
+				var midHeight = $(window).height() - $top.height() - $bottom.height() -4 -5;
+				$middle.height(midHeight);
+				$demoTree.height(midHeight);
+				$demoContainer.height(midHeight);
+				$demoIframe.height(midHeight);
+			}
+		});
+	</script>
+</body>
+</html>

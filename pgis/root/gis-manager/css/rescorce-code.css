@@ -1,0 +1,15 @@
+html,body{padding: 0px;margin: 0px;background-color: #fff;}
+/*resouce code*/
+#codeContainer{display: none ;position: absolute;left:0px;bottom:0px;width:100%;height:200px;background:#ffffff; z-index:999;overflow-y: scroll;border-top: 1px solid #dfdfdf;}
+
+#codeButton1{position:absolute;bottom:0px;z-index:100000;width:93px;height:13px;background-image: url("../css/images/all.png");background-position: 105px 78px;overflow: hidden;}
+#codeButton1:hover{background-position: 105px 108px; cursor: pointer;}
+#codeButton2{background-image: url("../css/images/all.png");background-position: 105px 26px;display:none;position:absolute;bottom:200px;z-index:100000;width:93px;height:13px;overflow: hidden;}
+#codeButton2:hover{background-position: 105px 51px;cursor: pointer;}
+
+.codeButton0style1{position:absolute;top:30px;right:100px;width:76px;height:30px;background-position: 150px 195px;z-index:100000;background-image: url("../css/images/all.png");overflow: hidden;}
+.codeButton0style2{position:absolute;top:30px;right:100px;width:76px;height:30px;background-position: 150px 162px;z-index:100000;background-image: url("images/all.png");overflow: hidden;}
+.codeButton0style2:hover,.codeButton0style1:hover{background-position: 150px 162px; cursor: pointer;}
+.controlButtonstyle1{position:absolute;top:30px;right:24px;width:76px;height:30px;background-position: 74px 195px;z-index:100000;background-image: url("images/all.png");overflow: hidden;}
+.controlButtonstyle2{position:absolute;top:30px;right:24px;width:76px;height:30px;background-position: 74px 162px;z-index:100000;background-image: url("images/all.png");overflow: hidden;}
+.controlButtonstyle1:hover,.controlButtonstyle2:hover{background-position: 74px 162px;cursor: pointer;}

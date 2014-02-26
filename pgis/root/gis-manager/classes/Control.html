@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../css/class.css"/>
+	</head>
+	<body>
+		<div class="class-container">
+			<div class="class-label">说明：控件的抽象基类，所有控件均继承基类的方法。此类不可实例化。</div>
+			<div class="class-label">命名空间：NPMapLib&nbsp;&nbsp;&nbsp;&nbsp;(PS：力图精简，以下描述皆省略命名空间，详见相关类的说明页面)</div>
+			<div class="class-label">属性</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">属性</th>
+					<th width="90">类型</th>
+					<th>描述</th>
+				</tr>
+				<tr class="even">
+					<td class="green">id</td>
+					<td class="green">Number</td>
+					<td class="grey">唯一标识。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">controlType</td>
+					<td class="green">Enum</td>
+					<td class="grey">控件类型。<br/>未知：NPMapLib.CONTROL_TYPE_UNKNOWN;<br/>版权控件：NPMapLib.CONTROL_TYPE_COPYRIGHT;<br/>导航控件：NPMapLib.CONTROL_TYPE_NAVIGATION;<br/>鹰眼控件：NPMapLib.CONTROL_TYPE_OVERVIEW;<br/>比例尺控件：NPMapLib.CONTROL_TYPE_SCALE;<br/></td>
+				</tr>
+				<tr class="odd">
+					<td class="green">mapId</td>
+					<td class="green">Number</td>
+					<td class="grey">所属地图id。</td>
+				</tr>
+			</table>
+
+			<div class="class-label">方法</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">isVisible()</td>
+					<td class="green">Boolean</td>
+					<td class="grey">判断是否显示。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">setOffset(offset:Size)</td>
+					<td class="green">none</td>
+					<td class="grey">设置控件停靠的偏移量。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getOffset()</td>
+					<td class="green">Size</td>
+					<td class="grey">返回控件停靠的偏移量。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setAnchor(anchor:enum)</td>
+					<td class="green">none</td>
+					<td class="grey">设置控件停靠位置。<br>
+						左上角：NPMapLib.CONTROL_ANCHOR_TOP_LEFT;<br>
+						右上角：NPMapLib.CONTROL_ANCHOR_TOP_RIGHT;<br>
+						左下角：NPMapLib.CONTROL_ANCHOR_BOTTOM_LEFT;<br>
+						右下角：NPMapLib.CONTROL_ANCHOR_BOTTOM_RIGHT; 
+					</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">getAnchor()</td>
+					<td class="green">enum</td>
+					<td class="grey">获取控件停靠位置。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">show()</td>
+					<td class="green">none</td>
+					<td class="grey">显示。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">hide()</td>
+					<td class="green">none</td>
+					<td class="grey">隐藏。</td>
+				</tr>
+				<tr class="even">
+					<td class="green"><setOffset(offset:Size)/td>
+					<td class="green">none</td>
+					<td class="grey">设置控件停靠的偏移量。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setAnchor(anchor:enum)</td>
+					<td class="green">none</td>
+					<td class="grey">设置停靠位置。</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

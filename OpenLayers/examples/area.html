@@ -1,0 +1,397 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>TMS示例</title></head>
+    <link rel="stylesheet" type="text/css" href="../theme/default/style.css"/>
+   <script  src="../lib/OpenLayers.js" type="text/javascript"></script>
+    <script type="text/javascript">
+       var lon = 111.6595458984375;//经度
+        var lat = 40.50;//纬度
+        var zoom = 9;
+        var map, layer, markers;
+
+        AutoSizeFramedCloud = OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
+            'autoSize': true
+        });
+
+        function init(){
+           var geographic = new OpenLayers.Projection("EPSG:4326");
+           var geographic2 = new OpenLayers.Projection("EPSG:900913");
+            map = new OpenLayers.Map('map',{
+              numZoomLevels:12
+            });    
+
+            
+        
+         var bouchina = new OpenLayers.Layer.Vector("KML_huhehaote", {//加载呼和浩特市边界KML
+            projection: map.displayProjection,
+            isBaseLayer: true,
+            styleMap: new OpenLayers.StyleMap({
+            pointRadius: 3,
+            fillColor: "white",
+            strokeColor: "black",
+            strokeWidth: 2
+            }),
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+            url: "kml/hhhtPro.kml",
+            format: new OpenLayers.Format.KML({
+            extractStyles: true, 
+            extractAttributes: true,
+            maxDepth: 2
+            })
+            })
+            });
+ 
+           map.addLayer(bouchina);
+
+            var hlgexVector = new OpenLayers.Layer.Vector("KML_hlgex", {//加载和林县边界KML
+            isBaseLayer: false,
+            styleMap: new OpenLayers.StyleMap({
+            pointRadius: 3,
+            fillColor: "white",
+            strokeColor: "black",
+            strokeWidth: 2
+            }),
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+            url: "kml/hlgex.kml",
+            format: new OpenLayers.Format.KML({
+            extractStyles: false, 
+            extractAttributes: false,
+            maxDepth: 2
+            })
+            })
+            });
+ 
+            map.addLayer(hlgexVector);
+
+            var hmqVector = new OpenLayers.Layer.Vector("KML_hmq", {//加载回民区边界KML
+            isBaseLayer: false,
+            styleMap: new OpenLayers.StyleMap({
+            pointRadius: 3,
+            fillColor: "black",
+            strokeColor: "black",
+            strokeWidth: 2
+            }),
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+            url: "kml/hmq.kml",
+            format: new OpenLayers.Format.KML({
+            extractStyles: false, 
+            extractAttributes: false,
+            maxDepth: 2
+            })
+            })
+            });
+ 
+            map.addLayer(hmqVector);
+
+            var qshxVector = new OpenLayers.Layer.Vector("KML_qshx", {//加载清水河边界KML
+            isBaseLayer: false,
+            styleMap: new OpenLayers.StyleMap({
+            pointRadius: 3,
+            fillColor: "white",
+            strokeColor: "black",
+            strokeWidth: 2
+            }),
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+            url: "kml/qshx.kml",
+            format: new OpenLayers.Format.KML({
+            extractStyles: false, 
+            extractAttributes: false,
+            maxDepth: 2
+            })
+            })
+            });
+ 
+            map.addLayer(qshxVector);
+
+             var shqVector = new OpenLayers.Layer.Vector("KML_shq", {//加载赛罕区边界KML
+            isBaseLayer: false,
+            styleMap: new OpenLayers.StyleMap({
+            pointRadius: 3,
+            fillColor: "white",
+            strokeColor: "black",
+            strokeWidth: 2
+            }),
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+            url: "kml/shq.kml",
+            format: new OpenLayers.Format.KML({
+            extractStyles: false, 
+            extractAttributes: false,
+            maxDepth: 2
+            })
+            })
+            });
+ 
+            map.addLayer(shqVector);
+
+             var tktxVector = new OpenLayers.Layer.Vector("KML_tktx", {//加载托克托县边界KML
+            isBaseLayer: false,
+            styleMap: new OpenLayers.StyleMap({
+            pointRadius: 3,
+            fillColor: "white",
+            strokeColor: "black",
+            strokeWidth: 2
+            }),
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+            url: "kml/tktx.kml",
+            format: new OpenLayers.Format.KML({
+            extractStyles: false, 
+            extractAttributes: false,
+            maxDepth: 2
+            })
+            })
+            });
+ 
+            map.addLayer(tktxVector);
+
+             var tzqVector = new OpenLayers.Layer.Vector("KML_tzq", {//加载土左旗边界KML
+            isBaseLayer: false,
+            styleMap: new OpenLayers.StyleMap({
+            pointRadius: 3,
+            fillColor: "white",
+            strokeColor: "black",
+            strokeWidth: 2
+            }),
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+            url: "kml/tzq.kml",
+            format: new OpenLayers.Format.KML({
+            extractStyles: false, 
+            extractAttributes: false,
+            maxDepth: 2
+            })
+            })
+            });
+ 
+            map.addLayer(tzqVector);
+
+            var wcxVector = new OpenLayers.Layer.Vector("KML_wcx", {//加载武川县边界KML
+            isBaseLayer: false,
+            styleMap: new OpenLayers.StyleMap({
+            pointRadius: 3,
+            fillColor: "white",
+            strokeColor: "black",
+            strokeWidth: 2
+            }),
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+            url: "kml/wcx.kml",
+            format: new OpenLayers.Format.KML({
+            extractStyles: false, 
+            extractAttributes: false,
+            maxDepth: 2
+            })
+            })
+            });
+ 
+            map.addLayer(wcxVector);
+
+             var yqqVector = new OpenLayers.Layer.Vector("KML_yqq", {//加载玉泉区边界KML
+            isBaseLayer: false,
+            styleMap: new OpenLayers.StyleMap({
+            pointRadius: 3,
+            fillColor: "white",
+            strokeColor: "black",
+            strokeWidth: 2
+            }),
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+            url: "kml/yqq.kml",
+            format: new OpenLayers.Format.KML({
+            extractStyles: false, 
+            extractAttributes: false,
+            maxDepth: 2
+            })
+            })
+            });
+ 
+            map.addLayer(yqqVector);
+
+
+             var xcqVector = new OpenLayers.Layer.Vector("KML_xcq", {//加载新城区边界KML
+            isBaseLayer: false,
+            styleMap: new OpenLayers.StyleMap({
+            pointRadius: 3,
+            fillColor: "white",
+            strokeColor: "black",
+            strokeWidth: 2
+            }),
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+            url: "kml/xcq.kml",
+            format: new OpenLayers.Format.KML({
+            extractStyles: false, 
+            extractAttributes: false,
+            maxDepth: 2
+            })
+            })
+            });
+ 
+            map.addLayer(xcqVector);
+
+
+
+            var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
+            renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
+            
+            var vectorLayer = new OpenLayers.Layer.Vector("Simple Geometry", {
+                styleMap: new OpenLayers.StyleMap({'default':{
+                    strokeColor: "white",
+                    strokeOpacity: 1,
+                    strokeWidth: 3,
+                    fillColor: "white",
+                    fillOpacity: 0.5,
+                    pointRadius: 6,
+                    pointerEvents: "visiblePainted",
+                    // label with \n linebreaks
+                    label : "name: ${name}\n\nage: ${age}",
+                    
+                    fontColor: "${favColor}",
+                    fontSize: "12px",
+                    fontFamily: "Courier New, monospace",
+                    fontWeight: "bold",
+                    labelAlign: "${align}",
+                    labelXOffset: "${xOffset}",
+                    labelYOffset: "${yOffset}",
+                    labelOutlineColor: "white",
+                    labelOutlineWidth: 3
+                }}),
+                renderers: renderer
+            });
+
+             // create a point feature   添加一个文本标注
+
+            var point = new OpenLayers.Geometry.Point(111.47,41.08).transform(geographic,map.getProjectionObject());
+            var pointFeature = new OpenLayers.Feature.Vector(point);
+            pointFeature.attributes = {
+                name: "toto",
+                age: 20,
+                favColor: 'black',
+                align: "cm",
+                 // positive value moves the label to the right
+                xOffset: 50,
+                // negative value moves the label down
+                yOffset: -15
+            };
+
+             map.addLayer(vectorLayer);
+             vectorLayer.addFeatures([pointFeature]);
+
+
+            //添加图片标注及提示信息  这里使用的是弹出框的方式，没有使用图片标注
+            markers = new OpenLayers.Layer.Markers( "Markers" );
+            map.addLayer(markers);
+
+            popupClass = AutoSizeFramedCloud;
+            popupContentHTML = '<img src="img/small.jpg"></img>';
+            //popupContentHTML = '<di>fsdfsdfdsfdfdfsffsafasad</br>fsddafsdfdsafasa</div>';
+            
+            var lonlat1 = new OpenLayers.LonLat(111.65,40.75).transform(geographic,map.getProjectionObject());//玉泉区
+            addMarkerInfo(lonlat1, popupClass, popupContentHTML, true, true);
+
+            var lonlat2 = new OpenLayers.LonLat(111.65,40.82).transform(geographic,map.getProjectionObject());//回民区
+            addMarkerInfo(lonlat2, popupClass, popupContentHTML, true, true);
+
+            var lonlat3 = new OpenLayers.LonLat(111.89,40.84).transform(geographic,map.getProjectionObject());//赛罕区
+            addMarkerInfo(lonlat3, popupClass, popupContentHTML, true, true);
+
+            var lonlat4 = new OpenLayers.LonLat(111.69,40.87).transform(geographic,map.getProjectionObject());//毫沁营乡
+            addMarkerInfo(lonlat4, popupClass, popupContentHTML, true, true);
+
+            var lonlat5 = new OpenLayers.LonLat(111.15,40.68).transform(geographic,map.getProjectionObject());//土左旗
+            addMarkerInfo(lonlat5, popupClass, popupContentHTML, true, true);
+
+            var lonlat6 = new OpenLayers.LonLat(111.70,40.75).transform(geographic,map.getProjectionObject());//呼市郊区站
+            addMarkerInfo(lonlat6, popupClass, popupContentHTML, true, true);
+
+            var lonlat7 = new OpenLayers.LonLat(111.18,40.27).transform(geographic,map.getProjectionObject());//托县
+            addMarkerInfo(lonlat7, popupClass, popupContentHTML, true, true);
+
+            var lonlat8 = new OpenLayers.LonLat(111.82,40.40).transform(geographic,map.getProjectionObject());//和林县
+            addMarkerInfo(lonlat8, popupClass, popupContentHTML, true, true);
+
+            
+            var lonlat9 = new OpenLayers.LonLat(111.47,41.08).transform(geographic,map.getProjectionObject());// 武川县
+            addMarkerInfo(lonlat9, popupClass, popupContentHTML, true, true);
+
+            var lonlat10 = new OpenLayers.LonLat(111.67,39.92).transform(geographic,map.getProjectionObject());// 清水河
+            addMarkerInfo(lonlat10, popupClass, popupContentHTML, true, true);
+
+             var lonlat11 = new OpenLayers.LonLat(111.80,40.83).transform(geographic,map.getProjectionObject());// 昭君博物院
+             addMarkerInfo(lonlat11, popupClass, popupContentHTML, true, true);
+
+             var lonlat12 = new OpenLayers.LonLat(111.44,39.64).transform(geographic,map.getProjectionObject());// 老牛湾旅游景区
+             addMarkerInfo(lonlat12, popupClass, popupContentHTML, true, true);
+
+              var lonlat13 = new OpenLayers.LonLat(110.99,40.63).transform(geographic,map.getProjectionObject());// 哈素海旅游区
+             addMarkerInfo(lonlat13, popupClass, popupContentHTML, true, true);
+
+              var lonlat14 = new OpenLayers.LonLat(111.38,40.27).transform(geographic,map.getProjectionObject());// 托克托县电厂
+             addMarkerInfo(lonlat14, popupClass, popupContentHTML, true, true);
+
+              var lonlat15 = new OpenLayers.LonLat(111.47,40.76).transform(geographic,map.getProjectionObject());// 金山开发区
+             addMarkerInfo(lonlat15, popupClass, popupContentHTML, true, true);
+
+             
+             var lonlat16 = new OpenLayers.LonLat(111.92,40.62).transform(geographic,map.getProjectionObject());//  蒙牛工业园区
+             addMarkerInfo(lonlat16, popupClass, popupContentHTML, true, true);
+
+             var lonlat17 = new OpenLayers.LonLat(111.71,40.01).transform(geographic,map.getProjectionObject());//  中棚马铃薯基地
+             addMarkerInfo(lonlat17, popupClass, popupContentHTML, true, true);
+
+             var lonlat18 = new OpenLayers.LonLat(111.99,40.50 ).transform(geographic,map.getProjectionObject());//  古城镇伊利奶牛场
+             addMarkerInfo(lonlat18, popupClass, popupContentHTML, true, true);
+
+            
+
+            map.setCenter(new OpenLayers.LonLat(lon, lat).transform(geographic,map.getProjectionObject()), zoom);
+            map.addControl(new OpenLayers.Control.LayerSwitcher({})); 
+            
+            //map.zoomToMaxExtent();
+        }
+        
+         
+         function addMarkerInfo(ll, popupClass, popupContentHTML, closeBox, overflow) {
+
+            var feature = new OpenLayers.Feature(markers, ll); 
+            feature.closeBox = closeBox;
+            feature.popupClass = popupClass;
+            feature.data.popupContentHTML = popupContentHTML;
+            feature.data.overflow = (overflow) ? "auto" : "hidden";
+                    
+            var marker = feature.createMarker();
+
+            var markerClick = function (evt) {
+                if (this.popup == null) {
+                    this.popup = this.createPopup(this.closeBox);//this为feature对象
+                    map.addPopup(this.popup);
+                    this.popup.show();
+                } else {
+                    this.popup.toggle();
+                }
+                currentPopup = this.popup;
+                OpenLayers.Event.stop(evt);
+            };
+            marker.events.register("mousedown", feature, markerClick);
+
+            markers.addMarker(marker);
+        }
+
+    </script>
+  
+
+
+  <body onLoad="init()">
+<div id="map" style="width:1000px; height:700px;background:url(middle_bg.png) repeat-y;">    </div>
+
+  </body>
+</html>
+

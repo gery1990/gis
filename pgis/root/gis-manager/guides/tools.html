@@ -1,0 +1,117 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>东方网力 地图API-入门指导</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/shCore.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/shThemeDefault.css"/>
+	<style type="text/css">
+		p{line-height: 2;padding: 0px 15px 0px 15px;}
+	</style>
+</head>
+<body class="main-body">
+	<div class="gis-container">
+		<div class="gis-top" id="gisTop">
+			<ul class="top-nav">
+				<li class="logo"><img src="../css/images/logo.png" /></li>
+				<li><a href="../home.html" class="nav-item">首页</a></li>
+				<li><a href="#" class="nav-item-hover">入门指导</a></li>
+				<li><a href="../class.html" class="nav-item">类参考</a></li>
+				<li><a href="../gis_demo.html" class="nav-item">DEMO示例</a></li>
+				<li><a href="../all_demos.html" class="nav-item">综合示例</a></li>
+				<li><a href="../download.html" class="nav-item">下载中心</a></li>
+			</ul>
+		</div>
+		<div class="gis-middle" id="gisMiddle">
+			<div class="right guide-right" id="guideRight">
+				<div class="guide-content" id="guide-covering">
+					<div class="title">
+						<h3>地图工具概述</h3>
+					</div>
+					<p>东方网力地图主要提供地图测量工具和几何绘制工具：</p>
+					<p><b> - 测量工具：</b>通过该工具可以实现距离（两点之间）测量和面积（多个点闭合而成）测量；</p>
+					<p><b> - 几何绘制工具：</b>通过该工具可以实现线、矩形、圆形、多边形的绘制；</p>
+					<div class="title">
+						<h3>测量工具</h3>
+					</div>
+					<pre class="brush:js" name="maptools" id="maptools">
+						//测量工具
+						var tool = new NPMapLib.Tools.MeasureTool(map, {
+								lengthUnit: NPMapLib.MAP_UNITS_METERS, //长度单位
+								areaUnit: NPMapLib.MAP_UNITS_SQUARE_KILOMETERS,	//面积单位
+								mode: NPMapLib.MEASURE_MODE_DISTANCE //测量模式
+							});
+		
+						//操作
+						/*测距离*/
+						tool.setMode(NPMapLib.MEASURE_MODE_DISTANCE);
+						/*测面积*/
+						tool.setMode(NPMapLib.MEASURE_MODE_AREA);
+						/*开启*/
+						tool.startUp();
+						/*取消*/
+						tool.cancel();
+					</pre>
+					<div class="title">
+						<h3>绘制工具</h3>
+					</div>
+					<pre class="brush:js" name="maptoolsOpera" id="maptoolsOpera">
+						//绘制工具
+						var tool = new NPMapLib.Tools.DrawingTool(map);
+
+						//操作
+						/*画线*/
+						tool.setMode(NPMapLib.DRAW_MODE_POLYLINE, callBackMethod);
+						/*画矩形*/
+						tool.setMode(NPMapLib.DRAW_MODE_RECT, callBackMethod);
+						/*画圆形*/
+						tool.setMode(NPMapLib.DRAW_MODE_CIRCLE, callBackMethod);
+						/*画多边形*/
+						tool.setMode(NPMapLib.DRAW_MODE_POLYLGON, callBackMethod);
+						/*开启*/
+						tool.startUp(callBackMethod);
+						/*取消*/
+						tool.cancel();
+					</pre>
+				</div>
+			</div>
+			<div class="left guide-left" id="guideLeft">
+				<div class="title"><h3>目录结构</h3></div>
+				<ul class="guide-ul">
+					<li><a href="../guide.html">▪ 简介</a></li>
+					<li><a href="helloworld.html">▪ Hello World!</a></li>
+					<li><a href="control.html">▪ 控件</a></li>
+					<li><a href="overlay.html">▪ 覆盖物</a></li>
+					<li><a href="listener.html">▪ 事件</a></li>
+					<li><a href="maplayer.html">▪ 地图图层</a></li>
+					<li class="active"><a href="javascript:;">▪ 工具</a></li>
+					<!-- <li><a href="service.html">▪ 服务</a></li>
+					<li><a href="version.html">▪ 版本说明</a></li> -->
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="gis-bottom" id="gisBottom">版权所有：东方网力科技股份有限公司 </div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/allScript.js"></script>
+	<script type="text/javascript">
+		SyntaxHighlighter.all("maptools");
+		SyntaxHighlighter.all("maptoolsOpera");
+		$(function(){
+			var $top = $("#gisTop"),$middle = $("#gisMiddle"),$bottom = $("#gisBottom");
+			var $midRight = $("#guideRight");
+			resize();
+			$(window).resize(function(){
+				resize();
+			});
+			function resize(){
+				var midHeight = $(window).height() - $top.height() - $bottom.height() -4 -5;
+				$middle.height(midHeight);
+				$midRight.height(midHeight);
+			}
+		});
+	</script>
+</body>
+</html>

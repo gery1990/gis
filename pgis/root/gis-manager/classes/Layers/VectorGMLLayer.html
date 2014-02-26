@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../../css/class.css"/>
+	</head>
+	<body>
+		<div class="class-container">
+			<div class="class-label">命名空间：NPMapLib.Layers&nbsp;&nbsp;&nbsp;&nbsp;(PS：力图精简，以下描述皆省略命名空间，详见相关类的说明页面)</div>
+			<div class="class-label">构造函数</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">构造函数</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">VectorGMLLayer(url:String, name:String, opts:Array)</td>
+					<td class="grey">创建GML矢量图层实例，继承自Layer。<br>url：图层数据连接路径；<br>
+						name：图层名称；<br>
+						opts={<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mapUnitPixels: "",						//缓存图片像素<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;projection: "EPSG:4326",            //投影方式<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buffer: 0, 				//图片加载方式，0--快速下载，2--双螺旋下载[默认为0]<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reproject:true,                    //是否进行重投影，默认为true<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isBaseLayer: true, 			//是否作为基础图层，默认为true<br>
+						}
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../css/class.css"/>
+	</head>
+	<body>
+		<div class="class-container">
+			<div class="class-label">说明：覆盖物的抽象基类。此类不可实例化。</div>
+			<div class="class-label">命名空间：NPMapLib&nbsp;&nbsp;&nbsp;&nbsp;(PS：力图精简，以下描述皆省略命名空间，详见相关类的说明页面)</div>
+			<div class="class-label">构造函数</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">构造函数</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">Overlay()</td>
+					<td class="grey">创建叠加实例对象。</td>
+				</tr>
+			</table>
+
+			<div class="class-label">属性</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">属性</th>
+					<th width="90">类型</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">id</td>
+					<td class="green">Number</td>
+					<td class="grey">唯一标识。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">overlayType</td>
+					<td class="green">enum</td>
+					<td class="grey">覆盖物类型。<br/>未知：NPMapLib.OVERLAY_TYPE_UNKNOWN；<br/>多段线：NPMapLib.OVERLAY_TYPE_POLYLINE；<br/>多边形：NPMapLib.OVERLAY_TYPE_POLYGON；<br/>圆形：NPMapLib.OVERLAY_TYPE_CIRCLE；<br/>文本：NPMapLib.OVERLAY_TYPE_LABEL；<br/>图像标注：NPMapLib.OVERLAY_TYPE_MARKER；<br/></td>
+				</tr>
+				<tr class="odd">
+					<td class="green">mapId</td>
+					<td class="green">Number</td>
+					<td class="grey">所属地图id。</td>
+				</tr>
+			</table>
+
+			<div class="class-label">方法</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th>返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">isVisible()</td>
+					<td class="green">boolean</td>
+					<td class="grey">是否显示。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">show()</td>
+					<td class="green">none</td>
+					<td class="grey">显示。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">hide()</td>
+					<td class="green">none</td>
+					<td class="grey">隐藏。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">flash()</td>
+					<td class="green">none</td>
+					<td class="grey">闪烁3次</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">flash2(times:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">闪烁。times：闪烁次数</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getZIndex()</td>
+					<td class="green">Number</td>
+					<td class="grey">获取当前对象在图层中的叠加次序。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setZIndex(zIndex:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">设置当前对象在图层中的叠加次序。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">rotate(angle:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">旋转。<br/>angle为弧度。</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

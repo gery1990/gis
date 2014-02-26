@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../../css/class.css"/>
+	</head>
+	<body>
+		<div class="class-container">
+			<div class="class-label">命名空间：NPMapLib.Symbols&nbsp;&nbsp;&nbsp;&nbsp;(PS：力图精简，以下描述皆省略命名空间，详见相关类的说明页面)</div>
+			<div class="class-label">构造函数</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">构造函数</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">Animation(mapId:Number, overLay:Overlay, opts:Array<object>)</td>
+					<td class="grey">创建一个图像标注实例，继承自Overlay。<br/>
+						mapId：地图id。<br />
+						overLay：覆盖物。<br />
+						opts={</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;speed: 100,         //速度 </br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isReturn: true,     //是否往返：若为true，则来回推演</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isRepeat: true      //是否重复：若为true，则反复推演<br />
+								    };
+					</td>
+				</tr>
+			</table>
+			
+			<div class="class-label">方法</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="even">
+					<td class="green">setPath(path:Polyline)</td>
+					<td class="green">none</td>
+					<td class="grey">设置推演行径路线。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">getPath()</td>
+					<td class="green">Icon</td>
+					<td class="grey">返回推演行径路线。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getOverlay()</td>
+					<td class="green">Overlay</td>
+					<td class="grey">返回覆盖物对象。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setRepeat(isRepeat:Boolean)</td>
+					<td class="green">none</td>
+					<td class="grey">设置是否重复。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">setReturn(isReturn:Boolean)</td>
+					<td class="green">none</td>
+					<td class="grey">设置是否返回。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setSpeed(speed:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">设置速度。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">start()</td>
+					<td class="green">none</td>
+					<td class="grey">启动推演。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">pause()</td>
+					<td class="green">none</td>
+					<td class="grey">暂停推演。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">stop()</td>
+					<td class="green">none</td>
+					<td class="grey">停止推演。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">addEventListener(event:enum,handler:Function)</td>
+					<td class="green">none</td>
+					<td class="grey">添加事件监听函数。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">removeEventListener(event:enum)</td>
+					<td class="green">none</td>
+					<td class="grey">移除事件监听函数。</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="class-label">事件</div>
+				<table cellpadding=0 cellspacing=0 class="class-table">
+					<tr>
+						<th width="280">事件类型</th>
+						<th width="150">回调函数</th>
+						<th>描述</th>
+					</tr>
+					<tr class="odd">
+						<td class="green">NPMapLib.ANIMATION_EVENT_START</td>
+						<td class="green">target(point:Point)</td>
+						<td class="grey">启动推演时会触发此事件。</td>
+					</tr>
+					<tr class="even">
+						<td class="green">NPMapLib.ANIMATION_EVENT_PAUSE</td>
+						<td class="green">target(point:Point)</td>
+						<td class="grey">暂停推演时会触发此事件。</td>
+					</tr>
+					<tr class="even">
+						<td class="green">NPMapLib.ANIMATION_EVENT_STOP</td>
+						<td class="green">target(point:Point)</td>
+						<td class="grey">停止推演时会触发此事件。</td>
+					</tr>
+					<tr class="even">
+						<td class="green">NPMapLib.ANIMATION_EVENT_MOVING</td>
+						<td class="green">target(point:Point)</td>
+						<td class="grey">覆盖物准备移动时触发此事件。</td>
+					</tr>
+					<tr class="even">
+						<td class="green">NPMapLib.ANIMATION_EVENT_MOVED</td>
+						<td class="green">target(point:Point)</td>
+						<td class="grey">覆盖物移动后触发此事件。</td>
+					</tr>
+				</table>
+			</div>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../../css/class.css"/>
+	</head>
+	<body>
+		<div class="class-container">
+			<div class="class-label">命名空间：NPMapLib.Tools&nbsp;&nbsp;&nbsp;&nbsp;(PS：力图精简，以下描述皆省略命名空间，详见相关类的说明页面)</div>
+			<div class="class-label">构造函数</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">构造函数</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">DrawingTool(map:Map)</td>
+					<td class="grey">创建几何图形绘制工具实例。<br />
+						map：地图对象。
+								</td>
+				</tr>
+			</table>
+			
+			<div class="class-label">属性</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">属性</th>
+					<th width="90">类型</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">mapId</td>
+					<td class="green">Number</td>
+					<td class="grey">地图容器实例Id。</td>
+				</tr>
+			</table>
+			
+			<div class="class-label">方法</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">setMode(mode:enum, callback)</td>
+					<td class="green">none</td>
+						<td class="grey">设置绘制模式。<br>不绘制：NPMapLib.DRAW_MODE_NONE; <br>
+						画矩形：NPMapLib.DRAW_MODE_RECT; <br>
+						画圆：NPMapLib.DRAW_MODE_CIRCLE; <br>
+						画多段线：NPMapLib.DRAW_MODE_POLYLINE;<br>
+						画面：NPMapLib.DRAW_MODE_POLYLGON;
+					</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getMode()</td>
+					<td class="green">enmu</td>
+					<td class="grey">获取绘制模式。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">startUp()</td>
+					<td class="green">none</td>
+					<td class="grey">启动绘制。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">cancel()</td>
+					<td class="green">none</td>
+					<td class="grey">取消绘制。</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

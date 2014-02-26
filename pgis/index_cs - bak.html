@@ -1,0 +1,159 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
+<body>
+    <input type="button" style="width: 100; height: 25" value="test" onmousedown="Test();" />
+    <div class="map-id" id="mapId" style="margin-top: 35px"></div>
+    <script type="text/javascript" src="v1.0/Init.js"></script>
+    <script type="text/javascript">
+        //地图控件
+        var mapContainer = document.getElementById("mapId");
+        var map = new NPMapLib.Map(mapContainer, {
+            minZoom: 0,
+            maxZoom: 10
+        });
+
+        //图层参数
+        var opts = {
+            centerPoint: [12959745.271695066, 4848706.4522418715],
+            fullExtent: [12912392.532672398, 4819583.94446522, 13007098.010717731, 4877828.960018523],
+            minLevel: 0,
+            maxLevel: 7,
+            zoomOffset: 11,
+            zoomLevelSequence: 2,
+            initResolution: 156543.033928,
+            origin: [-20037508.342789248, 20037508.342789248]
+        };
+
+        //图层路径
+        var url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaCities_Community_BaseMap_CHN/BeiJing_Community_BaseMap_CHN/MapServer";
+        var layerSL = new NPMapLib.Layers.ArcgisTileLayer(url, "矢量地图", opts);
+        map.addLayer(layerSL);
+
+        Test();
+
+        function Test() {
+            var a = { mapId: 1, id: 10 };
+            //debugger;
+            //NPMapLib.Managers.OtherManager.drawCallFromCS(a, "startUp");
+            //NPMapLib.Managers.OtherManager.drawCallFromCS(a, "setMode", 1);
+            //NPMapLib.Managers.MapManager.callFromCS(a, "addEventListener", "click", function () {
+            //});
+            //NPMapLib.Managers.OtherManager.measureCallFromCS(a, "startUp");
+            //NPMapLib.Managers.OtherManager.measureCallFromCS(a, "setMode", 0);
+            
+
+            var line = {
+                id: 1, mapId: 1,
+                OverlayType: 1,
+                arrowStyle: 0, color: "blue",
+                lineStyle: 0, opacity: 1,
+                points: [
+                    { Lat: 4848706.4522418715, Lon: 12959745.271695066 },
+                    { Lat: 4859888.9976964174, Lon: 12971770.817241305 },
+                    { Lat: 4861271.6887831278, Lon: 12960420.726149615 }
+                ],
+                weight: 2
+            };
+            var polygon = {
+                "id": 1, "mapId": 1, "OverlayType": 2, "color": "red",
+                "enableEditing": false, "fillOpacity": 0.5, "fillcolor": "blue",
+                "lineStyle": 0, "opacity": 0.5,
+                "points": [
+                    { "Lat": 4848782.8892701576, "Lon": 12975414.862493526 },
+                    { "Lat": 4838846.0755930841, "Lon": 12975109.114380386 },
+                    { "Lat": 4837470.20908395, "Lon": 12959898.145751636 },
+                    { "Lat": 4839992.6310173618, "Lon": 12938954.400001505 },
+                    { "Lat": 4848706.4522418715, "Lon": 12959745.271695066 }
+                ],
+                "weight": 2
+            }
+            //NPMapLib.Managers.MapManager.callFromCS(a, "pointToPixel", line.points[0]);
+            var infowin = {
+                "id": 1, "mapId": 1, "arrow": false, "content": "在这里填充内容", "enableCloseOnClick": true,
+                "height": 100, "offset": { "X": 150, "Y": 30 }, "title": "netposa", "width": 190
+            };
+            //NPMapLib.Managers.OtherManager.infoWinCallFromCS(infowin, "open", 100.0, 220.0);
+            //return;
+            var animationLine = {
+                "id": 3, "mapId": 1, "OverlayType": 1, "arrowStyle": 0,
+                "color": "blue", "lineStyle": 0, "opacity": 0.5,
+                "points": [{
+                    "Lat": 4848706.4522418715, "Lon": 12959745.271695066
+                }, {
+                    "Lat": 4859888.9976964174, "Lon": 12971770.817241305
+                }, {
+                    "Lat": 4861271.6887831278, "Lon": 12960420.726149615
+                }
+                ],
+                "weight": 5
+            };
+            
+            //var animation = {
+            //    "id": 0, "mapId": 1,opt:{ "IsRepeat": false, "IsReturn": false,Speed:100},
+            //    "overlay": {
+            //        "__type": "Marker:#NPMapLib.Symbols",
+            //        "id": 2, "mapId": 1, "OverlayType": 5,
+            //        "Icon": {
+            //            "id": 1, "mapId": 1, "anchor": { "X": -16, "Y": -16 },
+            //            "imageSize": { "id": 0, "mapId": 1, "Height": 32, "Width": 32 },
+            //            "imageUrl": "..\/..\/..\/root\/gis-manager\/images\/Car.png"
+            //        },
+            //        "Label": {
+            //            "id": 1, "mapId": 1, "OverlayType": 4, "content": "一个动画标注",
+            //            "labelStyle": { "Align": "center", "BgColor": "#FFFFFF", "BordColor": "#CCCCFF", "BorderSize": 1, "Color": "red", "FontFamily": "宋体", "FontSize": 12, "IsBold": true, "bordColor": "#CCCCFF" },
+            //            "offset": { "X": 0, "Y": 16 },
+            //            "position": { "Lat": 0, "Lon": 0 },
+            //            "title": ""
+            //        },
+            //        "Offset": { "X": 0, "Y": 0 },
+            //        "Point": { "Lat": 4848706.4522418715, "Lon": 12959745.271695066 }
+            //    }
+            //};
+            var animation = {
+                "id": 1, "mapId": 1,
+                "opt": { "IsRepeat": true, "IsReturn": true, "Speed": 100 },
+                "overlay": {
+                    "__type": "Marker:#NPMapLib.Symbols",
+                    "id": 2, "mapId": 1, "OverlayType": 5,
+                    "Icon": {
+                        "id": 1, "mapId": 1,
+                        "anchor": { "X": -16, "Y": -16 },
+                        "imageSize": { "id": 0, "mapId": 1, "Height": 32, "Width": 32 },
+                        "imageUrl": "..\/..\/..\/root\/gis-manager\/images\/Car.png"
+                    },
+                    "Label": {
+                        "id": 1, "mapId": 1, "OverlayType": 4, "content": "一个动画标注",
+                        "labelStyle": { "Align": "center", "BgColor": "#FFFFFF", "BordColor": "#CCCCFF", "BorderSize": 1, "Color": "red", "FontFamily": "宋体", "FontSize": 12, "IsBold": true, "bordColor": "#CCCCFF" }, "offset": { "X": 0, "Y": 16 }, "position": { "Lat": 0, "Lon": 0 }, "title": ""
+                    },
+                    "Offset": { "X": 0, "Y": 0 },
+                    "Point": { "Lat": 4848706.4522418715, "Lon": 12959745.271695066 }
+                }
+            }
+            
+            NPMapLib.Managers.OtherManager.animationCallFromCS(animation, "setPath", animationLine);
+            //var t = NPMapLib.Managers.OtherManager._getAnimation(animation.id);
+            //map.addOverlay(t._overlay);
+            //map.addOverlay(t._path);
+            NPMapLib.Managers.MapManager.callFromCS(a, "addOverlay", animationLine);
+            NPMapLib.Managers.MapManager.callFromCS(a, "addOverlay", animation.overlay);
+            NPMapLib.Managers.OtherManager.animationCallFromCS(animation, "start");
+
+           
+            //var layer = {
+            //    "id": 2, "mapId": 1, "LayerId": 0, "MapId": 1, "layerType": 9,
+            //    "maxLevel": 0, "minLevel": 0, "name": "an overlayLayer", "url": null, "visible": true
+            //};
+            //NPMapLib.Managers.MapManager.callFromCS(a, "addLayer", layer);
+            //NPMapLib.Managers.LayerManager.callFromCS(layer, "hide");
+            //NPMapLib.Managers.LayerManager.callFromCS(layer, "addOverlay", line);
+            //NPMapLib.Managers.LayerManager.callFromCS(layer, "show");
+        }
+    </script>
+
+</body>
+</html>

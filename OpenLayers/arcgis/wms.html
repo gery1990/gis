@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples
+    on iOS devices-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>Create Map with Custom ArcGISDynamicMapServiceLayer Layer Definitions</title>
+    <link rel="stylesheet" href="http://192.168.60.46:8026/library/3.6/3.6/js/esri/css/esri.css"/>
+    <style>
+        html,body,#mapDiv{
+            padding:0;
+            margin:0;
+            height:100%;
+        }
+    </style>
+    <script src="http://192.168.60.46:8026/library/3.6/3.6/init.js"></script>
+    <script>
+        dojo.require("esri.map");
+        var map;
+        var startTime;
+        function init() {           
+            map = new esri.Map("mapDiv",{maxZoom:14,minZoom:8});                 
+            var lay = new  esri.layers.ArcGISTiledMapServiceLayer("http://192.168.60.56:6080/arcgis/rest/services/sjz_google222/MapServer");
+            map.addLayer(lay);
+
+            map.on("zoom-start",function(){
+                document.getElementById("calctime").innerHTML = "";
+                startTime = new Date();
+            });
+            map.on("zoom-end",function(){
+               document.getElementById("calctime").innerHTML = (new Date()-startTime);
+           });
+        }
+        dojo.ready(init);
+
+        function calcTime(zoom){
+            map.setZoom(zoom);
+        }
+
+    </script>
+</head>
+<body>
+    <input type="button" value="8-14" data="14" onclick="calcTime(14)"/> <input type="button" value="14-8" data="8" onclick="calcTime(8)"/>
+    <span id="calctime"></span>
+    <div id="mapDiv" style="width:95%;height:95%"></div>
+</body>
+</html>

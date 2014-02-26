@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>东方网力 地图API-类参考</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css" type="text/css"/>
+	</head>
+	<body class="main-body">
+		<div class="gis-container">
+			<div class="gis-top" id="gisTop">
+				<ul class="top-nav">
+					<li class="logo"><img src="css/images/logo.png" /></li>
+					<li><a href="home.html" class="nav-item">首页</a></li>
+					<li><a href="guide.html" class="nav-item">入门指导</a></li>
+					<li><a href="#" class="nav-item-hover">类参考</a></li>
+					<li><a href="gis_demo.html" class="nav-item">DEMO示例</a></li>
+					<li><a href="all_demos.html" class="nav-item">综合示例</a></li>
+					<li><a href="download.html" class="nav-item">下载中心</a></li>
+				</ul>
+			</div>
+			<div class="gis-middle" id="gisMiddle">
+				<div class="right class-container">
+					<iframe id="classIframe" class="class-iframe" frameborder="no" marginheight="0" marginwidth"0"></iframe>
+				</div>
+				<div class="left class-tree">
+					<ul class="ztree" id="ztree"></ul>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="gis-bottom" id="gisBottom">版权所有：东方网力科技股份有限公司 </div>
+		</div>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.ztree.core-3.5.min.js"></script>
+		<script type="text/javascript" src="js/classtree.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var $top = $("#gisTop"),$middle = $("#gisMiddle"),$bottom = $("#gisBottom");
+				var $classTree = $(".class-tree"),$classContainer = $(".class-container");
+				var $classIframe = $("#classIframe");
+				resize();
+				$(window).resize(function(){
+					resize();
+				});
+				function resize(){
+					var midHeight = $(window).height() - $top.height() - $bottom.height() -4 -5;
+					$middle.height(midHeight);
+					$classTree.height(midHeight);
+					$classContainer.height(midHeight-20);
+					$classIframe.height(midHeight-20);
+				}
+			});
+		</script>
+	</body>
+</html>

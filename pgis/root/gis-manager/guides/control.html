@@ -1,0 +1,99 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>东方网力 地图API-入门指导</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/shCore.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/shThemeDefault.css"/>
+	<style type="text/css">
+		p{line-height: 2;padding: 0px 15px 0px 15px;}
+	</style>
+</head>
+<body class="main-body">
+	<div class="gis-container">
+		<div class="gis-top" id="gisTop">
+			<ul class="top-nav">
+				<li class="logo"><img src="../css/images/logo.png" /></li>
+				<li><a href="../home.html" class="nav-item">首页</a></li>
+				<li><a href="#" class="nav-item-hover">入门指导</a></li>
+				<li><a href="../class.html" class="nav-item">类参考</a></li>
+				<li><a href="../gis_demo.html" class="nav-item">DEMO示例</a></li>
+				<li><a href="../all_demos.html" class="nav-item">综合示例</a></li>
+				<li><a href="../download.html" class="nav-item">下载中心</a></li>
+			</ul>
+		</div>
+		<div class="gis-middle" id="gisMiddle">
+			<div class="right guide-right" id="guideRight">
+				<div class="guide-content" id="guide-control">
+					<div class="title">
+						<h3>控件概述</h3>
+					</div>
+					<p>东方网力地图上负责与地图交互的UI元素称为控件，东方网力地图API提供以下控件：</p>
+					<p><b> - 导航控件（NavigationControl）：</b>默认位于地图左上方，它包含控制地图的平移和缩放的功能</p>
+					<p><b> - 比例尺控件（ScaleControl）：</b>默认位于地图右下方，显示地图的比例关系</p>
+					<p><b> - 鹰眼控件（OverviewControl）：</b>默认位于地图右下方，是一个可折叠的缩略地图。</p>
+					<p><b> - 版权控件（CopyRightControl）：</b>默认位于地图左下方。</p>
+					<div class="title">
+						<h3>定义控件</h3>
+					</div>
+					<pre class="brush:js" name="defineControl" id="defineControl">
+						//导航控件
+						var ctrl = new NPMapLib.Controls.NavigationControl();
+						//比例尺控件
+						var ctrl = new NPMapLib.Controls.ScaleControl();
+						//鹰眼控件
+						var ctrl = new NPMapLib.Controls.OverviewControl();
+						//版权控件
+						var ctrl = new NPMapLib.Controls.CopyRightControl("东方网力");
+					</pre>
+					<div class="title">
+						<h3>控件操作</h3>
+					</div>
+					<pre class="brush:js" name="controlOpera" id="controlOpera">
+						//添加
+						map.addControl(ctrl);
+						//移除
+						map.removeControl(ctrl);
+					</pre>
+				</div>
+			</div>
+			<div class="left guide-left" id="guideLeft">
+				<div class="title"><h3>目录结构</h3></div>
+				<ul class="guide-ul">
+					<li><a href="../guide.html">▪ 简介</a></li>
+					<li><a href="helloworld.html">▪ Hello World!</a></li>
+					<li class="active"><a href="javascript:;">▪ 控件</a></li>
+					<li><a href="overlay.html">▪ 覆盖物</a></li>
+					<li><a href="listener.html">▪ 事件</a></li>
+					<li><a href="maplayer.html">▪ 地图图层</a></li>
+					<li><a href="tools.html">▪ 工具</a></li>
+					<!-- <li><a href="service.html">▪ 服务</a></li>
+					<li><a href="version.html">▪ 版本说明</a></li> -->
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="gis-bottom" id="gisBottom">版权所有：东方网力科技股份有限公司 </div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/allScript.js"></script>
+	<script type="text/javascript">
+		SyntaxHighlighter.all("defineControl");
+		SyntaxHighlighter.all("controlOpera");
+		$(function(){
+			var $top = $("#gisTop"),$middle = $("#gisMiddle"),$bottom = $("#gisBottom");
+			var $midRight = $("#guideRight");
+			resize();
+			$(window).resize(function(){
+				resize();
+			});
+			function resize(){
+				var midHeight = $(window).height() - $top.height() - $bottom.height() -4 -5;
+				$middle.height(midHeight);
+				$midRight.height(midHeight);
+			}
+		});
+	</script>
+</body>
+</html>

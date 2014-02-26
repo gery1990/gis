@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Dialog - Default functionality</title>
+	<link rel="stylesheet" type="text/css" href="../css/popup.css">
+	<script src="jquery.js"></script>
+	<script src="popup.js"></script>
+	<script>
+	$(function() {
+		var popup = new Popup({
+			type : "withArrow",//有没有箭头，默认为有；无箭头noArrow
+			caption : "东方网力",//标题
+			content : "<p>经度：123654.45454</p><p>纬度：123654.45454</p>",
+			width : 200,
+			height : 100
+		});
+		popup.open(100,100);
+		jQuery("#open").click(function(){
+			popup.open(300,200);
+		});
+		jQuery("#close").click(function(){
+			popup.close();
+		});
+	});
+	</script>
+</head>
+<body>
+	<input type="button" value="打开" id="open"/>
+	<input type="button" value="关闭" id="close"/>
+</body>
+</html>

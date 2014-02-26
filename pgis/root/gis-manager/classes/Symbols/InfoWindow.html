@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../../css/class.css"/>
+	</head>
+	<body>
+		<div class="class-container">
+			<div class="class-label">命名空间：NPMapLib.Symbols&nbsp;&nbsp;&nbsp;&nbsp;(PS：力图精简，以下描述皆省略命名空间，详见相关类的说明页面)</div>
+			<div class="class-label">构造函数</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">构造函数</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">InfoWindow(title:String, content：String|HTMLElement, opts:Array<object>)</td>
+					<td class="grey">创建一个信息窗实例。<br/>
+									title：标题。<br/>
+									content：内容。支持HTML内容。默认信息窗不显示。<br/>
+									opts={</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: 260, //信息窗宽度，单位像素 </br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 180, //信息窗高度，单位像素</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offset: new NPMapLib.Geometry.Size(0,0),				//信息窗位置偏移值</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arrow: true, //是否带箭头</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arrowStyle: NPMapLib.LINE_ARROW_TYPE_NULL, //线的箭头样式</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enableCloseOnClick: false, //是否开启点击地图关闭信息窗口（默认开启）</br>
+								    };
+					</td>
+				</tr>
+			</table>
+			
+			<div class="class-label">方法</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">open(x:Number, y:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">打开。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">close()</td>
+					<td class="green">none</td>
+					<td class="grey">关闭。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setWidth(width:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">设置信息窗口的宽度，单位像素。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">setHeight(height:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">设置信息窗口的高度，单位像素。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setTitle(title:String)</td>
+					<td class="green">none</td>
+					<td class="grey">设置信息窗口标题。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getTitle()</td>
+					<td class="green">String</td>
+					<td class="grey">返回信息窗口标题。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setContent(content:String)</td>
+					<td class="green">none</td>
+					<td class="grey">设置信息窗口内容。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getContent()</td>
+					<td class="green">String</td>
+					<td class="grey">返回信息窗口内容。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">getPosition()</td>
+					<td class="green">Point</td>
+					<td class="grey">返回信息窗口的位置。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">isOpen</td>
+					<td class="green">Boolean</td>
+					<td class="grey">返回信息窗口的打开状态。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">enableCloseOnClick()</td>
+					<td class="green">none</td>
+					<td class="grey">开启点击地图时关闭信息窗口。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">disableCloseOnClick</td>
+					<td class="green">none</td>
+					<td class="grey">关闭点击地图时关闭信息窗口。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">addEventListener(event:enum,handler:Function</td>
+					<td class="green">none</td>
+					<td class="grey">添加事件监听函数。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">removeEventListener(event:enum)</td>
+					<td class="green">none</td>
+					<td class="grey">移除事件监听函数。</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

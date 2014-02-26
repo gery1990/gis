@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Open</title>
+    <style type="text/css">
+        #map
+        {
+            width: 1200px;
+            height: 600px;
+            border: 1px solid black;
+        }
+    </style>
+    <script type="text/javascript" src="../OpenLayers.js"></script>
+    <script type="text/javascript">
+      
+        var map, vectors;
+        function init() {
+            // OpenLayers.ProxyHost = '../cgi/proxy.cgi?url=';
+            map = new OpenLayers.Map('map');
+            var layer = new OpenLayers.Layer.WMS(
+                "geoserver_wfs_juminxiaoqu_148:8080",
+                "http://192.168.60.148:8080/sjzmap/wms?",
+                { layers: 'juminxiaoqu1' }
+                );
+            vectors = new OpenLayers.Layer.Vector("Vector Layer");
+            map.addLayers([layer, vectors]);
+
+            map.addControl(new OpenLayers.Control.LayerSwitcher());
+            map.zoomToExtent(new OpenLayers.Bounds(114.431057,38.002398,114.570384,38.084114));           
+            
+        }
+
+        function query(keyword) {
+             var xmlPara = "<?xml version='1.0' encoding='UTF-8'?>"
+                      + "<wfs:GetFeature service='WFS' version='1.0.0' "
+
+                + "xmlns:wfs='http://www.opengis.net/wfs' "
+                + "xmlns:gml='http://www.opengis.net/gml' "
+                + "xmlns:ogc='http://www.opengis.net/ogc' "
+                + "xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' "
+                + "xsi:schemaLocation='http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.0.0/wfs.xsd'>"
+
+                + "<wfs:Query typeName='sjzmap:juminxiaoqu_test' srsName='EPSG:4326'>"
+                + "<wfs:PropertyName>test:gid</wfs:PropertyName>"
+                + "<wfs:PropertyName>test:NAME</wfs:PropertyName>"
+                + "<wfs:PropertyName>test:GEOCODE</wfs:PropertyName>"
+                + "<wfs:PropertyName>test:STARTDATE</wfs:PropertyName>"
+                + "<wfs:PropertyName>test:geom</wfs:PropertyName>"
+
+
+                + "<ogc:Filter>"
+                + "<ogc:PropertyIsLike wildCard='*' singleChar='.' escape='!'>"
+                + "<ogc:PropertyName>NAME</ogc:PropertyName>"
+                + "<ogc:Literal>" + keyword + "</ogc:Literal>"
+                + "</ogc:PropertyIsLike>"
+                + "</ogc:Filter>"
+
+                      + "</wfs:Query>"
+                      + "</wfs:GetFeature>";
+
+
+            var request = OpenLayers.Request.POST({
+                url: "http://192.168.60.148:8080/sjzmap/wfs?",
+                data: xmlPara,
+                callback: handlerQuery
+            });
+         
+        }
+
+        function handlerQuery(req) {
+            var gml = new OpenLayers.Format.GML();
+            var features = gml.read(req.responseText);
+            // vectors.addFeatures(features,Object.creat);
+            var Lon = features[0].geometry.x;
+            var Lat = features[0].geometry.y;          
+            var markers = new OpenLayers.Layer.Markers( "Markers" );
+            map.addLayer(markers);
+            var size = new OpenLayers.Size(31,35);
+            var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+            var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset);
+            markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(Lon,Lat),icon));
+            markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(Lon,Lat),icon.clone()));
+
+            outputInfo(features[0].attributes);
+
+        }
+    
+        //输出信息
+        function outputInfo(arg) {
+            var temp = arg;
+            var s = "id=" + temp.gid + "\n" + "name=" + temp.NAME + "\n" + "geocode=" + temp.GEOCODE + "\n" + "startdate=" + temp.STARTDATE + "\n" ;
+     
+            document.getElementById("t").innerText = s;
+        }
+
+
+    </script>
+
+</head>
+
+<body onload="init();">
+    <div id="search">
+        查询值:
+        <input type="text" name="key" id="key" size="30" value="石府小区" />
+        <input type="submit" onclick="query(document.getElementById('key').value);" value="查询" />
+    </div>
+    <div id="map" class="smallmap"></div>
+    <br>
+    <div>
+        <textarea id="t" style="height:150px; width:300px; background-color:white;"></textarea>
+    </div>
+</body>
+</html>

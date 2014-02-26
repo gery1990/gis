@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../css/class.css"/>
+	</head>
+	<body>
+		<div class="class-container">
+			<div class="class-label">说明：图层的抽象基类，所有图层均继承基类的方法。此类不可实例化。</div>
+			<div class="class-label">命名空间：NPMapLib&nbsp;&nbsp;&nbsp;&nbsp;(PS：力图精简，以下描述皆省略命名空间，详见相关类的说明页面)</div>
+			<div class="class-label">属性</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">属性</th>
+					<th width="90">类型</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">id</td>
+					<td class="green">Number</td>
+					<td class="grey">唯一标识。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">mapId</td>
+					<td class="green">Number</td>
+					<td class="grey">地图id。</td>
+				</tr>
+			</table>
+
+			<div class="class-label">方法</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">getUrl()</td>
+					<td class="green">String</td>
+					<td class="grey">获取图层路径。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">setUrl(url:String)</td>
+					<td class="green">none</td>
+					<td class="grey">设置图片路径。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">isVisible()</td>
+					<td class="green">Boolean</td>
+					<td class="grey">判断是否显示。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">setName(name:String)</td>
+					<td class="green">none</td>
+					<td class="grey">设置图层名称。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">getName()</td>
+					<td class="green">String</td>
+					<td class="grey">获取图层名称。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">setMinLevel(level:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">设置最小显示级别。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getMinLevel()</td>
+					<td class="green">Number</td>
+					<td class="grey">获取最小显示级别。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setMaxLevel(level:Number)</td>
+					<td class="green">none</td>
+					<td class="grey">设置最大显示级别。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getMaxLevel()</td>
+					<td class="green">Number</td>
+					<td class="grey">获取最大显示级别。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">show()</td>
+					<td class="green">none</td>
+					<td class="grey">显示图层。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">hide()</td>
+					<td class="green">none</td>
+					<td class="grey">隐藏图层。</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

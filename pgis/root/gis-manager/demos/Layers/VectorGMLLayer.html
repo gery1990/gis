@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
+<body>
+    <div class="map-id" id="mapId"></div>
+    <script type="text/javascript">
+        _NPMAPLIB_USING_ADAPTER_OPENLAYERS = 1;
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="../../css/rescorce-code.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/shThemeDefault.css" />
+    <script type="text/javascript" src="../../../../v1.0/Init.js"></script>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/allScript.js"></script>
+    <script type="text/javascript" src="../../js/resource-code.js"></script>
+    <script type="text/javascript">
+        //地图控件
+        var mapContainer = document.getElementById("mapId");
+        var map = new NPMapLib.Map(mapContainer, { minZoom: 0,
+            maxZoom: 16
+        });
+
+        //图层参数
+        var opts={
+            layerName: "sjzmap:sjzmap_postgis1",    //图层标识
+            projection: "EPSG:4326",               //地图数据的坐标投影
+            fullExtent: [113.511203709745, 37.4307567077597, 115.482923210193, 38.7698452416708],          //全图坐标范围
+            minLevel: 0,                        //最小显示级别
+            maxLevel: 5,                        //最大显示级别
+            tiled:false,                            //是否缓存
+            format:'image/png',                    //缓存图片格式
+            mapUnitPixels:256,                     //缓存图片像素
+            buffer:0,                              //图片加载方式，0--快速下载，2--双螺旋下载[默认为0]
+            reproject:true,                        //是否进行重投影
+            isBaseLayer:true                       //是否作为基础图层，备注：基础图层无法控制显示隐藏
+        };
+
+
+        //缓存地图路径
+        var wmsUrl = "/gwc";
+        var wmsLayer = new NPMapLib.Layers.WMSLayer(wmsUrl,"矢量地图",opts);
+        map.addLayer(wmsLayer);
+
+        //加载本地数据
+        //gml数据路径
+        var polygonGMLUrl="./gml/jianzhuwu.xml";
+        var polylineGMLUrl="./gml/danxianhe.xml";
+        var pointGMLUrl="./gml/gonggongfuwu.xml";
+        var pointGMLLayer=new NPMapLib.Layers.VectorGMLLayer(pointGMLUrl, "[点状图层]公共服务");
+        map.addLayer(pointGMLLayer);
+        var polylineGMLLayer=new NPMapLib.Layers.VectorGMLLayer(polylineGMLUrl, "[线状图层]单线河");
+        map.addLayer(polylineGMLLayer);
+        var polygonGMLLayer=new NPMapLib.Layers.VectorGMLLayer(polygonGMLUrl, "[面状图层]建筑物");
+        map.addLayer(polygonGMLLayer);
+    </script>
+
+    <script type="text/javascript">
+        $(function() {
+            loadDemoCode("../../demosCode/Layers/VectorGMLLayer.html");
+        });
+    </script>
+
+</body>
+</html>

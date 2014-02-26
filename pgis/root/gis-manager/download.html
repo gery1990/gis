@@ -1,0 +1,129 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>东方网力 地图API-下载中心</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+</head>
+<body class="main-body">
+	<div class="gis-container">
+		<div class="gis-top" id="gisTop">
+			<ul class="top-nav">
+				<li class="logo"><img src="css/images/logo.png" /></li>
+				<li><a href="home.html" class="nav-item">首页</a></li>
+				<li><a href="guide.html" class="nav-item">入门指导</a></li>
+				<li><a href="class.html" class="nav-item">类参考</a></li>
+				<li><a href="gis_demo.html" class="nav-item">DEMO示例</a></li>
+				<li><a href="all_demos.html" class="nav-item">综合示例</a></li>
+				<li><a href="#" class="nav-item-hover">下载中心</a></li>
+			</ul>
+		</div>
+		<div class="gis-middle" id="gisMiddle">
+			<div class="download-center">
+				<!-- <div class="title">
+					<h3>东方网力 地图API 下载中心</h3>
+				</div> -->
+				<div class="right download-right" id="downloadRight">
+					<div content="npmapapi" class="active">
+						<h4>源码</h4>
+						<p>
+							<a href="#" title="点击下载">NPMap API For JavaScript Beta v1.0.zip</a>
+							<font>暂未对外开放</font>
+						</p>
+						<h4>相关文档</h4>
+						<p>
+							<a href="class.html" title="点击下载">类参考文档(.html)</a>
+							<font>类参考文档</font>
+						</p>
+						<h4>示例</h4>
+						<p>
+							<a href="all_demos.html" title="点击下载">综合示例</a>
+							<font>一个地图基本操作的示例。</font>
+						</p>
+					</div>
+					<div content="npmapsdk" class="inactive">
+						<!-- <h4>源码</h4>
+						<p>
+							<a href="#" title="点击下载">NPMap SDK For .net Beta v1.0.zip</a>
+							<font>暂未对外开放</font>
+						</p> -->
+						<h4>相关文档</h4>
+						<p>
+							<a href="downloads/sdk/NPMapLib for dotnet.chm" title="点击下载">类参考文档(.chm)</a> <font>类参考文档</font>
+							<a href="downloads/sdk/NPMapLib for dotnet.pdf" title="点击下载">类参考文档(.pdf)</a> <font>类参考文档</font>
+							<a href="downloads/other/NPMapLib使用说明.docx" title="点击下载">NPMapLib使用说明.docx</a> <font>使用说明文档</font>
+						</p>
+						<h4>示例</h4>
+						<p>
+							<a href="downloads/sdk/Demo of dotnet.rar" title="点击下载">综合示例</a>
+							<font>一个地图基本操作的示例，您可以单击下载，下载完成后，解压文件，双击GisDemo.exe即可。</font>
+						</p>
+					</div>
+					<div content="npmaptools" class="inactive">
+						<h4>应用程序</h4>
+						<p>
+							<a href="downloads/tools/GIS离线地图工具v1.0(非API版).zip" title="点击下载">GIS离线地图工具v1.0(非API版)</a>
+							<font>与旧版PGISWeb搭配使用，可采集Google、Arcgis、PGIS等数据。</font>
+						</p>
+						<p>
+							<a href="downloads/tools/GIS简易点位批量导入工具(仅适用于Psap).zip" title="点击下载">GIS简易点位批量导入工具(仅适用于Psap)</a>
+							<font>用于Psap数据库中批量更新摄像点点位信息。</font>
+						</p>
+						<h4>相关文档</h4>
+						<p>
+							<font>暂无</font>
+						</p>
+					</div>
+					<div content="npmapother" class="inactive">
+						<h4>下载</h4>
+						<p>
+							<font>暂无</font>
+						</p>
+						<h4>相关文档</h4>
+						<p>
+							<font>暂无</font>
+						</p>
+					</div>
+				</div>
+				<div class="left download-left">
+					<div class="title"><h3>东方网力地图下载中心</h3></div>
+					<ul class="download-ul">
+						<li class="active" id="npmapapi"><a href="javascript:;" >▪ 地图API下载</a></li>
+						<li id="npmapsdk"><a href="javascript:;">▪ 地图SDK下载</a></li>
+						<li id="npmaptools"><a href="javascript:;">▪ 地图工具下载</a></li>
+						<li id="npmapother"><a href="javascript:;">▪ 其他</a></li>
+					</ul>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="gis-bottom" id="gisBottom">版权所有：东方网力科技股份有限公司 </div>
+	</div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var $top = $("#gisTop"),$middle = $("#gisMiddle"),$bottom = $("#gisBottom");
+			var $midRight = $("#downloadRight");
+			resize();
+			$(window).resize(function(){
+				resize();
+			});
+			function resize(){
+				var midHeight = $(window).height() - $top.height() - $bottom.height() -4 -5;
+				$middle.height(midHeight);
+				$midRight.height(midHeight);
+			}
+			jQuery(".download-ul li").click(function(){
+			jQuery(".download-ul li").each(function(){
+				jQuery(this).attr("class","");
+				var thisId = this.id;
+				jQuery(".download-right .active").attr("class","inactive");
+			});
+			var currId = this.id;
+			jQuery(this).attr("class","active");
+			jQuery(".download-right div[content="+currId+"]").attr("class","active");
+		});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+body{overflow-y: auto;}
+.class-container{overflow-y: auto;}
+.class-label{width: 890px;height: 30px;line-height:30px;font-weight: bold;color: #2F83C7;margin: 10px 0px;background-color: #E8E8E8;padding-left: 10px;}
+.class-table{width: 900px;border-collapse:collapse;font-size: 13px;margin-bottom: 5px;}
+.class-table tr th{text-align: left;height: 26px;line-height: 26px;background-color: #E5EFFB;padding: 0px 10px;border: 1px solid #C8CCD1;color:#333;}
+.class-table tr td{text-align: left;height: 26px;line-height: 26px;padding: 0px 10px;border: 1px solid #C8CCD1;}
+.odd{background-color: #fff;}
+.even{background-color: #F5F9FC;}
+.green{color:#0A8021;}
+.grey{color:#535353;}

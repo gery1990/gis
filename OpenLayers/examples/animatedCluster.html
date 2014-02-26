@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>AnimatedCluster Strategy Test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Antonio Santiago">
+    <meta name="description" content="Test for the AnimatedCluster Strategy for OpenLayers which animated the cluster on zoomin/zoomout actions.">
+    <meta name="keywords" content="OpenLayers, Strategy, Cluster, AnimatedCluster, Animation, Tween" />
+
+    <!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine&amp;v1" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
+-->
+    <!-- <link rel="stylesheet" type="text/css" href="style/style.css" />
+-->
+    <link rel="stylesheet" href="../theme/default/style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+
+    <link href="prettify.css" type="text/css" rel="stylesheet" />
+    <link href="sunburst.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="prettify.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="../lib/OpenLayers.js"></script>
+    <script src="AnimatedCluster.js"></script>
+
+    <style>
+    #header {
+        height: 100px;
+    }
+    #content {
+        width: 920px;
+        padding-bottom: 25px;
+        font-size: 14px;
+    }
+    .map {
+        -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+        box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+        -webkit-border-radius: 7px;
+        border-radius: 7px;
+        width: 1100px;
+        height: 700px;
+        margin-bottom: 20px;
+    }
+    #map1, #map2 {
+        width: 100%;
+        height: 100%;
+    }
+    </style>
+</head>
+
+<body onload="init();">
+    <input type="button" value="8-14" data="14" onclick="calcTime(14)" />
+    <input type="button" value="14-8" data="8" onclick="calcTime(8)" />
+    <span id="calctime"></span>
+    <div id="main">
+
+        <div id="site_content">
+            <div id="content">
+
+                <a href="http://acuriousanimal.com/code/animatedCluster/">http://acuriousanimal.com/code/animatedCluster/</a>
+                </p>
+
+                <div class="map">
+                    <div id="map2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+    //使用json自动获取layerInfo，并调用initMap
+    var url = "http://192.168.60.56:6080/arcgis/rest/services/sjz_google222/MapServer";
+    var url2 = "../examples/data/50000-photos.json";
+    // Create some random features
+    var startTime;
+    var vector2;
+
+    function init() {
+        var jsonp = new OpenLayers.Protocol.Script();
+        jsonp.createRequest(url, {
+            f: 'json',
+            pretty: 'true'
+        }, initMap);
+    }
+
+    function initMap(layerInfo) {
+
+        var colors = {
+            low: "rgb(181, 226, 140)",
+            middle: "rgb(241, 211, 87)",
+            high: "rgb(253, 156, 115)"
+        };
+
+        var lowRule = new OpenLayers.Rule({
+            filter: new OpenLayers.Filter.Comparison({
+                type: OpenLayers.Filter.Comparison.LESS_THAN,
+                property: "count",
+                value: 15
+            }),
+            symbolizer: {
+                fillColor: colors.low,
+                fillOpacity: 0.9,
+                strokeColor: colors.low,
+                strokeOpacity: 0.5,
+                strokeWidth: 12,
+                pointRadius: 10,
+                label: "${count}",
+                labelOutlineWidth: 0.1,
+                fontColor: "#ffffff",
+                fontOpacity: 0.8,
+                fontSize: "12px",
+                labelAlign: "m",
+                externalGraphic: "../img/BluePin1LargeB.png",
+                graphicWidth: 76,
+                graphicHeight: 76
+            }
+        });
+        var middleRule = new OpenLayers.Rule({
+            filter: new OpenLayers.Filter.Comparison({
+                type: OpenLayers.Filter.Comparison.BETWEEN,
+                property: "count",
+                lowerBoundary: 15,
+                upperBoundary: 50
+            }),
+            symbolizer: {
+                fillColor: colors.middle,
+                fillOpacity: 0.9,
+                strokeColor: colors.middle,
+                strokeOpacity: 0.5,
+                strokeWidth: 12,
+                pointRadius: 15,
+                label: "${count}",
+                labelOutlineWidth: 0.1,
+                fontColor: "#ffffff",
+                fontOpacity: 0.8,
+                fontSize: "12px",
+                labelAlign: "m",
+                externalGraphic: "../img/GreenPin1LargeB.png",
+                graphicWidth: 76,
+                graphicHeight: 76
+            }
+        });
+        var highRule = new OpenLayers.Rule({
+            filter: new OpenLayers.Filter.Comparison({
+                type: OpenLayers.Filter.Comparison.GREATER_THAN,
+                property: "count",
+                value: 50
+            }),
+            symbolizer: {
+                fillColor: colors.high,
+                fillOpacity: 0.9,
+                strokeColor: colors.high,
+                strokeOpacity: 0.5,
+                strokeWidth: 12,
+                pointRadius: 20,
+                label: "${count}",
+                labelOutlineWidth: 0.1,
+                fontColor: "#ffffff",
+                fontOpacity: 0.8,
+                fontSize: "12px",
+                labelAlign: "m",
+                externalGraphic: "../img/RedPin1LargeB.png",
+                graphicWidth: 76,
+                graphicHeight: 76
+            }
+        });
+
+        // Create a Style that uses the three previous rules
+        var style = new OpenLayers.Style(null, {
+            rules: [lowRule, middleRule, highRule]
+        });
+
+
+        var maxExtent = new OpenLayers.Bounds(1.2575260622768156E7, 4490908.1095299665, 1.2916248980616502E7, 4697331.824867047);
+
+        //Max extent from layerInfo above            
+        var layerMaxExtent = new OpenLayers.Bounds(
+            layerInfo.fullExtent.xmin,
+            layerInfo.fullExtent.ymin,
+            layerInfo.fullExtent.xmax,
+            layerInfo.fullExtent.ymax
+        );
+
+        var resolutions = [];
+        for (var i = 0; i < layerInfo.tileInfo.lods.length; i++) {
+            resolutions.push(layerInfo.tileInfo.lods[i].resolution);
+        }
+
+        map2 = new OpenLayers.Map('map2', {
+            // numZoomLevels: 7,
+            maxExtent: maxExtent,
+            StartBounds: layerMaxExtent,
+            units: (layerInfo.units == "esriFeet") ? 'ft' : 'm',
+            resolutions: resolutions,
+            tileSize: new OpenLayers.Size(layerInfo.tileInfo.width, layerInfo.tileInfo.height),
+            projection: 'EPSG:' + layerInfo.spatialReference.wkid
+
+        });
+
+        map2.events.register("zoomend", this, setZoomEnd);
+        // map2.events.register("zoomstart",this,function(){alert("d");});
+
+        cacheLayer = new OpenLayers.Layer.ArcGISCache("AGSCache", url, {
+            isBaseLayer: true,
+            resolutions: resolutions,
+            tileSize: new OpenLayers.Size(layerInfo.tileInfo.cols, layerInfo.tileInfo.rows),
+            tileOrigin: new OpenLayers.LonLat(layerInfo.tileInfo.origin.x, layerInfo.tileInfo.origin.y),
+            maxExtent: layerMaxExtent,
+            projection: 'EPSG:' + layerInfo.spatialReference.wkid
+        });
+        map2.addLayer(cacheLayer);
+        map2.addControl(new OpenLayers.Control.MousePosition());
+
+        $(".olControlZoomIn.olButton").click(setZoomStart);
+        $(".olControlZoomOut.olButton").click(setZoomStart);
+
+        map2.zoomToExtent(new OpenLayers.Bounds(1.263600939630041E7, 4499320.010109549, 1.2855500207077371E7, 4688757.293750983));
+
+        map2.addControl(new OpenLayers.Control.LayerSwitcher());
+
+        // Create a vector layers
+        vector2 = new OpenLayers.Layer.Vector("Features", {
+            renderers: ['SVG'], //'Canvas',
+            strategies: [
+                new OpenLayers.Strategy.AnimatedCluster({
+                    distance: 45,
+                    animationMethod: OpenLayers.Easing.Expo.easeOut,
+                    animationDuration: 20
+                })
+            ],
+            styleMap: new OpenLayers.StyleMap(style)
+        });
+        map2.addLayer(vector2);
+
+        //使用jQuery获取json脚本，并转换为pointInfo对象。
+        $.get(url2, function(pointInfo) {
+            initPoint(pointInfo);
+        }, 'json');
+
+    }
+
+    function initPoint(pointInfo) {
+        var features = [];
+        for (var i = 0; i < pointInfo.length; i++) {
+            var info = pointInfo[i];
+            var lonlat = new OpenLayers.LonLat(info.lon, info.lat);
+
+            var f = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(info.lon, info.lat));
+
+            features.push(f);
+        }
+        vector2.addFeatures(features);
+
+    }
+
+    function calcTime(zoom) {
+        setZoomStart();
+        map2.zoomTo(zoom);
+    }
+
+    function setZoomStart() {
+        startTime = new Date();
+    }
+
+    function setZoomEnd() {
+        document.getElementById("calctime").innerHTML = new Date() - startTime;
+    }
+    </script>
+</body>
+
+</html>

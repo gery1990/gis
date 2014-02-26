@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
+<body>
+	<div class="map-id" id="mapId"></div>
+	<link rel="stylesheet" type="text/css" href="../../css/rescorce-code.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shCore.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shThemeDefault.css"/>
+	<script type="text/javascript" src="../../../../v1.0/Init.js"></script>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/allScript.js"></script>
+	<script type="text/javascript" src="../../js/resource-code.js"></script>
+	<script type="text/javascript">
+		//地图控件
+		var mapContainer = document.getElementById("mapId");
+		var map = new NPMapLib.Map(mapContainer, {minZoom:0,
+												  maxZoom:7});
+		
+		//图层参数
+		// var opts = {centerPoint:[32991597.27439121,4853139.799882412],
+		// 		    fullExtent:[32896891.79634588,4826998.336208882,33086302.752436545,4879281.263555942],
+		// 			minLevel:0,
+		// 			maxLevel:6,
+		// 			zoomOffset:10,
+		// 			zoomLevelSequence:2
+		// 		};
+		var opts = {centerPoint:[32168829.10192957,4070653.9413270615],
+				    fullExtent:[32068543.72081942,4018982.510206282,32226309.747200027,4131344.941785492],
+					minLevel:0,
+					maxLevel:7,
+					zoomOffset:11,
+					zoomLevelSequence:2
+				};
+		//图层路径
+		var path = "/cache/vt/";
+		var layerSL = new NPMapLib.Layers.GoogleOffLineLayer(path, "矢量地图", opts);
+
+		map.addLayer(layerSL);
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			loadDemoCode("../../demosCode/Layers/GoogleOffLineLayer.html");
+		});
+	</script>
+</body>
+</html>

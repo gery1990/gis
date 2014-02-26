@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
+<body>
+	<div class="map-id" id="mapId"></div>
+	<link rel="stylesheet" type="text/css" href="../../css/rescorce-code.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shCore.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shThemeDefault.css"/>
+	<script type="text/javascript" src="../../../../v1.0/Init.js"></script>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/allScript.js"></script>
+	<script type="text/javascript" src="../../js/resource-code.js"></script>
+	<script type="text/javascript">
+		//地图控件
+		var mapContainer = document.getElementById("mapId");
+		var map = new NPMapLib.Map(mapContainer, {minZoom:0,
+												  maxZoom:6});
+		
+		//图层参数
+		var opts = {centerPoint:[119.69140625,31.65625],
+				    fullExtent:[119.74462, 31.59594, 120.14306, 31.9812],
+					minLevel:0,
+					maxLevel:6,
+					zoomOffset:0
+				};
+
+		//图层路径
+		var path = "/cache/SL/";
+		var layerSL = new NPMapLib.Layers.EzMapOffLineLayer(path, "矢量地图", opts);
+
+		path = "/cache/YX/";
+		var layerYX = new NPMapLib.Layers.EzMapOffLineLayer(path, "影像地图", opts);
+
+		path = "/cache/SLYX/";
+		var layerSLYX = new NPMapLib.Layers.EzMapOffLineLayer(path, "矢量影像地图", opts);
+
+		map.addLayers([layerSL, layerYX, layerSLYX]);
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			loadDemoCode("../../demosCode/Layers/EzMapOffLineLayer.html");
+		});
+	</script>
+</body>
+</html>

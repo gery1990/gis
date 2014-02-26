@@ -1,0 +1,153 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>东方网力 地图API-入门指导</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/shCore.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/shThemeDefault.css"/>
+	<style type="text/css">
+		p{line-height: 2;padding: 0px 15px 0px 15px;}
+	</style>
+</head>
+<body class="main-body">
+	<div class="gis-container">
+		<div class="gis-top" id="gisTop">
+			<ul class="top-nav">
+				<li class="logo"><img src="../css/images/logo.png" /></li>
+				<li><a href="../home.html" class="nav-item">首页</a></li>
+				<li><a href="#" class="nav-item-hover">入门指导</a></li>
+				<li><a href="../class.html" class="nav-item">类参考</a></li>
+				<li><a href="../gis_demo.html" class="nav-item">DEMO示例</a></li>
+				<li><a href="../all_demos.html" class="nav-item">综合示例</a></li>
+				<li><a href="../download.html" class="nav-item">下载中心</a></li>
+			</ul>
+		</div>
+		<div class="gis-middle" id="gisMiddle">
+			<div class="right guide-right" id="guideRight">
+				<div class="guide-content" id="guide-maplayer">
+					<div class="title">
+						<h3>地图图层概念</h3>
+					</div>
+					<p>
+						地图可以包含一个或多个图层，每个图层在每个级别都是由若干张图块组成的，它们覆盖了地球的整个表面。例如您所看到包括监控点的地图展现就是一个图层。
+					</p>
+					<div class="title">
+						<h3>东方网力地图图层</h3>
+					</div>
+					<p>东方网力地图目前提供的图层包括：</p>
+					<p><b> - ArcGIS在线缓存地图图层</b></p>
+					<p><b> - PGis在线缓存地图图层</b></p>
+					<p><b> - PGis离线缓存地图图层</b></p>
+					<p><b> - Google在线缓存地图图层</b></p>
+					<p><b> - Google离线缓存地图图层</b></p>
+					<p><b> - WMS缓存地图图层</b></p>
+					<p><b> - GML矢量图层</b></p>
+					<p><b> - 覆盖物图层</b></p>
+					<pre class="brush:js" name="defineLayer" id="defineLayer">
+						//ArcGIS在线缓存地图图层
+						var layerSL = new NPMapLib.Layers.ArcgisTileLayer(url, "矢量地图", opts);
+						//PGis在线缓存地图图层
+						var layerSLYX = new NPMapLib.Layers.EzMapTileLayer(url, "矢量影像地图", opts);
+						//PGis离线缓存地图图层
+						var layerSLYX = new NPMapLib.Layers.EzMapOffLineLayer(url, "矢量影像地图", opts);
+						//Google在线缓存地图图层
+						var layerSLYX = new NPMapLib.Layers.GoogleMapTileLayer(url, "矢量影像地图", opts);
+						//Google离线缓存地图图层
+						var layerSL = new NPMapLib.Layers.GoogleOffLineLayer(url, "矢量地图", opts);
+						//WMS缓存地图图层
+						var layerSL = new NPMapLib.Layers.WMSLayer(url,"矢量地图",opts);
+						//GML矢量图层
+						var layerSL = new NPMapLib.Layers.VectorGMLLayer(url,"矢量地图",opts);
+						//覆盖物图层
+						var layerSL = new NPMapLib.Layers.OverlayLayer("矢量地图");
+					</pre>
+					<div class="title">
+						<h3>自定义图层</h3>
+					</div>
+					<p>GML矢量图层：</p>
+					<pre class="brush:js" name="gmlLayer" id="gmlLayer">
+						var wmsUrl = "/gwc";
+				        var wmsLayer = new NPMapLib.Layers.WMSLayer(wmsUrl,"矢量地图",params,opts);
+				        map.addLayer(wmsLayer);
+				        var polygonGMLUrl="./gml/jianzhuwu.xml";
+				        var polylineGMLUrl="./gml/danxianhe.xml";
+				        var pointGMLUrl="./gml/gonggongfuwu.xml";
+				        var pointGMLLayer=new NPMapLib.Layers.VectorGMLLayer(pointGMLUrl, "[点状图层]公共服务");
+				        map.addLayer(pointGMLLayer);
+				        var polylineGMLLayer=new NPMapLib.Layers.VectorGMLLayer(polylineGMLUrl, "[线状图层]单线河");
+				        map.addLayer(polylineGMLLayer);
+				        var polygonGMLLayer=new NPMapLib.Layers.VectorGMLLayer(polygonGMLUrl, "[面状图层]建筑物");
+				        map.addLayer(polygonGMLLayer);
+					</pre>
+					<p>覆盖物图层：</p>
+					<pre class="brush:js" name="userdefineLayer" id="userdefineLayer">
+						//覆盖物图层
+						var layer = new NPMapLib.Layers.OverlayLayer("图层1");
+						map.addLayer(layer2,true);
+
+						//向图层中添加覆盖物
+						layer.addOverlay(marker1);
+						layer.addOverlay(marker2);
+						layer.addOverlay(marker3);
+						layer.addOverlay(circle);
+						layer.addOverlay(polygon);
+
+						layer.show();
+					</pre>	
+					<div class="title">
+						<h3>图层操作</h3>
+					</div>
+					<pre class="brush:js" name="layerOpera" id="layerOpera">
+						//添加图层
+						map.addLayer(layer);
+						//移除图层
+						map.removeLayer(id);
+						//显示
+						layer.show();
+						//隐藏
+						layer.hide();
+					</pre>
+				</div>
+			</div>
+			<div class="left guide-left" id="guideLeft">
+				<div class="title"><h3>目录结构</h3></div>
+				<ul class="guide-ul">
+					<li><a href="../guide.html">▪ 简介</a></li>
+					<li><a href="helloworld.html">▪ Hello World!</a></li>
+					<li><a href="control.html">▪ 控件</a></li>
+					<li><a href="overlay.html">▪ 覆盖物</a></li>
+					<li><a href="listener.html">▪ 事件</a></li>
+					<li class="active"><a href="javascript:;">▪ 地图图层</a></li>
+					<li><a href="tools.html">▪ 工具</a></li>
+					<!-- <li><a href="service.html">▪ 服务</a></li>
+					<li><a href="version.html">▪ 版本说明</a></li> -->
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="gis-bottom" id="gisBottom">版权所有：东方网力科技股份有限公司 </div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/allScript.js"></script>
+	<script type="text/javascript">
+		SyntaxHighlighter.all("defineLayer");
+		SyntaxHighlighter.all("layerOpera");
+		SyntaxHighlighter.all("userdefineLayer");
+		SyntaxHighlighter.all("gmlLayer");
+		$(function(){
+			var $top = $("#gisTop"),$middle = $("#gisMiddle"),$bottom = $("#gisBottom");
+			var $midRight = $("#guideRight");
+			resize();
+			$(window).resize(function(){
+				resize();
+			});
+			function resize(){
+				var midHeight = $(window).height() - $top.height() - $bottom.height() -4 -5;
+				$middle.height(midHeight);
+				$midRight.height(midHeight);
+			}
+		});
+	</script>
+</body>
+</html>

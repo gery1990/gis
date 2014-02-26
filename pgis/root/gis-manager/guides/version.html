@@ -1,0 +1,70 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>东方网力 地图API-入门指导</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+	<style type="text/css">
+		p{line-height: 2;}
+	</style>
+</head>
+<body class="main-body">
+	<div class="gis-container">
+		<div class="gis-top" id="gisTop">
+			<ul class="top-nav">
+				<li class="logo"><img src="../css/images/logo.png" /></li>
+				<li><a href="../home.html" class="nav-item">首页</a></li>
+				<li><a href="#" class="nav-item-hover">入门指导</a></li>
+				<li><a href="../class.html" class="nav-item">类参考</a></li>
+				<li><a href="../gis_demo.html" class="nav-item">DEMO示例</a></li>
+				<li><a href="../all_demos.html" class="nav-item">综合示例</a></li>
+				<li><a href="../download.html" class="nav-item">下载中心</a></li>
+			</ul>
+		</div>
+		<div class="gis-middle" id="gisMiddle">
+			<div class="right guide-right" id="guideRight">
+				<div class="guide-content" id="guide-version">
+					<div class="title">
+						<h3>版本说明</h3>
+					</div>
+					<p>
+						东方网力 地图API是一套由JavaScript语言编写的应用程序接口，它能够帮助您在网站中制作各种类型、行业的地图应用，还可以使地图功能够以模块化集成在不同类型的系统应用中。
+						东方网力 地图API是一套由JavaScript语言编写的应用程序接口，它能够帮助您在网站中制作各种类型、行业的地图应用，还可以使地图功能够以模块化集成在不同类型的系统应用中。
+						东方网力 地图API是一套由JavaScript语言编写的应用程序接口，它能够帮助您在网站中制作各种类型、行业的地图应用，还可以使地图功能够以模块化集成在不同类型的系统应用中。东方网力 地图API是一套由JavaScript语言编写的应用程序接口，它能够帮助您在网站中制作各种类型、行业的地图应用，还可以使地图功能够以模块化集成在不同类型的系统应用中。
+					</p>
+				</div>
+			</div>
+			<div class="left guide-left" id="guideLeft">
+				<div class="title"><h3>目录结构</h3></div>
+				<ul class="guide-ul">
+					<li><a href="../guide.html">▪ 简介</a></li>
+					<li><a href="helloworld.html">▪ Hello World!</a></li>
+					<li><a href="control.html">▪ 控件</a></li>
+					<li><a href="overlay.html">▪ 覆盖物</a></li>
+					<li><a href="maplayer.html">▪ 地图图层</a></li>
+					<li><a href="service.html">▪ 服务</a></li>
+					<li class="active"><a href="javascript:;">▪ 版本说明</a></li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="gis-bottom" id="gisBottom">版权所有：东方网力科技股份有限公司 </div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var $top = $("#gisTop"),$middle = $("#gisMiddle"),$bottom = $("#gisBottom");
+			var $midRight = $("#guideRight");
+			resize();
+			$(window).resize(function(){
+				resize();
+			});
+			function resize(){
+				var midHeight = $(window).height() - $top.height() - $bottom.height() -4 -5;
+				$middle.height(midHeight);
+				$midRight.height(midHeight);
+			}
+		});
+	</script>
+</body>
+</html>

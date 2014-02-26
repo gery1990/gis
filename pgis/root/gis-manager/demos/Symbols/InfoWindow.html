@@ -1,0 +1,140 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
+<body>
+	<div class="map-id" id="mapId"></div>
+	<link rel="stylesheet" type="text/css" href="../../css/rescorce-code.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shCore.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shThemeDefault.css"/>
+	<link rel="stylesheet" href="../../css/dialog.css">
+	<script type="text/javascript" src="../../../../v1.0/Init.js"></script>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/allScript.js"></script>
+	<script type="text/javascript" src="../../js/resource-code.js"></script>
+	<script src="../../js/dialog.js"></script>
+	<script type="text/javascript">
+		//地图控件
+		var mapContainer = document.getElementById("mapId");
+		var map = new NPMapLib.Map(mapContainer, {minZoom:0,
+												  maxZoom:10});
+		
+		var resolutions = [156543.033928,78271.5169639999,39135.7584820001,19567.8792409999,9783.93962049996,
+                           4891.96981024998,2445.98490512499,1222.99245256249,305.748113140558,152.874056570411,
+                           76.4370282850732,38.2185141425366,19.1092570712683,9.55462853563415,4.77731426794937,
+                           2.38865713397468,1.19432856685505,0.597164283559817];
+
+		//图层参数
+		var opts = {centerPoint:[12959745.271695066,4848706.4522418715],
+				    fullExtent:[12912392.532672398,4819583.94446522,13007098.010717731,4877828.960018523],
+					minLevel:0,
+					maxLevel:7,
+					zoomOffset:11,
+					zoomLevelSequence:2,
+					initResolution:resolutions,
+					origin:[-20037508.342789248, 20037508.342789248]
+				};
+
+		//图层路径
+		var url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaCities_Community_BaseMap_CHN/BeiJing_Community_BaseMap_CHN/MapServer";
+		var layer1 = new NPMapLib.Layers.ArcgisTileLayer(url, "矢量地图", opts);
+		map.addLayer(layer1);
+
+		//信息窗口
+		var windownCount = 0;
+		var windownArrary = new Array;
+		 
+		function add(){
+			var position = document.getElementById("position").value;
+			position = new NPMapLib.Geometry.Point(position.split(',')[0],position.split(',')[1]);
+			var title = document.getElementById("title").value;
+			var content = document.getElementById("content").value;
+			var w = document.getElementById("width").value;
+			var h = document.getElementById("height").value;
+
+			var leftOffset = document.getElementById("leftOffset").value;
+			var topOffset = document.getElementById("topOffset").value;
+
+			var offset = new NPMapLib.Geometry.Size(leftOffset,topOffset);
+			var infoWindow = new NPMapLib.Symbols.InfoWindow(null, title, content, {
+																			width:w,		//信息窗宽度，单位像素
+																			height:h,		//信息窗高度，单位像素
+																			offset:offset, 	//信息窗位置偏移值
+																			arrow:false		//是否带箭头
+																		}
+														);
+
+			//转换为像素坐标
+			var posPixel = map.pointToPixel(position);
+
+			// //添加关闭事件
+			// infoWindow.addEventListener(NPMapLib.INFOWINDOW_EVENT_CLOSE, function(){
+			// 	alert("您关闭了窗口！");
+			// });
+
+			// //添加打开事件
+			// infoWindow.addEventListener(NPMapLib.INFOWINDOW_EVENT_OPEN, function(){
+			// 	alert("您打开了窗口！");
+			// });
+
+			// //添加点击关闭按钮事件
+			// infoWindow.addEventListener(NPMapLib.INFOWINDOW_EVENT_CLICK_CLOSE, function(){
+			// 	alert("您点击窗口右上方的关闭按钮！");
+			// });
+			infoWindow.open(posPixel.x, posPixel.y);
+			infoWindow.GetApiObjDiv();
+
+			//infoWindow.id = (windownCount++);
+			windownArrary[infoWindow.id] = infoWindow;
+		}
+
+		function remove() {
+		    if (windownCount <= 0) {
+		        return;
+            }
+		    var window = windownArrary[windownCount-1];
+		    if (window != null) {
+		        window.close();
+		        window = null;
+		        windownCount--;
+		    }
+		}
+		function reconfig() {
+		    var window = windownArrary[windownCount - 1];
+		    if (window == null) {
+		        return;
+		    }
+		    window.setContent($("#content").val());
+		    window.setTitle($("#title").val());
+		    window.setWidth($("#width").val());
+		    window.setHeight($("#height").val());
+		    var position = document.getElementById("position").value;
+		    window.setPosition(new NPMapLib.Geometry.Point(position.split(',')[0], position.split(',')[1]))
+		    window.redraw();
+        }
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			loadDemoCode("../../demosCode/Symbols/InfoWindow.html");
+			//注册操作说明
+			registerDemoInstructions({
+			    title: "东方网力",
+				height:"340",
+				width:"320",
+				position:["right",60],
+				modal:false,
+				content:"在地图添加一个窗口，用于描述某对象的相关信息。<br /><br /><hr />位置：<input id='position' type='text' size='26' value='12959745.271695066,4848706.4522418715' /></br>标题：<input type='text' size='26' id='title' value='东方网力' /></br>内容：<input type='text' size='26' id='content' value ='东方网力科技股份有限公司' /></br>宽度：<input type='text' size='26' id='width' value ='240' /></br>高度：<input type='text' size='26' id='height' value ='170' /></br>偏左：<input type='text' size='26' id='leftOffset' value ='0' /></br>偏上：<input type='text' size='26' id='topOffset' value ='0' />",
+				buttons: {
+					"添加": add,
+					"移除": remove,
+                    "修改配置":reconfig
+				}
+			});
+		});
+	</script>
+</body>
+</html>

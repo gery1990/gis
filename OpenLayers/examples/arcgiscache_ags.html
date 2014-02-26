@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OpenLayers ArcGIS Cache Example (MapServer Access)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="../theme/default/style.css" type="text/css">
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <style type="text/css">
+    #map{
+            width: 1000px;
+            height: 620px;
+            border: 1px solid gray;
+        }
+  </style>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="../lib/OpenLayers.js"></script>
+  <script src="../lib/OpenLayers/Layer/ArcGISCache.js" type="text/javascript"></script>
+  <script type="text/javascript">
+        var map, 
+            cacheLayer,
+            testLayer,
+            startTime,
+            url =  "http://192.168.60.56:6080/arcgis/rest/services/sjz_google222/MapServer";
+        function init() {
+            var jsonp = new OpenLayers.Protocol.Script();
+            jsonp.createRequest(url, {
+                f: 'json', 
+                pretty: 'true'
+            }, initMap);          
+        }
+
+        function initMap(layerInfo){
+            //The max extent for spherical mercator
+            OpenLayers.ProxyHost = '../cgi/proxy.cgi?url=';
+            
+            var maxExtent = new OpenLayers.Bounds(1.2575260622768156E7,4490908.1095299665,1.2916248980616502E7,4697331.824867047);
+            
+            //Max extent from layerInfo above            
+            var layerMaxExtent = new OpenLayers.Bounds(
+                layerInfo.fullExtent.xmin, 
+                layerInfo.fullExtent.ymin, 
+                layerInfo.fullExtent.xmax, 
+                layerInfo.fullExtent.ymax  
+            );
+            
+            var resolutions = [];
+            for (var i=0; i<layerInfo.tileInfo.lods.length; i++) {
+                resolutions.push(layerInfo.tileInfo.lods[i].resolution);
+            }
+            
+            map = new OpenLayers.Map('map', {
+                maxExtent: maxExtent,
+                StartBounds: layerMaxExtent,
+                units: (layerInfo.units == "esriFeet") ? 'ft' : 'm',
+                resolutions: resolutions,
+                tileSize: new OpenLayers.Size(layerInfo.tileInfo.width, layerInfo.tileInfo.height),                
+                projection: 'EPSG:' + layerInfo.spatialReference.wkid
+            });
+            map.events.register("zoomend",this,setZoomEnd);
+            
+            
+            cacheLayer = new OpenLayers.Layer.ArcGISCache( "AGSCache",
+                    "http://192.168.60.56:6080/arcgis/rest/services/sjz_google222/MapServer", {
+                        isBaseLayer: true,
+
+                        //From layerInfo above                        
+                        resolutions: resolutions,                        
+                        tileSize: new OpenLayers.Size(layerInfo.tileInfo.cols, layerInfo.tileInfo.rows),                        
+                        tileOrigin: new OpenLayers.LonLat(layerInfo.tileInfo.origin.x , layerInfo.tileInfo.origin.y),                        
+                        maxExtent: layerMaxExtent,                        
+                        projection: 'EPSG:' + layerInfo.spatialReference.wkid
+                    });
+            map.addLayer(cacheLayer);
+            // map.addControl(new OpenLayers.Control.LayerSwitcher());
+            map.addControl( new OpenLayers.Control.MousePosition() );
+            $(".olControlZoomIn.olButton").click(setZoomStart);
+            $(".olControlZoomOut.olButton").click(setZoomStart);
+            
+            map.zoomToExtent(new OpenLayers.Bounds(1.263600939630041E7,4499320.010109549,1.2855500207077371E7,4688757.293750983));
+        }
+        function calcTime(zoom){   
+            setZoomStart();         
+            map.zoomTo(zoom);        
+        }     
+
+        function setZoomStart(){
+            startTime = new Date();
+        }
+        function setZoomEnd(){        
+            document.getElementById("calctime").innerHTML= new Date()-startTime;
+        }
+    </script></head>
+<body onload="init()">
+  <input type="button" value="8-14" data="14" onclick="calcTime(14)"/>
+  <input type="button" value="14-8" data="8" onclick="calcTime(8)"/>
+  <span id="calctime"></span>
+  <h1 id="title">OpenLayers ArcGIS Cache Example (MapServer Access)</h1>
+
+  <div id="tags">arcgis, arcgiscache, cache, tms</div>
+
+  <p id="shortdesc">
+    
+    <div id="map" class="smallmap"></div>
+    
+
+</body>
+</html>

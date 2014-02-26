@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../../css/class.css"/>
+	</head>
+	<body>
+		<div class="class-container">
+			<div class="class-label">命名空间：NPMapLib.Symbols&nbsp;&nbsp;&nbsp;&nbsp;(PS：力图精简，以下描述皆省略命名空间，详见相关类的说明页面)</div>
+			<div class="class-label">构造函数</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">构造函数</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">Label(content:String, opts:Array)</td>
+					<td class="grey">创建文本标注实例。<br/>
+									content：内容。<br/>
+									opts={</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offset:new NPMapLib.Geometry.Size(0, 0),	//文本标注的位置偏移值 </br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: new NPMapLib.Geometry.Point(0,0)	//文本标注的地理位置</br>
+								    };
+					</td>
+				</tr>
+			</table>
+			
+			<div class="class-label">方法</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">setStyle(styles:Array)</td>
+					<td class="green">none</td>
+					<td class="grey">设置文本标注样式，该样式将作用于文本标注的容器元素上。</br>
+									{</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:12,			//文字大小 </br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontFamily:'宋体',		//字体</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color:'red',			//文字前景色</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bgColor:'#FFFFFF',		//背景色</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bordColor:'#CCCCFF',	//边框颜色</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderSize:1,			//边框宽度</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;align:'center',			//对方方式</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isBold:false			//是否粗体</br>
+								    };
+					</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getStyle()</td>
+					<td class="green">Array</td>
+					<td class="grey">获取文本标注样式。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setContent(content:String)</td>
+					<td class="green">none</td>
+					<td class="grey">设置文本标注的内容。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getContent()</td>
+					<td class="green">String</td>
+					<td class="grey">获取内容。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setPosition(position:Point)</td>
+					<td class="green">none</td>
+					<td class="grey">设置文本标注坐标。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getPosition()</td>
+					<td class="green">Point</td>
+					<td class="grey">获取标注位置。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setOffset(offset:Size)</td>
+					<td class="green">none</td>
+					<td class="grey">设置文本标注的偏移值。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getOffset()</td>
+					<td class="green"></td>
+					<td class="grey">返回文本标注的偏移值。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setTitle(title:String)</td>
+					<td class="green">none</td>
+					<td class="grey">设置文本标注的标题。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getTitle()</td>
+					<td class="green">String</td>
+					<td class="grey">返回文本标注的标题。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">addEventListener(event:enum, handler:Function)</td>
+					<td class="green">none</td>
+					<td class="grey">添加事件监听函数。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">removeEventListener(event:enum)</td>
+					<td class="green">none</td>
+					<td class="grey">移除事件监听函数。</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="class-label">事件</div>
+				<table cellpadding=0 cellspacing=0 class="class-table">
+					<tr>
+						<th width="280">事件类型</th>
+						<th width="150">回调函数</th>
+						<th>描述</th>
+					</tr>
+					<tr class="odd">
+						<td class="green">NPMapLib.LABEL_EVENT_CLICK</td>
+						<td class="green">target(point:Point)</td>
+						<td class="grey">点击标注后会触发此事件。</td>
+					</tr>
+					<tr class="even">
+						<td class="green">NPMapLib.LABEL_EVENT_DBLCLICK</td>
+						<td class="green">target(point:Point)</td>
+						<td class="grey">双击标注后会触发此事件。</td>
+					</tr>
+					<tr class="even">
+						<td class="green">NPMapLib.LABEL_EVENT_RIGHT_CLICK</td>
+						<td class="green">target(point:Point)</td>
+						<td class="grey">右键点击标注时触发此事件。</td>
+					</tr>
+					<tr class="even">
+						<td class="green">NPMapLib.LABEL_EVENT_MOUSE_DOWN</td>
+						<td class="green">target(point:Point)</td>
+						<td class="grey">鼠标在标注上按下触发此事件。</td>
+					</tr>
+					<tr class="even">
+						<td class="green">NPMapLib.LABEL_EVENT_MOUSE_UP</td>
+						<td class="green">target(point:Point)</td>
+						<td class="grey">鼠标在标注上释放触发此事件。</td>
+					</tr>
+					<tr class="even">
+						<td class="green">NPMapLib.LABEL_EVENT_MOUSE_OVER</td>
+						<td class="green">target(point:Point)</td>
+						<td class="grey">当鼠标进入标注区域时会触发此事件。</td>
+					</tr>
+					<tr class="even">
+						<td class="green">NPMapLib.LABEL_EVENT_MOUSE_OUT</td>
+						<td class="green">target(point:Point)</td>
+						<td class="grey">鼠标离开标注时触发此事件。</td>
+					</tr>
+					<tr class="even">
+						<td class="green">NPMapLib.LABEL_EVENT_DRAG_START</td>
+						<td class="green">target()</td>
+						<td class="grey">开始拖拽标注时触发此事件。</td>
+					</tr>
+					<tr class="even">
+						<td class="green">NPMapLib.LABEL_EVENT_DRAG_END</td>
+						<td class="green">target()</td>
+						<td class="grey">拖拽结束时触发此事件。</td>
+					</tr>
+				</table>
+			</div>
+	</body>
+</html>

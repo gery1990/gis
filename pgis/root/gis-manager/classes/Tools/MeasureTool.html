@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../../css/class.css"/>
+	</head>
+	<body>
+		<div class="class-container">
+			<div class="class-label">命名空间：NPMapLib.Tools&nbsp;&nbsp;&nbsp;&nbsp;(PS：力图精简，以下描述皆省略命名空间，详见相关类的说明页面)</div>
+			<div class="class-label">构造函数</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">构造函数</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">MeasureTool(map:Map, opts:Array)</td>
+					<td class="grey">创建测量工具实例。<br />
+						map：地图对象。<br />
+						opts={</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lengthUnit: NPMapLib.MAP_UNITS_METERS,				//长度单位，默认是米 </br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;areaUnit: NPMapLib.MAP_UNITS_SQUARE_KILOMETERS,		//面积单位，默认为平方千米</br>
+								    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mode: NPMapLib.MEASURE_MODE_DISTANCE				//测量模式，默认为测量长度<br />
+								    };</td>
+				</tr>
+			</table>
+
+			<div class="class-label">属性</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">属性</th>
+					<th width="90">类型</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">mapId</td>
+					<td class="green">Number</td>
+					<td class="grey">地图容器实例Id。</td>
+				</tr>
+			</table>
+			
+			<div class="class-label">方法</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">getLengthUnit()</td>
+					<td class="green">enum</td>
+					<td class="grey">获取长度单位。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">setLengthUnit(unit:enum)</td>
+					<td class="green">none</td>
+					<td class="grey">设置长度单位。<br>
+						未知：NPMapLib.MAP_UNITS_UNKNOWN;<br>
+						厘米：NPMapLib.MAP_UNITS_CENTIMETERS;  <br>               
+						经纬度：NPMapLib.MAP_UNITS_DECIMAL_DEGREES;<br>
+						度分秒：NPMapLib.MAP_UNITS_DEGREE_MINUTE_SECONDS;<br>
+						分米：NPMapLib.MAP_UNITS_DECIMETERS;<br>
+						英尺：NPMapLib.MAP_UNITS_FEET;<br>
+						英寸：NPMapLib.MAP_UNITS_INCHES;<br>
+						公里：NPMapLib.MAP_UNITS_KILOMETERS;<br>
+						米：NPMapLib.MAP_UNITS_METERS;<br>
+						英里：NPMapLib.MAP_UNITS_MILES;<br>
+						毫米：NPMapLib.MAP_UNITS_MILLIMETERS;<br>
+						海里：NPMapLib.MAP_UNITS_NAUTICAL_MILES;<br>
+						点：NPMapLib.MAP_UNITS_POINTS;<br>
+						码：NPMapLib.MAP_UNITS_YARDS;<br>
+						英亩：NPMapLib.MAP_UNITS_ACRES;<br>
+					</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">getAreaUnit()</td>
+					<td class="green">enum</td>
+					<td class="grey">获取面积单位。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">setAreaUnit(unit:enum)</td>
+					<td class="green">none</td>
+					<td class="grey">设置面积单位。面积单位参数如下：<br>
+						公亩：NPMapLib.MAP_UNITS_ARES;<br>
+						平方公里：NPMapLib.MAP_UNITS_SQUARE_KILOMETERS;<br>
+						平方英里：NPMapLib.MAP_UNITS_SQUARE_MILES;<br>
+						平方英尺：NPMapLib.MAP_UNITS_SQUARE_FEET;<br>
+						平方米：NPMapLib.MAP_UNITS_SQUARE_METERS;<br>
+						公顷：NPMapLib.MAP_UNITS_HECTARES;<br>
+						平方码：NPMapLib.MAP_UNITS_SQUARE_YARDS;<br>
+						平方英寸：NPMapLib.MAP_UNITS_SQUARE_INCHES;<br>
+						平方毫米：NPMapLib.MAP_UNITS_SQUARE_MILLIMETERS;<br>
+						平方厘米：NPMapLib.MAP_UNITS_SQUARE_CENTIMETERS;<br>
+						平方分米：NPMapLib.MAP_UNITS_SQUARE_DECIMETERS;
+					</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">setMode(mode:enum)</td>
+					<td class="green">mode</td>
+						<td class="grey">设置测量模式。测量模式参数如下：<br>测量距离：NPMapLib.MEASURE_MODE_DISTANCE <br>
+						测量面积：NPMapLib.MEASURE_MODE_AREA<br>
+						测量区域：NPMapLib.MEASURE_MODE_LOCATION
+					</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getMode()</td>
+					<td class="green">enum</td>
+					<td class="grey">获取测量模式。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">startUp()</td>
+					<td class="green">none</td>
+					<td class="grey">启动。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">cancel()</td>
+					<td class="green">none</td>
+					<td class="grey">取消。</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

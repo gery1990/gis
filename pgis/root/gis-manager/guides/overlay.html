@@ -1,0 +1,291 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>东方网力 地图API-入门指导</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/shCore.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/shThemeDefault.css"/>
+	<style type="text/css">
+		p{line-height: 2;padding: 0px 15px 0px 15px;}
+	</style>
+</head>
+<body class="main-body">
+	<div class="gis-container">
+		<div class="gis-top" id="gisTop">
+			<ul class="top-nav">
+				<li class="logo"><img src="../css/images/logo.png" /></li>
+				<li><a href="../home.html" class="nav-item">首页</a></li>
+				<li><a href="#" class="nav-item-hover">入门指导</a></li>
+				<li><a href="../class.html" class="nav-item">类参考</a></li>
+				<li><a href="../gis_demo.html" class="nav-item">DEMO示例</a></li>
+				<li><a href="../all_demos.html" class="nav-item">综合示例</a></li>
+				<li><a href="../download.html" class="nav-item">下载中心</a></li>
+			</ul>
+		</div>
+		<div class="gis-middle" id="gisMiddle">
+			<div class="right guide-right" id="guideRight">
+				<div class="guide-content" id="guide-covering">
+					<div class="title">
+						<h3>覆盖物概述</h3>
+					</div>
+					<p>所有叠加或覆盖到地图的内容，我们统称为地图覆盖物。如标注、矢量图形元素(包括：折线和多边形和圆)、信息窗口等。覆盖物拥有自己的地理坐标，当您拖动或缩放地图时，它们会相应的移动。</p>
+					<p>地图API提供了如下几种覆盖物：</p>
+					<p><b> - Overlay：</b>覆盖物的抽象基类，所有的覆盖物均继承此类的方法。</p>
+					<p><b> - Polyline：</b>表示地图上的折线。</p>
+					<p><b> - Polygon：</b>表示地图上的多边形。多边形类似于闭合的折线，您可以为其自定义样式。</p>
+					<p><b> - Circle：</b>表示地图上的圆。</p>
+					<p><b> - Icon：</b>表示地图上的图像标注，您可以自定义标注的图像。</p>
+					<p><b> - Label：</b>表示地图上的文本标注，您可以自定义标注的文本内容。</p>
+					<p><b> - Marker：</b>标注表示地图上的点，可自定义标注的图标。</p>
+					<p><b> - Animation：</b>表示地图上的动画标注。</p>
+					<p><b> - InfoWindow：</b>信息窗口也是一种特殊的覆盖物，它可以展示更为丰富的文字和多媒体信息。注意：同一时刻只能有一个信息窗口在地图上打开。</p>
+					<div class="title">
+						<h3>折线</h3>
+					</div>
+					<p>定义折线：</p>
+					<pre class="brush:js" name="Polyline" id="Polyline">
+						//点序列
+						var points = [];
+						points.push(new NPMapLib.Geometry.Point(12959745.271695066,4848706.4522418715));
+						points.push(new NPMapLib.Geometry.Point(12975414.862493526,4848782.889270157));
+						points.push(new NPMapLib.Geometry.Point(12975109.114380386,4838846.075593084));
+
+						//多段线
+						var polyline = new NPMapLib.Geometry.Polyline(points, {
+								color:"blue",	//颜色
+								weight:5,		//宽度，以像素为单位
+								opacity:0.5,	//透明度，取值范围0 - 1
+								lineStyle:NPMapLib.LINE_TYPE_SOLID	//样式
+							  };
+					</pre>
+					<p>折线操作：</p>
+					<pre class="brush:js" name="PolylineOpera" id="PolylineOpera">
+						//添加
+						map.addOverlay(polyline);
+						//移除
+						map.removeOverlay(polyline);
+						//显示
+						polyline.show();
+						//隐藏
+						polyline.hide();
+						//闪烁
+						polyline.flash();
+					</pre>
+					<div class="title">
+						<h3>多边形</h3>
+					</div>
+					<p>定义多边形：</p>
+					<pre class="brush:js" name="Polygon" id="Polygon">
+						//点序列（注：多连形的起始点与终止点一致，形成闭合）
+						var points = [];
+						points.push(new NPMapLib.Geometry.Point(12959745.271695066,4848706.4522418715));
+						points.push(new NPMapLib.Geometry.Point(12975414.862493526,4848782.889270157));
+						points.push(new NPMapLib.Geometry.Point(12975109.114380386,4838846.075593084));
+						points.push(new NPMapLib.Geometry.Point(12959898.145751636,4837470.20908395));
+						points.push(new NPMapLib.Geometry.Point(12938954.4000015,4839992.631017361));
+						points.push(new NPMapLib.Geometry.Point(12959745.271695066,4848706.4522418715));
+
+						//多边形
+						var polygon = new NPMapLib.Geometry.Polygon(points, {
+									color:"blue",			//颜色
+									fillColor:"red",		//填充颜色
+									weight:2,				//宽度，以像素为单位
+									opacity:1,				//透明度，取值范围0 - 1
+									fillOpacity:0.5			//填充的透明度，取值范围0 - 1
+								  };
+										
+					</pre>
+					<p>多边形操作：</p>
+					<pre class="brush:js" name="PolygonOpera" id="PolygonOpera">
+						//添加
+						map.addOverlay(polygon);
+						//移除
+						map.removeOverlay(polygon);
+						//显示
+						polygon.show();
+						//隐藏
+						polygon.hide();
+						//闪烁
+						polygon.flash();
+					</pre>
+					<div class="title">
+						<h3>圆形</h3>
+					</div>
+					<p>定义圆形：</p>
+					<pre class="brush:js" name="Circle" id="Circle">
+						//中点
+						var center = new NPMapLib.Geometry.Point(12959745.271695066,4848706.4522418715);
+						var radius = 5000;
+
+
+						//圆形
+						var circle = new NPMapLib.Geometry.Circle(center, radius, {
+								color:"blue",			//颜色
+								fillColor:"red",		//填充颜色
+								weight:2,				//宽度，以像素为单位
+								opacity:1,				//透明度，取值范围0 - 1
+								fillOpacity:0.5			//填充的透明度，取值范围0 - 1
+							  };
+					</pre>
+					<p>圆形操作：</p>
+					<pre class="brush:js" name="CircleOpera" id="CircleOpera">
+						//添加
+						map.addOverlay(circle);
+						//移除
+						map.removeOverlay(circle);
+						//显示
+						circle.show();
+						//隐藏
+						circle.hide();
+						//闪烁
+						circle.flash();
+					</pre>
+					<div class="title">
+						<h3>图像标注</h3>
+					</div>
+					<p>定义图像标注：</p>
+					<pre class="brush:js" name="Icon" id="Icon">
+						//图像标记的地理坐标
+						var pt = new NPMapLib.Geometry.Point(12959745.271695066,4848706.4522418715);
+						//图片大小
+						var size = new NPMapLib.Geometry.Size(32,32);
+
+						//图片
+						var icon = new NPMapLib.Symbols.Icon("../../images/Flag.png",size);
+						//设置偏移量，这里取坐标点为图片中心点
+						icon.setAnchor(new NPMapLib.Geometry.Size(-size.width/2, -size.height/2));
+
+						//文本标记
+						var label = new NPMapLib.Symbols.Label("一个图像标记");
+						//设置样式
+						label.setStyle({
+								fontSize:12,			//文字大小
+								fontFamily:'宋体',		//字体
+								color:'red',			//文字前景色
+								align:'center',			//对方方式
+								isBold:true			//是否粗体
+							});
+						//设置偏移量
+						label.setOffset(new NPMapLib.Geometry.Size(0, size.height/2));
+
+						//图像标记
+						var marker = new NPMapLib.Symbols.Marker(pt);
+						marker.setIcon(icon);
+						marker.setLabel(label);
+					</pre>
+					<p>图像标注操作：</p>
+					<pre class="brush:js" name="IconOpera" id="IconOpera">
+						//添加
+						map.addOverlay(marker);
+						//移除
+						map.removeOverlay(marker);
+						//显示
+						marker.show();
+						//隐藏
+						marker.hide();
+						//闪烁
+						marker.flash();
+						//显示文本
+						marker.showLabel();
+						//隐藏文本
+						marker.hideLabel();
+					</pre>
+					<div class="title">
+						<h3>动画标注</h3>
+					</div>
+					<p>定义动画标注：</p>
+					<pre class="brush:js" name="Animation" id="Animation">
+						var animation = new NPMapLib.Symbols.Animation(map.id, marker, options);
+                        animation.setPath(polyline);
+                        animation.setSpeed(20);
+					</pre>
+					<p>动画标注操作：</p>
+					<pre class="brush:js" name="AnimationOpera" id="AnimationOpera">
+						//添加
+						map.addOverlay(marker);
+						//开始
+						animation.start();
+						//暂停
+						animation.pause();
+						//移除
+						animation.stop();
+                        map.removeOverlay(marker);
+                        animation = null;
+						//显示
+						marker.show();
+						//隐藏
+						marker.hide();
+						//闪烁
+						marker.flash();
+					</pre>
+					<div class="title">
+						<h3>信息窗口</h3>
+					</div>
+					<p>定义信息窗口：</p>
+					<pre class="brush:js" name="Animation" id="Animation">
+						var infoWindow = new NPMapLib.Symbols.InfoWindow(title, content, {
+								width:w,		//信息窗宽度，单位像素
+								height:h,		//信息窗高度，单位像素
+								offset:offset, 	//信息窗位置偏移值
+								arrow:false		//是否带箭头
+							});
+					</pre>
+					<p>信息窗口操作：</p>
+					<pre class="brush:js" name="AnimationOpera" id="AnimationOpera">
+						//打开
+						var posPixel = map.pointToPixel(position);
+						infoWindow.open(posPixel.x, posPixel.y);
+						//关闭
+						infoWindow.close();
+						infoWindow = null;
+					</pre>
+				</div>
+			</div>
+			<div class="left guide-left" id="guideLeft">
+				<div class="title"><h3>目录结构</h3></div>
+				<ul class="guide-ul">
+					<li><a href="../guide.html">▪ 简介</a></li>
+					<li><a href="helloworld.html">▪ Hello World!</a></li>
+					<li><a href="control.html">▪ 控件</a></li>
+					<li class="active"><a href="javascript:;">▪ 覆盖物</a></li>
+					<li><a href="listener.html">▪ 事件</a></li>
+					<li><a href="maplayer.html">▪ 地图图层</a></li>
+					<li><a href="tools.html">▪ 工具</a></li>
+					<!-- <li><a href="service.html">▪ 服务</a></li>
+					<li><a href="version.html">▪ 版本说明</a></li> -->
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="gis-bottom" id="gisBottom">版权所有：东方网力科技股份有限公司 </div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/allScript.js"></script>
+	<script type="text/javascript">
+		SyntaxHighlighter.all("Polyline");
+		SyntaxHighlighter.all("PolylineOpera");
+		SyntaxHighlighter.all("Polygon");
+		SyntaxHighlighter.all("PolygonOpera");
+		SyntaxHighlighter.all("Circle");
+		SyntaxHighlighter.all("CircleOpera");
+		SyntaxHighlighter.all("Icon");
+		SyntaxHighlighter.all("IconOpera");
+		SyntaxHighlighter.all("Animation");
+		SyntaxHighlighter.all("AnimationOpera");
+		$(function(){
+			var $top = $("#gisTop"),$middle = $("#gisMiddle"),$bottom = $("#gisBottom");
+			var $midRight = $("#guideRight");
+			resize();
+			$(window).resize(function(){
+				resize();
+			});
+			function resize(){
+				var midHeight = $(window).height() - $top.height() - $bottom.height() -4 -5;
+				$middle.height(midHeight);
+				$midRight.height(midHeight);
+			}
+		});
+	</script>
+</body>
+</html>

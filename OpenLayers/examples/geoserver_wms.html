@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="../theme/default/style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <style>
+        html,body,.smallmap {
+            width: 1100px;
+            height: 580px;
+            border: 1px solid #ccc;
+        }
+    </style>
+    <script src="../lib/OpenLayers.js"></script>
+    <script type="text/javascript">
+        var lon = 114.5144;
+        var lat = 38.04228;
+        var zoom = 13;
+        var map, layer;
+
+        function init(){
+            // OpenLayers.ProxyHost = '../cgi/proxy.cgi?url=';
+            map = new OpenLayers.Map( 'map' );
+            layer = new OpenLayers.Layer.WMS( "geoserver_wms_sjzmap_148:8080",
+                "http://192.168.60.148:8080/sjzmap/wms?", 
+                {layers: 'sjzmap_postgis'} );
+            map.addLayer(layer);
+
+            map.setCenter(new OpenLayers.LonLat(lon, lat), zoom);
+            map.addControl( new OpenLayers.Control.LayerSwitcher() );
+            map.addControl(new OpenLayers.Control.OverviewMap());
+            map.zoomToExtent(new OpenLayers.Bounds(113.511203709745,37.4307567077597,115.482923210193,38.7698452416708)); 
+        }
+    </script>
+  </head>
+  <body onload="init()">
+    <h1 id="title">WMS Example</h1>
+
+    <div id="tags">
+        wms, layer, singletile
+    </div>
+    <p id="shortdesc">
+        Shows the basic use of openlayers using a WMS layer
+    </p>
+
+    <div id="map" class="smallmap"></div>
+
+    <div id="docs">
+        <p>This is an example of how to add an WMS layer to the OpenLayers
+        window. The images are tiled in this instance. If you wanted to not use
+        a tiled WMS, "singleTile" option to true like shown in this example.</p>
+    </div>
+  </body>
+</html>
+
+
+
+

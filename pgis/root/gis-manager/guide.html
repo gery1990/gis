@@ -1,0 +1,84 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>东方网力 地图API-入门指导</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<style type="text/css">
+		p{line-height: 2;}
+	</style>
+</head>
+<body class="main-body">
+	<div class="gis-container">
+		<div class="gis-top" id="gisTop">
+			<ul class="top-nav">
+				<li class="logo"><img src="css/images/logo.png" /></li>
+				<li><a href="home.html" class="nav-item">首页</a></li>
+				<li><a href="#" class="nav-item-hover">入门指导</a></li>
+				<li><a href="class.html" class="nav-item">类参考</a></li>
+				<li><a href="gis_demo.html" class="nav-item">DEMO示例</a></li>
+				<li><a href="all_demos.html" class="nav-item">综合示例</a></li>
+				<li><a href="download.html" class="nav-item">下载中心</a></li>
+			</ul>
+		</div>
+		<div class="gis-middle" id="gisMiddle">
+			<div class="right guide-right" id="guideRight">
+				<div class="guide-content" id="guide-describe">
+					<div class="title">
+						<h3>功能介绍</h3>
+					</div>
+					<p>
+						&nbsp;&nbsp;&nbsp;&nbsp;东方网力 地图API是一套由JavaScript语言编写的应用程序接口，它能够帮助您在网站中构建功能丰富、交互性强的地图应用，包含了构建地图基本功能的各种接口，及提供了相关数据服务。</br>
+						&nbsp;&nbsp;&nbsp;&nbsp;<B>－地图展现：</B>支持ARCGIS在线地图、PGIS在线地图、PGIS离线地图、谷歌在线地图、谷歌离线地图、NPGIS在线地图。<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<B>－地图控件展示功能：</B>可以在地图上添加/删除鹰眼、工具条、比例尺、自定义版权等控件，并可以设置各类控件的显示位置。<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<B>－基本地图功能：</B>可对地图进行平移、缩放等。<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<B>－地图信息获取功能：</B>可获取地图的中心点、当前缩放级别、可视范围坐标等。<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<B>－覆盖物功能：</B>支持在地图上添加/删除点、线、面、图像标注、文本标注、动画标注、信息框等。<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<B>－图层功能：</B>支持ArcGIS在线缓存地图图层、ArcGIS离线缓存地图图层、PGis在线缓存地图图层、PGis离线缓存地图图层、Google在线缓存地图图层、Google离线缓存地图图层、WMS缓存地图图层、GML矢量图层、覆盖物图层等。<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<B>－右键菜单功能：</B>支持在地图上添加自定义右键菜单等。<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;<B>－地图工具功能：</B>支持在地图上进行测量和绘制几何图形。<br/>
+					</p>
+					<div class="title">
+						<h3>目标读者</h3>
+					</div>
+					<p>
+						&nbsp;&nbsp;&nbsp;&nbsp;本套API是提供给那些具有一定JavaScript编程经验和了解面向对象概念的读者使用。此外，读者还应该对地图产品有一定的了解。您在使用中遇到任何问题，可以联系和反馈给我们。
+					</p>
+				</div>
+			</div>
+			<div class="left guide-left" id="guideLeft">
+				<div class="title"><h3>目录结构</h3></div>
+				<ul class="guide-ul">
+					<li class="active"><a href="javascript:;">▪ 简介</a></li>
+					<li><a href="guides/helloworld.html">▪ Hello World!</a></li>
+					<li><a href="guides/control.html">▪ 控件</a></li>
+					<li><a href="guides/overlay.html">▪ 覆盖物</a></li>
+					<li><a href="guides/listener.html">▪ 事件</a></li>
+					<li><a href="guides/maplayer.html">▪ 地图图层</a></li>
+					<li><a href="guides/tools.html">▪ 工具</a></li>
+					<!-- <li><a href="guides/service.html">▪ 服务</a></li>
+					<li><a href="guides/version.html">▪ 版本说明</a></li> -->
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="gis-bottom" id="gisBottom">版权所有：东方网力科技股份有限公司 </div>
+	</div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var $top = $("#gisTop"),$middle = $("#gisMiddle"),$bottom = $("#gisBottom");
+			var $midRight = $("#guideRight");
+			resize();
+			$(window).resize(function(){
+				resize();
+			});
+			function resize(){
+				var midHeight = $(window).height() - $top.height() - $bottom.height() -4 -5;
+				$middle.height(midHeight);
+				$midRight.height(midHeight);
+			}
+		});
+	</script>
+</body>
+</html>

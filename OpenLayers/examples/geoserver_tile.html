@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="imagetoolbar" content="no">
+    <title>geoserver_tile</title>
+    <style type="text/css">
+        #map {
+            width: 100%;
+            height: 100%;
+            /*border: 1px solid gray;*/
+        }
+    </style>
+    <script src="../lib/OpenLayers.js"></script>
+    <script type="text/javascript">
+        var map, demolayer;
+        // sets the chosen modifiable parameter   
+        // var bounds = new OpenLayers.Bounds(
+        //             113.511203709745,37.4307567077597,115.482923210193,38.7698452416708
+        //         );
+        function setParam(name, value) {
+            str = "demolayer.mergeNewParams({" + name + ": '" + value + "'})"
+            // alert(str);                                   
+            eval(str);
+        }
+        OpenLayers.DOTS_PER_INCH = 90.71428571428572;
+        OpenLayers.Util.onImageLoadErrorColor = 'transparent';
+        function init() {
+            var mapOptions = {
+                resolutions: [0.703125, 0.3515625, 0.17578125, 0.087890625, 0.0439453125, 0.02197265625, 0.010986328125, 0.0054931640625, 0.00274658203125, 0.001373291015625, 6.866455078125E-4, 3.4332275390625E-4, 1.71661376953125E-4, 8.58306884765625E-5, 4.291534423828125E-5, 2.1457672119140625E-5, 1.0728836059570312E-5, 5.364418029785156E-6, 2.682209014892578E-6, 1.341104507446289E-6, 6.705522537231445E-7, 3.3527612686157227E-7],
+                projection: new OpenLayers.Projection('EPSG:4326'),
+                maxExtent: new OpenLayers.Bounds(-180.0, -90.0, 180.0, 90.0),
+                units: "degrees",
+                controls: []
+            };
+            map = new OpenLayers.Map('map', mapOptions);
+            map.addControl(new OpenLayers.Control.PanZoomBar({
+                position: new OpenLayers.Pixel(2, 15)
+            }));
+            map.addControl(new OpenLayers.Control.Navigation());
+
+            demolayer = new OpenLayers.Layer.WMS(
+            "sjzmap:sjzmap_postgis", "http://192.168.60.148:8080/gwc/service/wms",
+            { layers: 'sjzmap:sjzmap_postgis', format: 'image/png' },
+            { tileSize: new OpenLayers.Size(256, 256) });
+            map.addLayer(demolayer);
+            // map.zoomToExtent(bounds);
+            map.zoomToExtent(new OpenLayers.Bounds(113.511203709745,37.4307567077597,115.482923210193,38.7698452416708)); 
+
+        }
+       
+    </script>
+    <link rel="stylesheet" type="text/css" href="../theme/default/style.css">
+</head>
+<body onload="init()">
+    <div id="map"></div>
+</body>
+</html>

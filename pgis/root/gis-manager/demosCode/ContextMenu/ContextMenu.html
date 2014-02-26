@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
+<body>
+	<div class="map-id" id="mapId"></div>
+	<link rel="stylesheet" type="text/css" href="../../css/rescorce-code.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shCore.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shThemeDefault.css"/>
+	<link rel="stylesheet" href="../../css/dialog.css">
+	<script type="text/javascript" src="../../../../v1.0/Init.js"></script>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/allScript.js"></script>
+	<script type="text/javascript" src="../../js/resource-code.js"></script>
+	<script src="../../js/dialog.js"></script>
+	<script type="text/javascript">
+		//地图控件
+		var mapContainer = document.getElementById("mapId");
+		var map = new NPMapLib.Map(mapContainer, {minZoom:0,
+												  maxZoom:10});
+
+		var resolutions = [156543.033928,78271.5169639999,39135.7584820001,19567.8792409999,9783.93962049996,
+						   4891.96981024998,2445.98490512499,1222.99245256249,305.748113140558,152.874056570411,
+						   76.4370282850732,38.2185141425366,19.1092570712683,9.55462853563415,4.77731426794937,
+						   2.38865713397468,1.19432856685505,0.597164283559817];
+		
+		//图层参数
+		var opts = {centerPoint:[12959745.271695066,4848706.4522418715],
+				    fullExtent:[12912392.532672398,4819583.94446522,13007098.010717731,4877828.960018523],
+					minLevel:0,
+					maxLevel:7,
+					zoomOffset:11,
+					zoomLevelSequence:2,
+					initResolution:resolutions,
+					origin:[-20037508.342789248, 20037508.342789248]
+				};
+
+		//图层路径
+		var url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaCities_Community_BaseMap_CHN/BeiJing_Community_BaseMap_CHN/MapServer";
+		var layer1 = new NPMapLib.Layers.ArcgisTileLayer(url, "矢量地图", opts);
+		map.addLayer(layer1);
+
+		//右键菜单
+		var menu = new NPMapLib.ContextMenu();
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			loadDemoCode("../../demosCode/ContextMenu/ContextMenu.html");
+
+			//注册操作说明
+			registerDemoInstructions({
+				title:"右键菜单",
+				height:"280",
+				width:"400",
+				position:["right",80],
+				modal:false,
+				content:"支持添加菜单项及分割符。<br />（注：菜单项与分割符的序号是分开计算的）<br/><br/><hr/>菜单项名称：<input type='text' name='title' value='新建菜单项' /></br>菜单项序号：<input type='text' name='index' value='0' />",
+				buttons: {
+					"显示菜单": function(){
+						var point = new NPMapLib.Geometry.Point(12959745.271695066,4848706.4522418715);
+						var pixel = map.pointToPixel(point);
+						menu.show(pixel);
+					},
+					"隐藏菜单": function(){
+						menu.hide();
+					},
+					"添加菜单项": function(){
+						var text  = document.getElementsByName('title')[0].value;
+						var menuItem = new NPMapLib.ContextMenuItem(text, function(){
+																	alert(text);
+																});
+
+						//添加子菜单项
+						var childItem = new NPMapLib.ContextMenuItem("子菜单一", function(){
+																	alert(text);
+																});
+						menuItem.addChildItem(childItem);
+
+						//添加子菜单项
+						childItem = new NPMapLib.ContextMenuItem("子菜单二", function(){
+																	alert(text);
+																});
+						menuItem.addChildItem(childItem);
+
+						menu.addItem(menuItem);
+					},
+					"移除菜单项": function(){
+						var index  = document.getElementsByName('index')[0].value;
+						menu.removeItem(index);
+					},
+					"添加分隔符": function(){
+						menu.addSeparator();
+					},
+					"移除分隔符": function(){
+						var index  = document.getElementsByName('index')[0].value;
+						menu.removeSeparator(index);
+					},
+					"禁用菜单项": function(){
+						var index  = document.getElementsByName('index')[0].value;
+						var item = menu.getItem(index);
+						item.disable();
+					},
+					"启用菜单项": function(){
+						var index  = document.getElementsByName('index')[0].value;
+						var item = menu.getItem(index);
+						item.enable();
+					}
+				}
+			});
+		});
+	</script>
+</body>
+</html>

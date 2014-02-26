@@ -1,0 +1,154 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>东方网力 地图API-入门指导</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/shCore.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/shThemeDefault.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+	<style type="text/css">
+		*{font-family: "Microsoft Yahei","微软雅黑","宋体" !important;font-size:1em;}
+		p{line-height: 2;padding: 10px 15px 0px 15px;}
+	</style>
+</head>
+<body class="main-body">
+	<div class="gis-container">
+		<div class="gis-top" id="gisTop">
+			<ul class="top-nav">
+				<li class="logo"><img src="../css/images/logo.png" /></li>
+				<li><a href="../home.html" class="nav-item">首页</a></li>
+				<li><a href="#" class="nav-item-hover">入门指导</a></li>
+				<li><a href="../class.html" class="nav-item">类参考</a></li>
+				<li><a href="../gis_demo.html" class="nav-item">DEMO示例</a></li>
+				<li><a href="../all_demos.html" class="nav-item">综合示例</a></li>
+				<li><a href="../download.html" class="nav-item">下载中心</a></li>
+			</ul>
+		</div>
+		<div class="gis-middle" id="gisMiddle">
+			<div class="right guide-right" id="guideRight">
+				<div class="guide-content" id="guide-helloworld">
+					<div class="title">
+						<h3 style="padding-left:20px;">示例代码</h3>
+					</div>
+					<p>以下是东方网力 地图的一个简单示例，开始学习东方网力 地图API，可以从该示例开始：</p>
+					<pre class="brush:html" name = "code" id="code"></pre>
+					<div class="title">
+						<h3 style="padding-left:20px;">分布说明</h3>
+					</div>
+					<p>准备页面，声明文档类型:</p>
+					<pre class="brush:html" name="doctype" id="doctype"></pre>
+					<p>声明meta标签，以便您的页面可以在平台上更好的展示：</p>
+					<pre class="brush:html" name="metatag" id="metatag">
+						<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+						<meta http-equiv="X-UA-Compatible" content="IE=7" />
+						<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+					</pre>
+					<p>引入东方网力 地图API:</p>
+					<pre class="brush:html" name="mapapi" id="mapapi"></pre>
+					<p>创建地图容器：</p>
+					<pre class="brush:html" name="map-container" id="map-container"></pre>
+					<p>创建地图实例：</p>
+					<pre class="brush:js" name="map-object" id="map-object">
+						var mapContainer = document.getElementById("mapId");
+						var map = new NPMapLib.Map(mapContainer, {minZoom:0, maxZoom:10});
+					</pre>
+					<p>添加图层：</p>
+					<pre class="brush:js" name="layer-option" id="layer-option">
+						//图层参数
+						var opts = {centerPoint:[12959745.271695066,4848706.4522418715],
+								    fullExtent:[12912392.532672398,4819583.94446522,13007098.010717731,4877828.960018523],
+									minLevel:0,
+									maxLevel:7,
+									zoomOffset:11,
+									zoomLevelSequence:2,
+									initResolution:156543.033928,
+									origin:[-20037508.342789248, 20037508.342789248]
+								};
+
+						//图层路径
+						var url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/
+						ChinaCities_Community_BaseMap_CHN/BeiJing_Community_BaseMap_CHN/MapServer";
+						var layer1 = new NPMapLib.Layers.ArcgisTileLayer(url, "矢量地图", opts);
+						map.addLayer(layer1);
+					</pre>
+					<p>完成以上步骤，便可以展示如下地图：</p>
+					<div id="mapContainer" style="width:890px;height:600px;margin-left:10px;border:1px solid #dfdfdf;"></div>
+				</div>
+			</div>
+			<div class="left guide-left" id="guideLeft">
+				<div class="title"><h3 style="padding-left:20px;">目录结构</h3></div>
+				<ul class="guide-ul">
+					<li><a href="../guide.html">▪ 简介</a></li>
+					<li class="active"><a href="javascript:;">▪ Hello World!</a></li>
+					<li><a href="control.html">▪ 控件</a></li>
+					<li><a href="overlay.html">▪ 覆盖物</a></li>
+					<li><a href="listener.html">▪ 事件</a></li>
+					<li><a href="maplayer.html">▪ 地图图层</a></li>
+					<li><a href="tools.html">▪ 工具</a></li>
+					<!-- <li><a href="service.html">▪ 服务</a></li>
+					<li><a href="version.html">▪ 版本说明</a></li> -->
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="gis-bottom" id="gisBottom">版权所有：东方网力科技股份有限公司 </div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/allScript.js"></script>
+	<script type="text/javascript" src="../js/resource-code.js"></script>
+	<script type="text/javascript" src="../../../v1.0/Init.js"></script>
+	<script type="text/javascript">
+		loadDemoCode("helloworldCode.html");
+		//文档类型
+		jQuery("#doctype").text('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">');
+		SyntaxHighlighter.all("doctype");
+		//meta标签
+		SyntaxHighlighter.all("metatag");
+		//地图API
+		jQuery("#mapapi").text('<script type="text/javascript" src="http://192.168.60.148:1080/v1.0/Init.js"/>');
+		SyntaxHighlighter.all("mapapi");
+		//地图容器
+		jQuery("#map-container").text('<div class="map-id" id="mapId"></div>');
+		SyntaxHighlighter.all("map-container");
+		//地图实例
+		SyntaxHighlighter.all("map-object");
+		//图层参数
+		SyntaxHighlighter.all("layer-option");
+
+		//地图控件
+		var mapContainer = document.getElementById("mapContainer");
+		var map = new NPMapLib.Map(mapContainer, {minZoom:0,
+												  maxZoom:10});
+		
+		//图层参数
+		var opts = {centerPoint:[12959745.271695066,4848706.4522418715],
+				    fullExtent:[12912392.532672398,4819583.94446522,13007098.010717731,4877828.960018523],
+					minLevel:0,
+					maxLevel:7,
+					zoomOffset:11,
+					zoomLevelSequence:2,
+					initResolution:156543.033928,
+					origin:[-20037508.342789248, 20037508.342789248]
+				};
+
+		//图层路径
+		var url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaCities_Community_BaseMap_CHN/BeiJing_Community_BaseMap_CHN/MapServer";
+		var layer1 = new NPMapLib.Layers.ArcgisTileLayer(url, "矢量地图", opts);
+		map.addLayer(layer1);
+
+		$(function(){
+			var $top = $("#gisTop"),$middle = $("#gisMiddle"),$bottom = $("#gisBottom");
+			var $midRight = $("#guideRight");
+			resize();
+			$(window).resize(function(){
+				resize();
+			});
+			function resize(){
+				var midHeight = $(window).height() - $top.height() - $bottom.height() -4 -5;
+				$middle.height(midHeight);
+				$midRight.height(midHeight);
+			}
+		});
+	</script>
+</body>
+</html>

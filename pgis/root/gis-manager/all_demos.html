@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>东方网力 地图示例--all</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<style type="text/css">
+		p{text-align: left;padding: 0px;}
+		.top-nav li{padding:13px 20px;}
+	</style>
+</head>
+<body class="main-body" style="text-align:center;overflow:hidden;" onload="mapOpera.init();">
+	<div class="gis-container">
+		<div class="gis-top" id="gisTop">
+			<ul class="top-nav">
+				<li class="logo"><img src="css/images/logo.png" /></li>
+				<li><a href="home.html" class="nav-item">首页</a></li>
+				<li><a href="guide.html" class="nav-item">入门指导</a></li>
+				<li><a href="class.html" class="nav-item">类参考</a></li>
+				<li><a href="gis_demo.html" class="nav-item">DEMO示例</a></li>
+				<li><a href="#" class="nav-item-hover">综合示例</a></li>
+				<li><a href="download.html" class="nav-item">下载中心</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="demo-all" style="text-align:left;">
+      	<div id="maptool" class="right">
+      		 <fieldset><legend>地图控件</legend>
+      		 	<p>
+      		 		<a href="javascript:;" onClick="ksetOverViewVisible(true)">显示鹰眼</a>
+	       			<a href="javascript:;" onClick="ksetOverViewVisible(false)">隐藏鹰眼</a>
+	       			<a href="javascript:;" onClick="ksetMapScale(true)">显示比例尺</a>
+      		 	</p>
+	       		<p>
+	       			<a href="javascript:;" onClick="ksetMapControl(true)">显示导航</a>
+	       			<a href="javascript:;" onClick="ksetMapControl(false)">隐藏导航</a>
+	       			<a href="javascript:;" onClick="ksetMapScale(false)">隐藏比例尺</a>
+	       		</p>
+	       		<p>
+	       			<a href="javascript:;" onClick="ksetMapVersion(true)">显示版权</a>
+	       			<a href="javascript:;" onClick="ksetMapVersion(false)">隐藏版权</a>
+	       		</p>
+	        </fieldset>
+      		<fieldset><legend>基本操作</legend>
+      			<!-- <a href="#" onClick="krefreshOperate()">刷新</a> -->
+      			<p>
+      				<a href="javascript:;" onClick="kzoomIn()">拉框放大</a>
+	       			<a href="javascript:;" onClick="kzoomOut()">拉框缩小</a>
+	       			<a href="javascript:;" onClick="kfullwin()">全屏</a>
+	       			<a href="javascript:;" onClick="kdefaultOperate()">平移</a>
+      			</p>
+      			<!-- <a href="#" onclick="toCenter()">对中</a> -->
+      			<p>
+	       			<a href="javascript:;" onClick="kzoomInFixed()">固定放大</a>
+		       		<a href="javascript:;" onClick="kzoomOutFixed()">固定缩小</a>
+		       		<a href="javascript:;" onClick="kfullMap()">全图</a>
+		       		<a href="javascript:;" onClick="krefreshMap()">刷新</a>
+	       		</p>
+	        </fieldset>
+	        <fieldset><legend>测量</legend>
+	        	<p>
+	        		<a href="javascript:;" onClick="kmeasureLength()">距离测量</a>
+		       		<a href="javascript:;" onClick="kmeasureArea()">面积测量</a>
+		       		<a href="javascript:;" onClick="cancleMeasure()">清除测量</a>
+		       	</p>
+	        </fieldset>
+	        <fieldset><legend>绘制</legend>
+	        	<!-- <a href="#" onclick="kactionDraw('point')" >画点</a> -->
+	        	<p>
+	        		<a href="javascript:;" onclick="kactionDraw('line')" >画线</a>
+		        	<a href="javascript:;" onClick="kactionDraw('rectangle')">画矩形</a>
+			       	<a href="javascript:;" onClick="kactionDraw('circle')">画圆</a>
+			       	<a href="javascript:;" onClick="kactionDraw('polygon')">画多边形</a>
+			    </p>
+			    <p>
+		       		<a href="javascript:;" onClick="cancelDraw()">取消绘制</a>
+		       	</p>
+	        </fieldset>
+	        <fieldset><legend>自定义图层</legend>
+	        	<p>
+	        		<a href="javascript:;" onclick="kshowUserdefineLayer()" >显示</a>
+		        	<a href="javascript:;" onClick="khideUserdefineLayer()">隐藏</a>
+	        	</p>
+	        </fieldset>
+	        <fieldset><legend>地图覆盖物</legend>
+	        	<p>
+	        		<a href="javascript:;" onClick="kbudian()">动画标注</a>
+	        		<a href="javascript:;" onClick="kbudianStart()">开始</a>
+	        		<a href="javascript:;" onClick="kbudianStop()">暂停</a>
+	        		<a href="javascript:;" onClick="kbudianRemove()">移除</a>
+	        	</p>
+	        	<p>
+	        		<a href="javascript:;" onclick="kaddIco()">图像标注</a>
+	        		<a href="javascript:;" onclick="kaddText()">文字标注</a>
+	        		<a href="javascript:;" onclick="kaddLine()">线</a>
+	        	</p>
+	        	<p>
+	        		<a href="javascript:;" onclick="kaddArea()">多边形</a>
+		        	<a href="javascript:;" onclick="kaddRectangle()">矩形</a>
+		        	<a href="javascript:;" onclick="kaddCircle()">圆</a>
+	        		<a href="javascript:;" onclick="kaddInfoWin()">信息窗口</a>
+	        	</p>
+	        	<p>
+	        		重置点位信息：
+	        		<textarea class="point-msg" id="pointMsg" type=""></textarea>
+	        	</p>
+	        </fieldset>
+	        <fieldset><legend>地图信息</legend>
+	        	<p>
+	        		<a href="javascript:;" onclick="kgetCurrentCenter()">获取中心点坐标</a>
+	        		<a href="javascript:;" onclick="kgetCurrentZoom()">获取缩放级别</a>
+	        	</p>
+	        	<p>
+	        		<a href="javascript:;" onclick="kgetCurrentActivearea()">获取可视范围坐标</a>
+	        	</p>
+	        </fieldset>
+	        <fieldset><legend>事件</legend>
+	        	<p>
+	        		<a href="javascript:;" onclick="kaddEvents()">绑定事件</a>
+	        		<a href="javascript:;" onclick="kremoveEvents()">取消绑定</a>
+	        	</p>
+	        	<p style="margin-bottom:10px;">（注：绑定事件后，您可以左键、右键、双击）</p>
+	        </fieldset>
+      	</div>
+	  	<div id="displaymap" class="left">
+	  		<div id="mapId"></div>
+	  		<a href="javascript:;" class="cancleFullwin" id="cancleFullScreen" onclick="cancleFullwin();">取消全屏</a>
+     	</div>
+		<div class="clear"></div>
+	</div>
+	<div class="gis-bottom" id="gisBottom">版权所有：东方网力科技股份有限公司 </div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="../../v1.0/Init.js"></script>  
+	<script type="text/javascript" src="js/all-demos.js"></script>
+	<script type="text/javascript">
+		var Displaymap=jQuery("#displaymap");
+		var MapTool = jQuery("#maptool");
+		resize();
+		jQuery(window).resize(function(){
+			resize();
+		});
+		function resize(){
+			var height = jQuery(window).height()-70-35;
+			var width = jQuery(window).width()-310-15;
+			Displaymap.width(width);
+			Displaymap.height(height);
+			MapTool.height(height);
+		};
+	</script>
+</body>
+</html>

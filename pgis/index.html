@@ -1,0 +1,35 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" >
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
+<body>
+	<div class="map-id" id="mapId"></div>
+	<script type="text/javascript" src="../../../../v1.0/Init.js"></script>
+	<script type="text/javascript">
+		window.location.href='root/gis-manager/home.html';
+		//地图控件
+		var mapContainer = document.getElementById("mapId");
+		var map = new NPMapLib.Map(mapContainer, {minZoom:0,
+												  maxZoom:10});
+		
+		//图层参数
+		var opts = {centerPoint:[12959745.271695066,4848706.4522418715],
+				    fullExtent:[12912392.532672398,4819583.94446522,13007098.010717731,4877828.960018523],
+					minLevel:0,
+					maxLevel:7,
+					zoomOffset:11,
+					zoomLevelSequence:2,
+					initResolution:156543.033928,
+					origin:[-20037508.342789248, 20037508.342789248]
+				};
+
+		//图层路径
+		var url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaCities_Community_BaseMap_CHN/BeiJing_Community_BaseMap_CHN/MapServer";
+		var layerSL = new NPMapLib.Layers.ArcgisTileLayer(url, "矢量地图", opts);
+		map.addLayer(layerSL);
+	</script>
+</body>
+</html>

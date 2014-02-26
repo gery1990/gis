@@ -1,0 +1,153 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
+<body>
+    <div class="map-id" id="mapId">
+    </div>
+    <link rel="stylesheet" type="text/css" href="../../css/rescorce-code.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/shThemeDefault.css" />
+    <link rel="stylesheet" href="../../css/dialog.css">
+    <script type="text/javascript" src="../../../../v1.0/Init.js"></script>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/allScript.js"></script>
+    <script type="text/javascript" src="../../js/resource-code.js"></script>
+    <script src="../../js/dialog.js"></script>
+    <script type="text/javascript">
+        //_NPMAPLIB_USING_ADAPTER_OPENLAYERS = 1;
+        //地图控件
+        var mapContainer = document.getElementById("mapId");
+        var map = new NPMapLib.Map(mapContainer, { minZoom: 0,maxZoom: 10});
+
+        var resolutions = [156543.033928,78271.5169639999,39135.7584820001,19567.8792409999,9783.93962049996,
+                           4891.96981024998,2445.98490512499,1222.99245256249,305.748113140558,152.874056570411,
+                           76.4370282850732,38.2185141425366,19.1092570712683,9.55462853563415,4.77731426794937,
+                           2.38865713397468,1.19432856685505,0.597164283559817];
+
+        //图层参数
+        var opts = { centerPoint: [12959745.271695066, 4848706.4522418715],
+            fullExtent: [12912392.532672398, 4819583.94446522, 13007098.010717731, 4877828.960018523],
+            minLevel: 0,
+            maxLevel: 7,
+            zoomOffset: 11,
+            zoomLevelSequence: 2,
+            initResolution: resolutions,
+            origin: [-20037508.342789248, 20037508.342789248]
+        };
+
+        //图层路径
+        var url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaCities_Community_BaseMap_CHN/BeiJing_Community_BaseMap_CHN/MapServer";
+        var layer1 = new NPMapLib.Layers.ArcgisTileLayer(url, "矢量地图", opts);
+        map.addLayer(layer1);
+
+        //图像标记的地理坐标
+        var pt = new NPMapLib.Geometry.Point(12959745.271695066, 4848706.4522418715);
+        //图片大小
+        var size = new NPMapLib.Geometry.Size(32, 32);
+
+        //图片
+        var icon = new NPMapLib.Symbols.Icon("../../images/Car.png", size);
+        //设置偏移量，这里取坐标点为图片中心点
+        icon.setAnchor(new NPMapLib.Geometry.Size(-size.width / 2, -size.height / 2));
+
+        //文本标记
+        var label = new NPMapLib.Symbols.Label("一个动画标记");
+        //设置样式
+        label.setStyle(
+						{
+						    fontSize: 12, 		//文字大小
+						    fontFamily: '宋体', 	//字体
+						    color: 'red', 		//文字前景色
+						    align: 'center', 		//对方方式
+						    isBold: true			//是否粗体
+						}
+					  );
+        //设置偏移量
+        label.setOffset(new NPMapLib.Geometry.Size(0, size.height / 2));
+
+        //图像标记
+        var marker = new NPMapLib.Symbols.Marker(pt);
+        marker.setIcon(icon);
+        marker.setLabel(label);
+
+        //点序列
+        var points = [];
+        points.push(new NPMapLib.Geometry.Point(12959745.271695066, 4848706.4522418715));
+        points.push(new NPMapLib.Geometry.Point(12975414.862493526, 4848782.889270157));
+        points.push(new NPMapLib.Geometry.Point(12975109.114380386, 4838846.075593084));
+
+        //多段线
+        var polyline = new NPMapLib.Geometry.Polyline(points, {
+                color: "blue", //颜色
+                weight: 5, 	//宽度，以像素为单位
+                opacity: 0.5, //透明度，取值范围0 - 1
+                lineStyle: 'shortdashdotdot'	//样式
+            }
+	    );
+
+        var options = {
+            speed: 100,        //速度 米/秒
+            isReturn: true,     //是否往返：若为true，则来回推演
+            isRepeat: true      //是否重复：若为true，则反复推演
+        };
+
+        var animation = null;
+        map.addOverlay(polyline);
+    </script>
+
+    <script type="text/javascript">
+        $(function() {
+            loadDemoCode("../../demosCode/Symbols/Animation.html");
+            //注册操作说明
+            registerDemoInstructions({
+                title: "动画标注",
+                height: "210",
+                width: "290",
+                position: ["right", 60],
+                modal: false,
+                content: "在地图添加一个标注，可在指定图形上移动。<br/><p>速度(米/秒)：<input type='text' size='20' name='speed' value='100' /></p>",
+                buttons: {
+                    "添加": function() {
+                        if(animation == null){
+                            animation = new NPMapLib.Symbols.Animation(map.id, marker, options);
+                            animation.setPath(polyline);
+                            map.addOverlay(marker);
+                        }
+                    },
+                    "开始": function() {
+                        var value = document.getElementsByName('speed')[0].value;
+                        if(value && value.length > 0){
+                            animation.setSpeed(parseFloat(value));
+                        }
+                            
+                        animation.start();
+                    },
+                    "暂停/恢复": function() {
+                        animation.pause();
+                    },
+                    "移除": function() {
+                        animation.stop();
+                        map.removeOverlay(marker);
+                        animation = null;
+                    },
+                    "显示": function() {
+                        marker.show();
+                    },
+                    "隐藏": function() {
+                        marker.hide();
+                    },
+                    "闪烁": function() {
+                        marker.flash();
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../../css/class.css"/>
+	</head>
+	<body>
+		<div class="class-container">
+			<div class="class-label">命名空间：NPMapLib.Geometry&nbsp;&nbsp;&nbsp;&nbsp;(PS：力图精简，以下描述皆省略命名空间，详见相关类的说明页面)</div>
+			<div class="class-label">构造函数</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">构造函数</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">Extent(a:Number, b:Number, c:Number, d:Number)</td>
+					<td class="grey">创建包络框实例。</br>a-最小经度；b-最小纬度；c-最大经度；d-最大纬度。</td>
+				</tr>
+			</table>
+
+			<div class="class-label">属性</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">属性</th>
+					<th width="90">类型</th>
+					<th>描述</th>
+				</tr>
+				<tr class="odd">
+					<td class="green">sw</td>
+					<td class="green">Point</td>
+					<td class="grey">左下角坐标点。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">ne</td>
+					<td class="green">Point</td>
+					<td class="grey">右上角坐标点。</td>
+				</tr>
+			</table>
+			
+			<div class="class-label">方法</div>
+			<table cellpadding=0 cellspacing=0 class="class-table">
+				<tr>
+					<th width="280">方法</th>
+					<th width="90">返回值</th>
+					<th>描述</th>
+				</tr>
+				<tr class="even">
+					<td class="green">containsPoint(point:Point)</td>
+					<td class="green">Boolean</td>
+					<td class="grey">如果点的地理坐标位于此矩形内，则返回true。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">containsExtent(extent:Extent)</td>
+					<td class="green">Boolean</td>
+					<td class="grey">传入的矩形区域完全包含于此矩形区域中，则返回true。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">intersects(other:Extent)</td>
+					<td class="green">Extent</td>
+					<td class="grey">计算与另一矩形的交集区域。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">extend(point:Point)</td>
+					<td class="green">Extent</td>
+					<td class="grey">放大此矩形，使其包含给定的点。</td>
+				</tr>
+				<tr class="even">
+					<td class="green">getCenter()</td>
+					<td class="green">Point</td>
+					<td class="grey">返回矩形的中心点。</td>
+				</tr>
+				<tr class="odd">
+					<td class="green">isEmpty()</td>
+					<td class="green">Boolean</td>
+					<td class="grey">判断矩形是否为空，如果矩形为空，则返回true。</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

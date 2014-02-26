@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
+<body>
+	<div class="map-id" id="mapId"></div>
+	<link rel="stylesheet" type="text/css" href="../../css/rescorce-code.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shCore.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shThemeDefault.css"/>
+	<script type="text/javascript" src="../../../../v1.0/Init.js"></script>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/allScript.js"></script>
+	<script type="text/javascript" src="../../js/resource-code.js"></script>
+	<script type="text/javascript">
+		//地图控件
+		var mapContainer = document.getElementById("mapId");
+		var map = new NPMapLib.Map(mapContainer, {minZoom:0,
+												  maxZoom:6});
+		
+		//图层参数
+		var opts = {centerPoint:[32991597.27439121,4853139.799882412],
+				    fullExtent:[32896891.79634588,4826998.336208882,33086302.752436545,4879281.263555942],
+					minLevel:0,
+					maxLevel:6,
+					zoomOffset:10,
+					zoomLevelSequence:2
+				};
+
+		//图层路径
+		var url = "http://mt1.google.cn/vt/lyrs=m@160000000";
+		var layerSL = new NPMapLib.Layers.GoogleMapTileLayer(url, "矢量地图", opts);
+
+		url = "http://mt2.google.cn/vt/lyrs=s@132";
+		var layerYX = new NPMapLib.Layers.GoogleMapTileLayer(url, "影像地图", opts);
+
+		/*url = ["http://mt1.google.cn/vt/lyrs=s@132", "http://mt0.google.cn/vt/imgtp=png32&lyrs=h@224000000"];
+		var layerSLYX = new NPMapLib.Layers.GoogleMapTileLayer(url, "矢量影像地图", opts);*/
+
+		map.addLayers([layerSL, layerYX]);
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			loadDemoCode("../../demosCode/Layers/GoogleMapTileLayer.html");
+		});
+	</script>
+	<input type="button" style="position:absolute;top:30px;right:200px;" value="切换到卫星地图" onclick="aaswitch()"/>
+	<script type="text/javascript">
+		function aaswitch(){
+			map.switchLayer(1);
+		}
+	</script>
+</body>
+</html>

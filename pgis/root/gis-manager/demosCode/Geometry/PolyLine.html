@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
+<body>
+	<div class="map-id" id="mapId"></div>
+	<link rel="stylesheet" type="text/css" href="../../css/rescorce-code.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shCore.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shThemeDefault.css"/>
+	<link rel="stylesheet" href="../../css/dialog.css">
+	<script type="text/javascript" src="../../../../v1.0/Init.js"></script>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/allScript.js"></script>
+	<script type="text/javascript" src="../../js/resource-code.js"></script>
+	<script src="../../js/dialog.js"></script>
+	<script type="text/javascript">
+		//地图控件
+		var mapContainer = document.getElementById("mapId");
+		var map = new NPMapLib.Map(mapContainer, {minZoom:0,
+												  maxZoom:10});
+		
+		var resolutions = [156543.033928,78271.5169639999,39135.7584820001,19567.8792409999,9783.93962049996,
+						   4891.96981024998,2445.98490512499,1222.99245256249,305.748113140558,152.874056570411,
+						   76.4370282850732,38.2185141425366,19.1092570712683,9.55462853563415,4.77731426794937,
+						   2.38865713397468,1.19432856685505,0.597164283559817];
+
+		//图层参数
+		var opts = {centerPoint:[12959745.271695066,4848706.4522418715],
+				    fullExtent:[12912392.532672398,4819583.94446522,13007098.010717731,4877828.960018523],
+					minLevel:0,
+					maxLevel:7,
+					zoomOffset:11,
+					zoomLevelSequence:2,
+					initResolution:resolutions,
+					origin:[-20037508.342789248, 20037508.342789248]
+				};
+
+		//图层路径
+		var url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaCities_Community_BaseMap_CHN/BeiJing_Community_BaseMap_CHN/MapServer";
+		var layer1 = new NPMapLib.Layers.ArcgisTileLayer(url, "矢量地图", opts);
+		map.addLayer(layer1);
+
+
+		//点序列
+		var points = [];
+		points.push(new NPMapLib.Geometry.Point(12959745.271695066,4848706.4522418715));
+		points.push(new NPMapLib.Geometry.Point(12975414.862493526,4848782.889270157));
+		points.push(new NPMapLib.Geometry.Point(12975109.114380386,4838846.075593084));
+
+		//多段线
+		var polyline = new NPMapLib.Geometry.Polyline(points, {
+																color:"blue",	//颜色
+																weight:5,		//宽度，以像素为单位
+																opacity:0.5,	//透明度，取值范围0 - 1
+																lineStyle:NPMapLib.LINE_TYPE_SOLID	//样式
+															  }
+													  );
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			loadDemoCode("../../demosCode/Geometry/PolyLine.html");
+			//注册操作说明
+			registerDemoInstructions({
+				title:"多段线",
+				height:"200",
+				width:"250",
+				position:["right",60],
+				modal:false,
+				content:"在地图添加一条线标记。",
+				buttons: {
+					"添加": function(){
+						map.addOverlay(polyline);
+					},
+					"移除": function(){
+						map.removeOverlay(polyline);
+					},
+					"显示": function(){
+						polyline.show();
+					},
+					"隐藏": function(){
+						polyline.hide();
+					},
+					"闪烁": function(){
+						polyline.flash();
+					}
+				}
+			});
+		});
+	</script>
+</body>
+</html>

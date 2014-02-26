@@ -1,0 +1,158 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+</head>
+<body>
+	<div class="map-id" id="mapId"></div>
+	<link rel="stylesheet" type="text/css" href="../../css/rescorce-code.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shCore.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/shThemeDefault.css"/>
+	<link rel="stylesheet" href="../../css/dialog.css">
+	<script type="text/javascript" src="../../../../v1.0/Init.js"></script>
+	<script type="text/javascript" src="../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../js/allScript.js"></script>
+	<script type="text/javascript" src="../../js/resource-code.js"></script>
+	<script src="../../js/dialog.js"></script>
+	<script type="text/javascript">
+		//地图控件
+		var mapContainer = document.getElementById("mapId");
+		var map = new NPMapLib.Map(mapContainer, {minZoom:0,
+												  maxZoom:10});
+		
+		//图层参数
+		var opts = {centerPoint:[12959745.271695066,4848706.4522418715],
+				    fullExtent:[12912392.532672398,4819583.94446522,13007098.010717731,4877828.960018523],
+					minLevel:0,
+					maxLevel:7,
+					zoomOffset:11,
+					zoomLevelSequence:2,
+					initResolution:156543.033928,
+					origin:[-20037508.342789248, 20037508.342789248]
+				};
+
+		//图层路径
+		var url = "http://cache1.arcgisonline.cn/ArcGIS/rest/services/ChinaCities_Community_BaseMap_CHN/BeiJing_Community_BaseMap_CHN/MapServer";
+
+		//Arcgis图层
+		var layer1 = new NPMapLib.Layers.ArcgisTileLayer(url, "矢量地图", opts);
+		map.addLayer(layer1);
+
+		//图像标记的地理坐标
+		var pt = new NPMapLib.Geometry.Point(12959745.271695066,4848706.4522418715);
+		//图片大小
+		var size = new NPMapLib.Geometry.Size(32,32);
+
+		//图片
+		var icon = new NPMapLib.Symbols.Icon("http://localhost:1080/v1.0/Netposa/Images/Flag_Red.png",size);
+		//设置偏移量，这里取坐标点为图片中心点
+		icon.setAnchor(new NPMapLib.Geometry.Size(-size.width/2, -size.height/2));
+
+		//文本标记
+		var label = new NPMapLib.Symbols.Label("图像标记A");
+		//设置样式
+		label.setStyle(
+						{
+							fontSize:12,			//文字大小
+							fontFamily:'宋体',		//字体
+							color:'red',			//文字前景色
+							align:'center',			//对方方式
+							isBold:true			//是否粗体
+						}
+					  );
+		//设置偏移量
+		label.setOffset(new NPMapLib.Geometry.Size(0, size.height/2));
+
+		//图像标记A
+		var marker1 = new NPMapLib.Symbols.Marker(pt);
+		marker1.setIcon(icon);
+		marker1.setLabel(label);
+
+		//图像标记B
+		label.setContent("图像标记B");
+		pt = new NPMapLib.Geometry.Point(12975109.114380386,4848782.889270157);
+		var marker2 = new NPMapLib.Symbols.Marker(pt);
+		marker2.setIcon(icon);
+		marker2.setLabel(label);
+
+		//图像标记C
+		label.setContent("图像标记C");
+		pt = new NPMapLib.Geometry.Point(12975109.114380386,4838846.075593084);
+		var marker3 = new NPMapLib.Symbols.Marker(pt);
+		marker3.setIcon(icon);
+		marker3.setLabel(label);
+
+
+		//圆形标注
+		var circle = new NPMapLib.Geometry.Circle(new NPMapLib.Geometry.Point(12959745.271695066,4848706.4522418715), 
+												  5000, {
+																color:"blue",			//颜色
+																fillColor:"yellow",		//填充颜色
+																weight:2,				//宽度，以像素为单位
+																opacity:1,				//透明度，取值范围0 - 1
+																fillOpacity:0.3			//填充的透明度，取值范围0 - 1
+													  	}
+													  );
+
+		//点序列（注：多连形的起始点与终止点一致，形成闭合）
+		var points = [];
+		points.push(new NPMapLib.Geometry.Point(12959745.271695066,4848706.4522418715));
+		points.push(new NPMapLib.Geometry.Point(12975414.862493526,4848782.889270157));
+		points.push(new NPMapLib.Geometry.Point(12975109.114380386,4838846.075593084));
+		points.push(new NPMapLib.Geometry.Point(12959898.145751636,4837470.20908395));
+		points.push(new NPMapLib.Geometry.Point(12938954.4000015,4839992.631017361));
+		points.push(new NPMapLib.Geometry.Point(12959745.271695066,4848706.4522418715));
+
+		//多边形标注
+		var polygon = new NPMapLib.Geometry.Polygon(points, {
+																color:"blue",			//颜色
+																fillColor:"green",		//填充颜色
+																weight:2,				//宽度，以像素为单位
+																opacity:1,				//透明度，取值范围0 - 1
+																fillOpacity:0.3			//填充的透明度，取值范围0 - 1
+															  }
+													  );
+
+		//覆盖物图层
+		  var layer2 = new NPMapLib.Layers.OverlayLayer("图层1", 1);
+		map.addLayer(layer2);
+
+		//向图层中添加覆盖物
+		layer2.addOverlay(marker1);
+		layer2.addOverlay(marker2);
+		layer2.addOverlay(marker3);
+		layer2.addOverlay(circle);
+		layer2.addOverlay(polygon);
+
+		layer2.show();
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			loadDemoCode("../../demosCode/Layers/OverlayLayer.html");
+
+			//注册操作说明
+			registerDemoInstructions({
+				title:"自定义图层",
+				height:"160",
+				width:"270",
+				position:["right",80],
+				modal:false,
+				content:"向自定义图层中添加覆盖物，以便对覆盖物进行统一管理和操作。<br/>",
+				buttons: {
+					"显示": function(){
+						layer2.show();
+					},
+					"隐藏": function(){
+						layer2.hide();
+					}
+				}
+			});
+		});
+
+
+	</script>
+</body>
+</html>
