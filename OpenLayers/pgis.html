@@ -1,0 +1,247 @@
+<html>  
+    <head>  
+        <title>PGIS</title>  
+      <!--   <link rel="stylesheet" href="css/style.css" type="text/css" />   -->
+        <script src="lib/OpenLayers.js"></script>  
+        <script src="lib/Config.js"></script> 
+        <script src="jquery.min.js"></script>
+  <style type="text/css">
+      .olImageLoadError { 
+                 background-color: transparent !important; 
+                 display:none; 
+            } 
+  </style>
+        <script type="text/javascript">
+            var map, layer; //complex object of type OpenLayers.Map  
+            var proj = new OpenLayers.Projection("EPSG:4326");
+            var mapproj = new OpenLayers.Projection("EPSG:104000");
+            //Initialise the 'map' object   
+            function init() {
+                var imageUrl = GetParamValue("strImageUrl", strImageUrl);
+                var extentbak = new OpenLayers.Bounds(0, -90, 180, 90);
+                var extent = new OpenLayers.Bounds(
+                       116.67871, 34.47558, 117.97167, 35.35058
+                   );
+                //extent.transform(proj, mapproj);
+               // extentbak.transform(proj, mapproj);
+                var extentbak2 = new OpenLayers.Bounds(13348809.744547672, 3500204.402117868, 13409959.366471555, 3561506.9011374912);
+                extentbak2.transform(mapproj, proj);
+                map = new OpenLayers.Map("map", {
+                    maxExtent: extentbak,
+                    // restrictedExtent: extent,
+                    maxResolution: 0.000976566472126202, // corresponds to level 8 in the cache 
+                    numZoomLevels: 10,
+                    units: 'degrees',
+                    projection: "EPSG:104000",
+                    tileOrigin: {lat:45,lon:0}
+                };
+                    // displayProjection: new OpenLayers.Projection("EPSG:4326")
+                layer = new OpenLayers.Layer.TMS("Name",
+                        imageUrl, {
+                            'type': 'png',
+                            'getURL': getUrl//get_my_url
+                        });
+                map.tileSize = new OpenLayers.Size(256, 256);
+                layer.setTileSize(new OpenLayers.Size(256, 256))
+
+var vectorLayer = new OpenLayers.Layer.Vector("vector");
+                //创建Geometry对象
+                var point = new OpenLayers.Geometry.Point(119.9143982, 30.4486737);
+                point.transform(proj, mapproj);
+                //创建Feature对象
+                var fea = new OpenLayers.Feature.Vector(point);
+                //把Feature对象添加到图层
+                vectorLayer.addFeatures(fea);
+                var point = new OpenLayers.Geometry.Point(120.4637146, 30.4486737);
+                point.transform(proj, mapproj);
+                //创建Feature对象
+                var fea = new OpenLayers.Feature.Vector(point);
+                vectorLayer.addFeatures(fea);
+                var point = new OpenLayers.Geometry.Point(119.9143982, 29.9751599);
+                point.transform(proj, mapproj);
+                //创建Feature对象
+                var fea = new OpenLayers.Feature.Vector(point);
+                //把Feature对象添加到图层
+                vectorLayer.addFeatures(fea);
+                var point = new OpenLayers.Geometry.Point(120.4637146, 29.9751599);
+                point.transform(proj, mapproj);
+                //创建Feature对象
+                var fea = new OpenLayers.Feature.Vector(point);
+                vectorLayer.addFeatures(fea)
+                var point = new OpenLayers.Geometry.Point(120.145315, 30.199747);
+                point.transform(proj, mapproj);
+                //创建Feature对象
+                var fea = new OpenLayers.Feature.Vector(point);
+                vectorLayer.addFeatures(fea)
+                map.addControl(new OpenLayers.Control.MousePosition());
+                map.addLayers([layer, vectorLayer])
+                map.addControl(new OpenLayers.Control.PanZoomBar());
+                map.events.register("click", null, function (e) {
+                    var ContextLonLat = map.getLonLatFromPixel(new OpenLayers.Pixel(e.x, e.y));
+                    alert(ContextLonLat.lon + " " + ContextLonLat.lat);
+                    // Geo.Map.DrawCtrl.DrawStartEndPoint(ContextLonLat.lon, ContextLonLat.lat, "images/img/ico_start1.png");
+                });
+                var lonLat = new OpenLayers.LonLat(119.9143982, 30.4486737);
+                lonLat.transform(map.displayProjection, map.getProjectionObject());
+                map.setCenter(lonLat, parseInt(0));
+                getlanguage();
+            }
+     function getUpperLeftTileCoord(res) {
+        var upperLeft = new OpenLayers.Geometry.Point(
+            map.maxExtent.left,
+            map.maxExtent.top);
+        return getContainingTileCoords(upperLeft, res);
+    }
+  function getLowerRightTileCoord(res) {
+        var bottomRight = new OpenLayers.Geometry.Point(
+            map.maxExtent.right,
+            map.maxExtent.bottom);
+        return getContainingTileCoords(bottomRight, res);
+    }
+    function  getContainingTileCoords(point, res) {
+        return new OpenLayers.Pixel(
+           Math.max(Math.floor((point.x - map.tileOrigin.lon) / (map.tileSize.w * res)),0),
+           Math.max(Math.floor((map.tileOrigin.lat - point.y) / (map.tileSize.h * res)),0)
+        );
+    }
+        function getUrl(bounds) {
+            var res = this.getResolution(); 
+
+var originTileX = (this.tileOrigin.lon + (res * this.tileSize.w/2)); 
+            var originTileY = Math.abs((0+(res * this.tileSize.h/2)));
+      //originTileY=0;
+      var z = this.map.getZoom();
+
+var center = bounds.getCenterLonLat();
+            var point = { x: center.lon, y: center.lat };
+
+var x = (Math.round(Math.abs((center.lon - originTileX) / (res * this.tileSize.w)))); 
+            var y = (Math.round(Math.abs((center.lat-originTileY) / (res * this.tileSize.h))));
+            // this prevents us from getting pink tiles (non-existant tiles)
+            if (this.lods) {        
+                var lod = this.lods[this.map.getZoom()];
+                if ((x < lod.startTileCol || x > lod.endTileCol) 
+                    || (y < lod.startTileRow || y > lod.endTileRow)) {
+                        return null;
+                }
+            }
+            else {
+                var start = getUpperLeftTileCoord(res);
+                var end = getLowerRightTileCoord(res);
+                if ((x < start.x || x >= end.x)
+                    || (y < start.y || y >= end.y)) {
+                        return null;
+                }        
+            }
+           //originTileX=0;
+           //originTileY=0;
+            var x2 = (Math.round(Math.abs((center.lon - originTileX) / (res * this.tileSize.w)))); 
+            var y2 = (Math.round(Math.abs((center.lat-originTileY) / (res * this.tileSize.h)))); 
+            // Write the values into our formatted url
+            //url = OpenLayers.String.format(url, {'x': x, 'y': y, 'z': z});
+      z=z+11;
+      //url=Hzgis.CommonMap.PGISMap+"&Col="+x2+"&Row="+y2+"&Zoom="+z+"&V=0.3";
+      //alert(url);
+      var imgsrc = "http://10.118.128.33:7001/PGIS_S_TileMapServer/Maps/default/EzMap?Service=getImage&Type=RGB&Zoom=" + z + "&Row=" + y2 + "&Col=" + x2 + "&V=0.3"
+      return imgsrc;
+    }
+            function playtrace(tracepoint)
+            {
+                var vectors, lineFeature;//存放线路 
+                //线路样式 
+                var style_green = {
+                    strokeColor: "#0",
+                    strokeWidth: 1,
+                    strokeDashstyle: "dashdot",
+                    pointRadius: 6,
+                    pointerEvents: "visiblePainted"
+                };
+                //画线图层设置 
+                var layer_style = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
+                layer_style.fillOpacity = 0.2;
+                layer_style.graphicOpacity = 1;
+                //画线图层 
+                vectors = new OpenLayers.Layer.Vector("Simple Geometry", { style: layer_style });
+                map.addLayer(vectors);
+                //一下采用数组型式填充轨迹 
+                var pointList = [];
+               // var readerCoo = [];
+                //readerCoo.push({ "lon": 120.4637146, "lan": 29.9751599 });
+               // readerCoo.push({ "lon": 120.4637146, "lan": 30.4486737 });
+               // readerCoo.push({ "lon": 119.9143982, "lan": 30.4486737 });
+               // readerCoo.push({ "lon": 119.9143982, "lan": 29.9751599 });
+             //   readerCoo.push({ "lon": 120.4637146, "lan": 29.9751599 });
+                for (var i = 0; i < tracepoint.length; i++) {
+                    if (parseInt(tracepoint[i].lo) < 10) continue;
+
+var newPoint = new OpenLayers.Geometry.Point(parseFloat(tracepoint[i].lo) + 0.00469276, parseFloat(tracepoint[i].la) - 0.002422505);
+                    newPoint.transform(map.displayProjection, map.getProjectionObject());
+                    pointList.push(newPoint);
+                }
+                lineFeature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString(pointList), null, style_green);
+                vectors.addFeatures([lineFeature]);
+            function getlanguage() {
+                var param = {
+                    "PlayGHz": "1",
+                    "UserID": "81",
+                    "limit": "100",
+                    "pageIndex": "1",
+                    "BegTime": "2013-05-21",
+                    "EndTime": "2013-05-22"
+                };
+                jquerygetNewData_ajax("http://10.8.52.241:8080/Handlers/GetGisHistoryByUserID.ashx", param, function (request) {
+                    if (request != null) {
+                        playtrace(request);
+                    }
+                }, false, false);
+            }
+            //自定义切片规则的切片路径获取
+            function get_my_url(bounds) {
+                var res = this.map.getResolution();
+                //var extent = new OpenLayers.Bounds(
+                //                119.9143982, 29.9751599,
+                //                120.4637146, 30.4486737
+                //            );
+                //extent.transform(proj, mapproj);  //投影转换
+                //var x1 = Math.round((extent.left - this.maxExtent.left) / (res * this.tileSize.w));
+                //var y1 = Math.round((this.maxExtent.top - extent.top) / (res * this.tileSize.h));
+                var x = Math.round((bounds.left - this.maxExtent.left)
+                            / (res * this.tileSize.w));
+                var y = Math.round((this.maxExtent.top - bounds.top)
+                        / (res * this.tileSize.h));
+                var z = parseInt(this.map.getZoom());
+                if (x == 0 || y == 0) return;
+                //http://10.118.128.33:7001/PGIS_S_TileMapServer/Maps/default/EzMap?Service=getImage&Type=RGB&Col=1922&Row=485&Zoom=13&V=0.3
+             var imgsrc = "http://10.118.128.33:7001/PGIS_S_TileMapServer/Maps/default/EzMap?Service=getImage&Type=RGB&Zoom=" + z + "&Row=" + y + "&Col=" + x + "&V=0.3"
+                //var imgsrc = this.url+ "/"+z+ "/"+ Math.floor(x/16) + "/"+ Math.floor((Math.pow(2,z) - 1 - y)/ 16) + "/"+x + "_" + (Math.pow(2, z) - 1 - y);
+                return imgsrc;
+            function GetParamValue(findParam, defaultValue) {
+                var arr0 = document.location.href.split("?");
+                if (arr0.length <= 1) return defaultValue;
+                var arr;
+                if (arr0[1].indexOf("&") == -1) {
+                    arr = arr0[1].split("%26");
+                }
+                else {
+                    arr = arr0[1].split("&");
+                }
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].indexOf(findParam) == 0 && arr[i].indexOf("=") == findParam.length) {
+                        arr = arr[i].split("=");
+                        defaultValue = arr[1];
+                        break;
+                    }
+                }
+                return defaultValue;
+            }
+        </script>  
+    </head>  
+
+<!-- body.onload is called once the page is loaded (call the 'init' function) -->  
+    <body onload="init();">  
+
+<!-- define a DIV into which the map will appear. Make it take up the whole window -->  
+        <div style="width: 100%; height: 100%" id="map" ></div>  
+
+</body> 
+</html> 
