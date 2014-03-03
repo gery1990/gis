@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples
+    on iOS devices-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+   
+    <title>Create Map with Custom ArcGISDynamicMapServiceLayer Layer Definitions</title>
+    <link rel="stylesheet" href="arcgis_js_api/library\3.6\3.6\js\dojo\dijit\themes\tundra\tundra.css"/>
+     <script type="text/javascript">djConfig = { isDebug:true };</script>
+    <link rel="stylesheet" href="arcgis_js_api/library/3.6/3.6/js/esri/css/esri.css"/>
+    <style>
+        html,body,#mapDiv{
+            padding:0;
+            margin:0;
+            height:100%;
+        }
+        .map-tool-item {
+position: relative;
+float: left;
+}
+.map-select{
+width: 45px;
+height: 20px;
+background-position: 0 -20px;
+padding-left: 25px;
+}
+.map-text {
+font-weight: normal;
+float: left;
+}
+.map-arrowdown {
+width: 16px;
+height: 16px;
+background-position: 0px 3px;
+float: right;
+}
+.map-arrowdown {
+width: 16px;
+height: 16px;
+background-position: 0px 3px;
+float: right;
+}
+    </style> 
+     <script src="jquery-1.10.2.min.js"></script>
+    <script src="arcgis_js_api/library/3.6/3.6/init.js"></script>
+    <script src="arcgis_js_api/library/3.6/3.6/js/esri/layers/PgisTiledMapServiceLayer.js"></script>
+      <script src=" GisMapTools.js"></script>
+    <script>
+
+        dojo.require("esri.map");
+        dojo.require("esri/toolbars/draw");
+        dojo.require("esri/symbols/SimpleFillSymbol");
+        dojo.require("esri/graphic");
+        dojo.require( "esri/layers/GraphicsLayer");
+         dojo.require("esri/symbols/SimpleMarkerSymbol");
+       dojo.require("esri/symbols/SimpleLineSymbol");
+        dojo.require("dijit/layout/BorderContainer");
+         dojo.require("dijit/registry");
+          dojo.require("dijit/form/Button");
+        var map,toolbar, symbol, geomTask;
+        var startTime;
+         
+         
+        function init() {           
+            map = new esri.Map("mapDiv",{maxZoom:14,minZoom:8});
+            console.log(map);
+                
+            var lay = new   esri.layers.PgisTiledMapServiceLayer("http://192.168.60.56:6080/arcgis/rest/services/sjz_google222/MapServer");
+            map.addLayer(lay);
+            map.on("load", createToolbar); 
+            map.on("zoom-start",function(){
+                document.getElementById("calctime").innerHTML = "";
+                startTime = new Date();
+            });
+            map.on("zoom-end",function(){
+               document.getElementById("calctime").innerHTML = (new Date()-startTime);
+           });
+
+
+              function createToolbar(themap) {
+          toolbar = new esri.toolbars.Draw(map);
+          toolbar.on("draw-end", addToMap);
+        }
+
+        function addToMap(evt) {
+          var symbol;
+          toolbar.deactivate();
+          map.showZoomSlider();
+          switch (evt.geometry.type) {
+            case "point":
+            case "multipoint":
+              symbol = new esri.symbols.SimpleMarkerSymbol();
+              break;
+            case "polyline":
+              symbol = new esri.symbols.SimpleLineSymbol();
+              break;
+            default:
+              symbol = new esri.symbols.SimpleFillSymbol();
+              break;
+          }
+          var graphic = new esri.Graphic(evt.geometry, symbol);
+          map.graphics.add(graphic);
+        }
+        }
+       dojo.ready(init);
+
+
+        function calcTime(zoom){
+            map.setZoom(zoom);
+        }
+        function activateTool(labelName) {
+          var tool = labelName;// labelName.toUpperCase().replace(/ /g, "_");          
+          toolbar.activate(tool);
+          map.hideZoomSlider();
+        }
+
+      
+
+    </script>
+</head>
+<body>
+    <input type="button" value="8-14" data="14" onclick="calcTime(14)"/> <input type="button" value="14-8" data="8" onclick="calcTime(8)"/>
+    <span id="calctime"></span>    
+    <div id="header" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
+      <span>Draw:<br /></span>
+      <button data-dojo-type="dijit/form/Button" onclick="activateTool('point')" >Point</button>
+      <button data-dojo-type="dijit/form/Button" onclick="activateTool('multipoint')">Multi Point</button>
+      <button data-dojo-type="dijit/form/Button" onclick="activateTool('line')">Line</button>
+      <button data-dojo-type="dijit/form/Button" onclick="activateTool('polyline')">Polyline</button>
+      <button data-dojo-type="dijit/form/Button" onclick="activateTool('polygon')">Polygon</button>
+      <button data-dojo-type="dijit/form/Button" onclick="activateTool('freehandpolyline')">Freehand Polyline</button>
+      <button data-dojo-type="dijit/form/Button" onclick="activateTool('freehandpolygon')">Freehand Polygon</button>
+      <!--The Arrow,Triangle,Circle and Ellipse types all draw with the polygon symbol-->
+      <button data-dojo-type="dijit/form/Button" onclick="activateTool('arrow')">Arrow</button>
+      <button data-dojo-type="dijit/form/Button" onclick="activateTool('triangle')">Triangle</button>
+      <button data-dojo-type="dijit/form/Button" onclick="activateTool('circle')">Circle</button>
+      <button data-dojo-type="dijit/form/Button" onclick="activateTool('ellipse')">Ellipse</button>
+    </div>
+
+    <div id="mapDiv" style="width:95%;height:95%"></div>
+</body>
+</html>
