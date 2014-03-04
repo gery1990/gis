@@ -175,13 +175,15 @@ OpenLayers.Layer.TMS_PGIS = OpenLayers.Class(OpenLayers.Layer.Grid, {
         var originTileX = (this.tileOrigin.lon + (res * this.tileSize.w/2)); 
         var originTileY = (this.tileOrigin.lat - (res * this.tileSize.h/2));
 
-        var center = bounds.getCenterLonLat();
-		console.log("center"+center);
+        var center = bounds.getCenterLonLat();		
         var point = { x: center.lon, y: center.lat };
+        console.log("center=" +center);
+        console.log("originTileX=" +originTileX);
         var x = (Math.round(Math.abs((center.lon - originTileX) / (res * this.tileSize.w)))); 
         var y = (Math.round(Math.abs((originTileY - center.lat) / (res * this.tileSize.h)))); 
 		 if (x == 0 || y == 0) return null;
         var z = this.map.getZoom();
+        console.log("zoom="+z);
 		 //"http://10.173.2.20/PGIS_S_TileMapServer/Maps/V/EzMap?Service=getImage&Type=RGB&ZoomOffset=0&Col=1745&Row=547&Zoom=13&V=0.3";
 	   return "http://10.173.2.20/PGIS_S_TileMapServer/Maps/V/EzMap?Service=getImage&Type=RGB&ZoomOffset=0&V=0.3&Col=" +y+ "&Row="+x+"&Zoom="+z;
     },

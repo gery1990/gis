@@ -23,11 +23,11 @@
     //图层信息
     EzServerClient.GlobeParams.MyMapType = NPMapLib.MAP_LAYER_TYPE_EZMAP_TILE;
     EzServerClient.GlobeParams.IsLocal = true;
-    EzServerClient.GlobeParams.CenterPoint = [0, 0];
-    EzServerClient.GlobeParams.MapFullExtent = [0, 0, 0, 0];
-    EzServerClient.GlobeParams.MapInitLevel = 0;
-    EzServerClient.GlobeParams.MapMaxLevel = 10;
-    EzServerClient.GlobeParams.ZoomOffset = 10;
+    EzServerClient.GlobeParams.CenterPoint = [108.72265, 34.24023];
+    EzServerClient.GlobeParams.MapFullExtent = [107.4414,33.75,110.0039,34.73046];
+    EzServerClient.GlobeParams.MapInitLevel = 12;
+    EzServerClient.GlobeParams.MapMaxLevel = 20;
+    EzServerClient.GlobeParams.ZoomOffset = 0;
     EzServerClient.GlobeParams.MapUnitPixels = 256;
     EzServerClient.GlobeParams.ZoomLevelSequence = 2;
     EzServerClient.GlobeParams.TileImageFormat = NPMapLib.IMAGE_FORMAT_PNG;

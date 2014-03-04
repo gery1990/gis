@@ -96,7 +96,7 @@ define("esri/layers/PgisTiledMapServiceLayer", ["dojo/_base/kernel", "dojo/_base
 			}
 		},
 		getTileUrl: function(_1b, row, col) {
-			console.log("lsg");
+			
 			var ts = this.tileServers,
 				_1c = this._url.query,
 				_1d = (ts ? ts[row % ts.length] : this._url.path) + "/tile/" + _1b + "/" + row + "/" + col;

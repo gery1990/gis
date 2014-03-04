@@ -27,6 +27,7 @@
 
         map = new OpenLayers.Map("map", {
             maxResolution: "auto",
+
             maxExtent: new OpenLayers.Bounds(107.4414, 33.75, 110.0039, 34.73046)
         }); //,maxResolution:1.40625
         map.events.register("zoomend", this, setZoomEnd);
@@ -35,7 +36,10 @@
             imageUrl, {
                 type: 'png',
                 layername: 'pgis',
+                 maxZoomLevel:20, 
+                 numZoomLevels:21,
                 isBaseLayer: true
+             //  , tileOrigin: new OpenLayers.LonLat(107.4414, 33.75)
             });
         var pointLayer = new OpenLayers.Layer.Vector("Point Layer");
         var lineLayer = new OpenLayers.Layer.Vector("Line Layer");
