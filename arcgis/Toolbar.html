@@ -71,7 +71,7 @@
             var options = {
               fullExtent:startExtent
             } ; 
-            var lay = new esri.layers.PgisTiledMapServiceLayer("http://192.168.60.56:6080/arcgis/rest/services/sjz_google222/MapServer");
+            var lay = new esri.layers.PgisTiledMapServiceLayer("http://192.168.61.27:6080/arcgis/rest/services/sjz_google222/MapServer");
             map.addLayer(lay);
         map.on("load", createToolbar);
          map.on("zoom-start",function(){

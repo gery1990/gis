@@ -22,7 +22,7 @@
         function init() {           
             map = new esri.Map("mapDiv",{maxZoom:14,minZoom:8});
             // http://server.arcgisonline.com/ArcGIS/rest/services/NGS_Topo_US_2D/MapServer                 
-            var lay = new  esri.layers.ArcGISTiledMapServiceLayer("http://192.168.60.56:6080/arcgis/rest/services/sjz_google222/MapServer");
+            var lay = new  esri.layers.ArcGISTiledMapServiceLayer("http://192.168.61.27:6080/arcgis/rest/services/sjz_google222/MapServer");
             map.addLayer(lay);
 
             map.on("zoom-start",function(){

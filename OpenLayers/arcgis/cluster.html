@@ -74,7 +74,7 @@
               "marginTop": "20"
             };
             map = new Map("map",{maxZoom:14,minZoom:8});
-            var lay = new  esri.layers.ArcGISTiledMapServiceLayer("http://192.168.60.56:6080/arcgis/rest/services/sjz_google222/MapServer");
+            var lay = new  esri.layers.ArcGISTiledMapServiceLayer("http://192.168.61.27:6080/arcgis/rest/services/sjz_google222/MapServer");
             map.addLayer(lay);
             map.on("click",function(event) {
               console.log(event.mapPoint.x + "," + event.mapPoint.y);

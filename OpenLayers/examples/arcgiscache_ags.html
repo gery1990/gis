@@ -22,7 +22,7 @@
             cacheLayer,
             testLayer,
             startTime,
-            url =  "http://192.168.60.56:6080/arcgis/rest/services/sjz_google222/MapServer";
+            url =  "http://192.168.61.27:6080/arcgis/rest/services/sjz_google222/MapServer";
         function init() {
             var jsonp = new OpenLayers.Protocol.Script();
             jsonp.createRequest(url, {
@@ -62,7 +62,7 @@
             
             
             cacheLayer = new OpenLayers.Layer.ArcGISCache( "AGSCache",
-                    "http://192.168.60.56:6080/arcgis/rest/services/sjz_google222/MapServer", {
+                    "http://192.168.61.27:6080/arcgis/rest/services/sjz_google222/MapServer", {
                         isBaseLayer: true,
 
                         //From layerInfo above                        

@@ -21,7 +21,7 @@
             map = new OpenLayers.Map('map');
             var layer = new OpenLayers.Layer.WMS(
                 "底图",
-                "http://192.168.60.56:6080/arcgis/services/wfs/wfs_wms/MapServer/WMSServer?",
+                "http://192.168.61.27:6080/arcgis/services/wfs/wfs_wms/MapServer/WMSServer?",
                 { layers: '0' }
                 );
             vectors = new OpenLayers.Layer.Vector("Vector Layer");
@@ -61,7 +61,7 @@
 
 
             var request = OpenLayers.Request.POST({
-                url: "http://192.168.60.56:6080/arcgis/services/wfs/wfs_wms/MapServer/WFSServer?",
+                url: "http://192.168.61.27:6080/arcgis/services/wfs/wfs_wms/MapServer/WFSServer?",
                 data: xmlPara,
                 callback: handlerQuery
             });

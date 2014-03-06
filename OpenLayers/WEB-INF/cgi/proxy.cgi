@@ -22,7 +22,7 @@ allowedHosts = ['www.openlayers.org', 'openlayers.org',
                 'www.openstreetmap.org', 'sample.azavea.com',
                 'v2.suite.opengeo.org', 'v-swe.uni-muenster.de:8080',
                 'vmap0.tiles.osgeo.org', 'www.openrouteservice.org',
-                'maps.wien.gv.at', '192.168.60.56:8060','192.168.60.46:8080']
+                'maps.wien.gv.at', '192.168.61.27:8060','192.168.60.46:8080']
 
 method = os.environ["REQUEST_METHOD"]
 
