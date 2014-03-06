@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,8 +18,8 @@
             map = new esri.Map("mapDiv");
             var basemap = new esri.layers.TDTLayer();
             var xianLayer = new esri.layers.PGISLayer(); 
-            //  map.addLayer(xianLayer);
-          map.addLayer(basemap);
+             map.addLayer(xianLayer);
+         //  map.addLayer(basemap);
 
             var point = new esri.geometry.Point(
             {
@@ -33,24 +33,24 @@
                 "y": 34.24023,//30.209999,
                 "spatialReference": { "wkid": 3785 }
             });
-            //  map.centerAndZoom(xian_point, 12);
-           map.centerAndZoom(point, 14);
+            map.centerAndZoom(xian_point, 12);
+           //  map.centerAndZoom(point, 14);
 
-            var button = new dijit.form.Button({
-                label: "北京",
-                onClick: function () {
-                    map.centerAt(new esri.geometry.Point(116.3, 39.9, new esri.SpatialReference({ wkid: 4326 })));
-                } 
-            }
-            , "ToBeijing");
+            // var button = new dijit.form.Button({
+            //     label: "北京",
+            //     onClick: function () {
+            //         map.centerAt(new esri.geometry.Point(116.3, 39.9, new esri.SpatialReference({ wkid: 4326 })));
+            //     } 
+            // }
+            // , "ToBeijing");
 
         }
         dojo.ready(init);
     </script>
 </head>
 <body class="tundra">
-    <button id="ToBeijing" type="button">
-    </button>
+   <!--  <button id="ToBeijing" type="button">
+    </button> -->
     <br />
     <div id="mapDiv" style="width: 100%; height: 700px; border: 1px solid #000;">
     </div>
