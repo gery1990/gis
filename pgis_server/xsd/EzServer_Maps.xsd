@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:complexType name="BounderType" mixed="true">
+		<xs:annotation>
+			<xs:documentation>图层边界</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Envelope">
+						<xs:annotation>
+							<xs:documentation>矩形图层边界</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Unlimited">
+						<xs:annotation>
+							<xs:documentation>无限制的图层边界</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Polygon">
+						<xs:annotation>
+							<xs:documentation>多边形的图层边界</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="coordinates" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+						坐标点序列，根据不同类型的边界，有不同的取值。
+						当边界为Envelope时：
+							使用minx,miny,maxx,maxy格式设置外边框。
+						当边界为Unlimited时：
+							可以忽略，系统不检查此属性值。
+						当边界为Polygon时：
+							使用x,y坐标对，格式如：x1,y1,x2,y2,x3,y3....xn,yn，勾画边界多边形，注意(x1,y1)和(xn,yn)必须为同一点，系统不自动闭合。
+						在作为地图区域边界时，请勿使用Polygon类型，暂不支持，图层边界可以使用三种类型的边界。
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="zoomrange" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					地图视图等级区域。
+					使用 minzoom,maxzoom 格式设置，例如：“1,6”，注意使用英文逗号。
+					最小视图等级为-2，最大视图等级为16，超过边界值，不会产生错误，等效于边界值。
+					可以省略此属性，省略后等价于没有视图限制(-2,16)，任何视图等级都在范围内。
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="EzServer">
+		<xs:annotation>
+			<xs:documentation>服务器配置根节点</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Maps" minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>地图列表，包含0到50个地图对象，如果没有任何地图对象，测试程序将不可用</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence minOccurs="0" maxOccurs="50">
+							<xs:element name="Map" type="MapType"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="LayerType">
+		<xs:annotation>
+			<xs:documentation>图层类型</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Bounder" type="BounderType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						地图图层边界对象，边界对象限制了图层的2维作用范围以及可视等级。
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Source" type="SourceType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="lifetime" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					数据源的监测周期，加载图片的生命周期，单位：秒。
+					可以省略，省略时，等价于默认值是1000(秒)。
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="cachesize" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					图层缓存图片个数的大小，单位：个。
+					请根据当前系统（JVM内存）设置设定，过大会导致系统内存紧张。
+					每个图片大约占据50K内存，默认值100(个)，占用约5M内存。
+					可以适当减小，100以上即可以达到较好效果。
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="MapType">
+		<xs:annotation>
+			<xs:documentation>
+				地图对象，表示可用的地图，每个地图包含有多个图层，并使用指定的图层合并方式进行合并渲染，同时可以设置高速缓存，边界，切图参考系，名称等参数。
+				新增加的地图，需要在用户配置中，添加到用户的允许地图列表中，否则无法访问。
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Bounder" type="BounderType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						地图的边界对象，边界对象限制了地图的2维作用范围以及可视等级。
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:sequence>
+				<xs:element name="Layer" type="LayerType" minOccurs="1" maxOccurs="30"/>
+			</xs:sequence>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					地图的名称，不设置时候，地图默认名称为"default"。
+					同名的地图只有最有一个起作用。
+					此名称在用户配置中需要引用，同时在对外URL服务路径中也会引用。
+					最好设置英文名称，中文名称会妨碍部分客户端使用。
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="crs" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					地图切图参考系，此参考系不是标准的空间参考系，而是EzMap软件定义的切图瓦片参考系。
+					此参考系设置如下：
+						1） Geog(256) 经纬度切图方式，每个图块256像素见方
+						2） Geog(128) 经纬度切图方式，每个图块128像素见方
+						3） Proj(256) 地方坐标切图方式，每个图块256像素见方，地图拉伸系数为114699
+						4） Proj(128) 地方坐标切图方式，每个图块128像素见方，地图拉伸系数为114699
+						5） Geog2010(256) 经纬度切图方式，每个图块256像素见方,只支持聚合类型切图
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="lifetime" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>地图图片的生命周期，控制浏览器客户端访问服务器的时间间隔和服务器缓存切图图片的生命值，单位为秒，默认值是1000(秒)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="cachesize" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					地区缓存图片个数的大小，单位：个。
+					请根据当前系统（JVM内存）设置设定，过大会导致系统内存紧张。
+					每个图片大约占据50K内存，默认值1000(个)，占用约50M内存。
+					可以适当减小，300以上即可以达到较好效果。
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="mixmode" use="optional">
+			<xs:annotation>
+				<xs:documentation>图层混合方式，默认采用图层覆盖方式Overlay进行混合</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Merge">
+						<xs:annotation>
+							<xs:documentation>图层之间采用融合方式，图层之间，使用溶解和RGB单通道求最大值，以及透明叠加方式进行图层混合</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Overlay">
+						<xs:annotation>
+							<xs:documentation>图层之间采用覆盖方式，位于上层的图层，覆盖下层地图，速度较快。</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="emptyimage" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					空白图片的位置，请使用绝对路径。
+					空白图片是地图数据缺失位置系统返回给客户的图片。
+					如果不填写或者填写空白，则使用系统自带的空白图片。
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="damageimage" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					损坏图片的位置，请使用绝对路径。
+					损坏图片是地图数据损坏的位置系统返回给客户的图片。
+					如果不填写或者填写空白，则使用系统自带的损坏图片。
+					损坏图片一般是带有一个黄色感叹号或者一个红色叉子的警告性图片。
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="SourceType">
+		<xs:annotation>
+			<xs:documentation>服务的切片数据源</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Proxy" type="ProxyType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						当数据源类型为EzMapProxy时，需要额外填写这个参数，此参数为代理URL地址。
+						如：http://192.168.10.1/EzServerProxy/
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Parameter" type="ParameterType" minOccurs="0" maxOccurs="30">
+				<xs:annotation>
+					<xs:documentation>
+						此参数是地图服务要求的附加参数，如：&lt;Parameter key=&quot;user&quot; value=&quot;username&quot; /&gt;等参数。
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="EzMapDir">
+						<xs:annotation>
+							<xs:documentation>散包的EzMap地图切图文件夹</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="EzMapAggrDir">
+						<xs:annotation>
+							<xs:documentation>打包的EzMap地图切图文件夹</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="EzMapURL">
+						<xs:annotation>
+							<xs:documentation>EzServer接口</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="EzMapProxy">
+						<xs:annotation>
+							<xs:documentation>EzServer代理接口</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WMS">
+						<xs:annotation>
+							<xs:documentation>OGC WMS 服务</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="location" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					数据源的位置。
+					对于EzMapDir：
+						此参数是一个文件夹，需要使用绝对位置，如：C:\Maps\ 或者 usr/maps/
+					对于EzMapURL：
+						此参数是另外一个图片引擎地图的URL值，如：
+							早期版本：http://192.168.10.1/EzServer/
+							当前版本：http://192.168.10.1/EzServer/Maps/default/
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="ProxyType">
+		<xs:annotation>
+			<xs:documentation>
+				当数据源为EzMapProxy类型时，此对象代表图片引擎代理服务。
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Parameter" type="ParameterType" minOccurs="0" maxOccurs="30">
+				<xs:annotation>
+					<xs:documentation>EzMapProxy数据源中，代理程序要求传入的附加参数</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="location" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					此参数是一个图片引擎代理的服务URL位置，如：http://192.168.10.1/EzServerProxy/
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="ParameterType">
+		<xs:annotation>
+			<xs:documentation>
+				出现于Source对象中时：
+				此参数是地图服务要求的附加参数，如：&lt;Parameter key=&quot;user&quot; value=&quot;username&quot; /&gt;等参数。
+				出现于Proxy对象中时：
+				此参数是地图服务代理服务器要求的附加参数，请根据不同类型的代理说明，填写指定参数。
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="key" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					附加于目标URL之后的HTTP GET/POST 请求中的参数名
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="value" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					附加于目标URL之后的HTTP GET/POST 请求中的参数值
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	
+</xs:schema>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="EzServer">
+		<xs:annotation>
+			<xs:documentation>服务配置文件根节点</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Logging"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Logging">
+		<xs:annotation>
+			<xs:documentation>日志配置</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="OutputLevel" minOccurs="0" />
+				<xs:element ref="OutputFile" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OutputFile" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>日志输出文件，如果省略或者为空，则不生成日志输出文件；相对路径位于当前应用程序目录下</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OutputLevel">
+		<xs:annotation>
+			<xs:documentation>日志输出等级，与JDK中LOG部分的Level定义相同，可以省略，省略后，日志输出内容为OFF</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="ALL"/>
+				<xs:enumeration value="SEVERE"/>
+				<xs:enumeration value="WARNING"/>
+				<xs:enumeration value="INFO"/>
+				<xs:enumeration value="CONFIG"/>
+				<xs:enumeration value="FINE"/>
+				<xs:enumeration value="FINER"/>
+				<xs:enumeration value="FINEST"/>
+				<xs:enumeration value="OFF"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+</xs:schema>
