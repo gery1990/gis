@@ -106,23 +106,16 @@
         var style = new OpenLayers.Style(null, {
             rules: [lowRule, middleRule, highRule]
         });
-        // var maxExtent = new OpenLayers.Bounds(12912392.532672398, 4819583.94446522, 13007098.010717731, 4877828.960018523);
-
-        //Max extent from layerInfo above
-        // var layerMaxExtent = new OpenLayers.Bounds(
-        //     107.4414,33.75,110.0039,34.73046
-        // );
+     
 
         var imageUrl = "http://10.173.2.20/PGIS_S_TileMapServer/Maps/V"
-        //maxZoomLevel:20,numZoomLevels:9,
-        // var bound = new OpenLayers.Bounds(12912392.532672398, 4819583.94446522, 13007098.010717731, 4877828.960018523);
+      
         var  resolutions = [
         2,1,0.5,0.25,0.125,0.0625,0.03125,0.015625,0.0078125,0.00390625,0.001953125,0.0009765625,0.00048828125,0.000244140625,0.0001220703125,0.00006103515625,0.000030517578125,0.0000152587890625,0.00000762939453125,0.000003814697265625,0.0000019073486328125,9.5367431640625e-7,4.76837158203125e-7];
         map = new OpenLayers.Map("map", {
             maxResolution: 2,
             projection: "EPSG:3785",
-            center:new OpenLayers.LonLat(108.72265, 34.24023),
-            // resolutions: resolutions,
+            center:new OpenLayers.LonLat(108.72265, 34.24023),         
             maxExtent: new OpenLayers.Bounds(107.4414, 32.75, 110.0039, 34.73046)
         });
         map.events.register("zoomend", this, setZoomEnd);
@@ -131,8 +124,7 @@
             imageUrl, {
                 type: 'png',
                 layername: 'pgis',
-                 maxZoomLevel:20,
-                // numZoomLevels:21,
+                 maxZoomLevel:20,                
                 maxResolution: 2,
                 tileOrigin: new OpenLayers.LonLat(0,0)
             });
@@ -140,11 +132,11 @@
         var lineLayer = new OpenLayers.Layer.Vector("Line Layer");
         var polygonLayer = new OpenLayers.Layer.Vector("Polygon Layer");
         var boxLayer = new OpenLayers.Layer.Vector("Box layer");
-        // map.addLayer(wmsLayer);
+      
         map.addLayers([wmsLayer, pointLayer, lineLayer, polygonLayer, boxLayer]);
-        // Create a vector layers
+      
         vector = new OpenLayers.Layer.Vector("Features", {
-            renderers: ['SVG'], //'Canvas',
+            renderers: ['SVG'], 
             strategies: [
                 new OpenLayers.Strategy.AnimatedCluster({
                     distance: 45,
@@ -155,7 +147,7 @@
             styleMap: new OpenLayers.StyleMap(style)
         });
         map.addLayer(vector);
-        //使用jQuery获取json脚本，并转换为pointInfo对象。
+       
         var xmin = 108.50732;
         var xmax = 109.41357;
         var ymin = 33.74308;
@@ -179,9 +171,8 @@
         map.addControl(new OpenLayers.Control.MousePosition());
         $(".olControlZoomIn.olButton").click(setZoomStart);
         $(".olControlZoomOut.olButton").click(setZoomStart);
-        //map.zoomTo(12);
-           map.setCenter(new OpenLayers.LonLat(108.68603,33.84177), 10);
-
+        
+       map.setCenter(new OpenLayers.LonLat(108.68603,33.84177), 10);
 
         drawControls = {
             point: new OpenLayers.Control.DrawFeature(pointLayer,
@@ -252,10 +243,7 @@
         }
     </script>
 </head>
-<!-- body.onload is called once the page is loaded (call the 'init' function) -->
-
-<body onload="init();">
-    <!-- define a DIV into which the map will appear. Make it take up the whole window -->
+<body onload="init();">   
     <input type="button" value="12-20" data="20 " onclick="calcTime(20)" />
     <input type="button" value="20-12" data="12" onclick="calcTime(12)" />
     <span id="calctime"></span>
