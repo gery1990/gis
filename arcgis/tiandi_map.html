@@ -1,0 +1,58 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TianDi Map</title>
+    <link rel="stylesheet" href="arcgis_js_api\library\3.6\3.6/js/esri/css/esri.css">
+    <link rel="stylesheet" href="arcgis_js_api\library\3.6\3.6\js/dojo/dijit/themes/tundra/tundra.css">
+    <script src="arcgis_js_api/library/3.6/3.6/init.js" type="text/javascript"></script>
+    <script src="TDLayer.js" type="text/javascript"></script>
+    <script src="PGISLayer.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        dojo.require("esri.map");
+        dojo.require("dijit/form/Button");
+        var map;
+
+        function init() {
+            map = new esri.Map("mapDiv");
+            var basemap = new esri.layers.TDTLayer();
+            var xianLayer = new esri.layers.PGISLayer(); 
+             map.addLayer(xianLayer);
+         //  map.addLayer(basemap);
+
+            var point = new esri.geometry.Point(
+            {
+                "x":  120.200018 ,
+                "y":  30.209999,
+                "spatialReference": { "wkid": 4326 }
+            });
+             var xian_point = new esri.geometry.Point(
+            {
+                "x": 108.72265,//120.200018,[108.72265, 34.24023]
+                "y": 34.24023,//30.209999,
+                "spatialReference": { "wkid": 3785 }
+            });
+            map.centerAndZoom(xian_point, 12);
+           //  map.centerAndZoom(point, 14);
+
+            var button = new dijit.form.Button({
+                label: "北京",
+                onClick: function () {
+                    map.centerAt(new esri.geometry.Point(116.3, 39.9, new esri.SpatialReference({ wkid: 4326 })));
+                } 
+            }
+            , "ToBeijing");
+
+        }
+        dojo.ready(init);
+    </script>
+</head>
+<body class="tundra">
+    <button id="ToBeijing" type="button">
+    </button>
+    <br />
+    <div id="mapDiv" style="width: 100%; height: 700px; border: 1px solid #000;">
+    </div>
+</body>
+</html>

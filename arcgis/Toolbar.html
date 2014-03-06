@@ -9,8 +9,8 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <title>Maps Toolbar</title>
     
-    <link rel="stylesheet" href="http://js.arcgis.com/3.8/js/dojo/dijit/themes/nihilo/nihilo.css">
-    <link rel="stylesheet" href="http://js.arcgis.com/3.8/js/esri/css/esri.css">
+    <link rel="stylesheet" href="../arcgis/arcgis_js_api/library/3.6/3.6/js/dojo/dijit/themes/nihilo/nihilo.css">
+    <link rel="stylesheet" href="../arcgis/arcgis_js_api/library/3.6/3.6/js/esri/css/esri.css">
     <style>
       html, body, #mainWindow {
         font-family: sans-serif; 
@@ -58,10 +58,20 @@
         //   center: [-15.469, 36.428],
         //   zoom: 3
         // });
-          map = new Map("map",{maxZoom:14,minZoom:8});
-            console.log(map);
-                
-            var lay = new   esri.layers.PgisTiledMapServiceLayer("http://192.168.60.56:6080/arcgis/rest/services/sjz_google222/MapServer");
+          var startExtent = new esri.geometry.Extent(12912392.532672398, 4819583.94446522, 13007098.010717731, 4877828.960018523,
+          new esri.SpatialReference({wkid:3785}) );
+          map = new Map("map",
+            {
+              maxZoom:20,
+              minZoom:8,
+              //extent: startExtent,
+             // center:[108.72265, 34.24023]
+            });
+            console.log(map);   
+            var options = {
+              fullExtent:startExtent
+            } ; 
+            var lay = new esri.layers.PgisTiledMapServiceLayer("http://192.168.60.56:6080/arcgis/rest/services/sjz_google222/MapServer");
             map.addLayer(lay);
         map.on("load", createToolbar);
          map.on("zoom-start",function(){

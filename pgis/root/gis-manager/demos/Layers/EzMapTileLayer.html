@@ -1,50 +1,85 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:v="urn:schemas-microsoft-com:vml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+
 <head>
-	<title></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=7" />
-	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
 </head>
+
 <body>
-	<div class="map-id" id="mapId"></div>
-	<link rel="stylesheet" type="text/css" href="../../css/rescorce-code.css"/>
-	<link rel="stylesheet" type="text/css" href="../../css/shCore.css"/>
-	<link rel="stylesheet" type="text/css" href="../../css/shThemeDefault.css"/>
-	<script type="text/javascript" src="../../../../v1.0/Init.js"></script>
-	<script type="text/javascript" src="../../js/jquery.js"></script>
-	<script type="text/javascript" src="../../js/allScript.js"></script>
-	<script type="text/javascript" src="../../js/resource-code.js"></script>
-	<script type="text/javascript">
-		//地图控件
-		var mapContainer = document.getElementById("mapId");
-		var map = new NPMapLib.Map(mapContainer, {minZoom:0,
-												  maxZoom:10});
-		
-		//图层参数
-		var opts = {centerPoint:[119.97998, 31.76391],
-				    fullExtent:[119.74462, 31.59594, 120.14306, 31.9812],
-					minLevel:0,
-					maxLevel:10,
-					zoomOffset:10
-				};
+    <input id="button" type="button" value="12-20" data="20 " onclick="calcTime(20)" />
+    <input id="button" type="button" value="20-12" data="12" onclick="calcTime(12)" />
+    <span id="calctime"></span>
+    <br>
+    <br>
+    <div class="map-id" style="width: 90%; height: 80%" id="mapId"></div>
+    <link rel="stylesheet" type="text/css" href="../../css/rescorce-code.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/shThemeDefault.css" />
+    <style type="text/css">
+    #mapId {
+        border: 1px solid #000;
+    }
+    #button {
+        width: 48px;
+        height: 22px;
+    }
+    </style>
 
-		//图层路径
-		var url = "http://172.21.12.51:9080/EzServer/Maps/SL";
-		var layerSL = new NPMapLib.Layers.EzMapTileLayer(url, "矢量地图", opts);
+    <script type="text/javascript" src="../../../../v1.0/Init.js"></script>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/allScript.js"></script>
+    <script type="text/javascript" src="../../js/resource-code.js"></script>
+    <script type="text/javascript">
+    //地图控件
+    var mapContainer = document.getElementById("mapId");
+    map = new NPMapLib.Map(mapContainer, {
+        minZoom: 12,
+        maxZoom: 20
+    });
+    //
+    //图层参数
+    var opts = {
+        centerPoint: [119.97998, 31.76391],
+        fullExtent: [110.0039, 34.73046, 107.4414, 33.75],
+        minLevel: 12,
+        maxLevel: 20,
+        zoomOffset: 0
+    };
 
-		url = "http://172.21.12.51:9080/EzServer/Maps/YX";
-		var layerYX = new NPMapLib.Layers.EzMapTileLayer(url, "影像地图", opts);
+    var url = "http://10.173.2.20/PGIS_S_TileMapServer/Maps/V"
+    layerSLYX = new NPMapLib.Layers.EzMapTileLayer(url, "矢量影像地图", opts);
+    map.addLayers([layerSLYX]);
+    var ctrl = new NPMapLib.Controls.NavigationControl();
+    map.addControl(ctrl);
 
-		url = "http://172.21.12.51:9080/EzServer/Maps/SLYX";
-		var layerSLYX = new NPMapLib.Layers.EzMapTileLayer(url, "矢量影像地图", opts);
+    map.addEventListener(NPMapLib.MAP_EVENT_ZOOM_START, setZoomStart);
+    map.addEventListener(NPMapLib.MAP_EVENT_ZOOM_END, setZoomEnd);
 
-		map.addLayers([layerSL, layerYX, layerSLYX]);
-	</script>
-	<script type="text/javascript">
-		$(function(){
-			loadDemoCode("../../demosCode/Layers/EzMapTileLayer.html");
-		});
-	</script>
+    function calcTime(zoom) {
+        setZoomStart();
+        map.setZoom(zoom);
+    }
+
+    function setZoomStart() {
+        startTime = new Date();        
+    }
+
+    function setZoomEnd() {
+        document.getElementById("calctime").innerHTML = new Date() - startTime;
+        startTime = null;
+    }
+    </script>
+    <script type="text/javascript">
+    var map, layerSLYX, startTime;
+    $(function() {
+        loadDemoCode("../../demosCode/Layers/EzMapTileLayer.html");
+    });
+
+   
+    </script>
 </body>
+
 </html>

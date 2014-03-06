@@ -97,24 +97,25 @@ define("esri/layers/PgisTiledMapServiceLayer", ["dojo/_base/kernel", "dojo/_base
 		},
 		getTileUrl: function(_1b, row, col) {
 			
-			var ts = this.tileServers,
-				_1c = this._url.query,
-				_1d = (ts ? ts[row % ts.length] : this._url.path) + "/tile/" + _1b + "/" + row + "/" + col;
-			if (this._resampling) {
-				_1d += "?blankTile=false";
-			}
-			if (_1c) {
-				if (this._resampling) {
-					_1d += ("&" + _7.objectToQuery(_1c));
-				} else {
-					_1d += ("?" + _7.objectToQuery(_1c));
-				}
-			}
-			var _1e = this._getToken();
-			if (_1e && (!_1c || !_1c.token)) {
-				_1d += (_1d.indexOf("?") === -1 ? "?" : "&") + "token=" + _1e;
-			}
-			return _9.addProxy(_1d);
+			// var ts = this.tileServers,
+			// 	_1c = this._url.query,
+			// 	_1d = (ts ? ts[row % ts.length] : this._url.path) + "/tile/" + _1b + "/" + row + "/" + col;
+			// if (this._resampling) {
+			// 	_1d += "?blankTile=false";
+			// }
+			// if (_1c) {
+			// 	if (this._resampling) {
+			// 		_1d += ("&" + _7.objectToQuery(_1c));
+			// 	} else {
+			// 		_1d += ("?" + _7.objectToQuery(_1c));
+			// 	}
+			// }
+			// var _1e = this._getToken();
+			// if (_1e && (!_1c || !_1c.token)) {
+			// 	_1d += (_1d.indexOf("?") === -1 ? "?" : "&") + "token=" + _1e;
+			// }
+			// return _9.addProxy(_1d);
+			return "http://10.173.2.20/PGIS_S_TileMapServer/Maps/V/EzMap?Service=getImage&Type=RGB&ZoomOffset=0&V=0.3&Col="+col+"&Row="+row+"&Zoom="+_1b;
 		}
 	});
 	if (_6("extend-esri")) {

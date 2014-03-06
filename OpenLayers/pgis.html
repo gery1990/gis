@@ -6,10 +6,11 @@
     #map {
         border: 1px solid #ccc;
     }
-    </style>  
+    </style>
     <script src="lib/OpenLayers.js"></script>
     <script src="lib/Config.js"></script>
-    <script src="lib/OpenLayers/Layer/TMS_PGIS.js"></script>  
+    <script src="lib/OpenLayers/Layer/TMS_PGIS.js"></script>
+    <script src="AnimatedCluster.js"></script>
     <style type="text/css">
     .olImageLoadError {
         background-color: transparent !important;
@@ -18,42 +19,169 @@
     </style>
     <script src="jquery.min.js"></script>
     <script type="text/javascript">
-    var map, wmsLayer, startTime;
+    var map, wmsLayer, vector,startTime;
 
     function init() {
+        var colors = {
+            low: "rgb(181, 226, 140)",
+            middle: "rgb(241, 211, 87)",
+            high: "rgb(253, 156, 115)"
+        };
+
+        var lowRule = new OpenLayers.Rule({
+            filter: new OpenLayers.Filter.Comparison({
+                type: OpenLayers.Filter.Comparison.LESS_THAN,
+                property: "count",
+                value: 15
+            }),
+            symbolizer: {
+                fillColor: colors.low,
+                fillOpacity: 0.9,
+                strokeColor: colors.low,
+                strokeOpacity: 0.5,
+                strokeWidth: 12,
+                pointRadius: 10,
+                label: "${count}",
+                labelOutlineWidth: 0.1,
+                fontColor: "#ffffff",
+                fontOpacity: 0.8,
+                fontSize: "12px",
+                labelAlign: "m",
+                externalGraphic: "img/BluePin1LargeB.png",
+                graphicWidth: 76,
+                graphicHeight: 76
+            }
+        });
+        var middleRule = new OpenLayers.Rule({
+            filter: new OpenLayers.Filter.Comparison({
+                type: OpenLayers.Filter.Comparison.BETWEEN,
+                property: "count",
+                lowerBoundary: 15,
+                upperBoundary: 50
+            }),
+            symbolizer: {
+                fillColor: colors.middle,
+                fillOpacity: 0.9,
+                strokeColor: colors.middle,
+                strokeOpacity: 0.5,
+                strokeWidth: 12,
+                pointRadius: 15,
+                label: "${count}",
+                labelOutlineWidth: 0.1,
+                fontColor: "#ffffff",
+                fontOpacity: 0.8,
+                fontSize: "12px",
+                labelAlign: "m",
+                externalGraphic: "img/GreenPin1LargeB.png",
+                graphicWidth: 76,
+                graphicHeight: 76
+            }
+        });
+        var highRule = new OpenLayers.Rule({
+            filter: new OpenLayers.Filter.Comparison({
+                type: OpenLayers.Filter.Comparison.GREATER_THAN,
+                property: "count",
+                value: 50
+            }),
+            symbolizer: {
+                fillColor: colors.high,
+                fillOpacity: 0.9,
+                strokeColor: colors.high,
+                strokeOpacity: 0.5,
+                strokeWidth: 12,
+                pointRadius: 20,
+                label: "${count}",
+                labelOutlineWidth: 0.1,
+                fontColor: "#ffffff",
+                fontOpacity: 0.8,
+                fontSize: "12px",
+                labelAlign: "m",
+                externalGraphic: "img/RedPin1LargeB.png",
+                graphicWidth: 76,
+                graphicHeight: 76
+            }
+        });
+
+        // Create a Style that uses the three previous rules
+        var style = new OpenLayers.Style(null, {
+            rules: [lowRule, middleRule, highRule]
+        });
+        // var maxExtent = new OpenLayers.Bounds(12912392.532672398, 4819583.94446522, 13007098.010717731, 4877828.960018523);
+
+        //Max extent from layerInfo above
+        // var layerMaxExtent = new OpenLayers.Bounds(
+        //     107.4414,33.75,110.0039,34.73046
+        // );
+
         var imageUrl = "http://10.173.2.20/PGIS_S_TileMapServer/Maps/V"
         //maxZoomLevel:20,numZoomLevels:9,
-        var bound = new OpenLayers.Bounds(12912392.532672398, 4819583.94446522, 13007098.010717731, 4877828.960018523);
-
+        // var bound = new OpenLayers.Bounds(12912392.532672398, 4819583.94446522, 13007098.010717731, 4877828.960018523);
+        var  resolutions = [
+        2,1,0.5,0.25,0.125,0.0625,0.03125,0.015625,0.0078125,0.00390625,0.001953125,0.0009765625,0.00048828125,0.000244140625,0.0001220703125,0.00006103515625,0.000030517578125,0.0000152587890625,0.00000762939453125,0.000003814697265625,0.0000019073486328125,9.5367431640625e-7,4.76837158203125e-7];
         map = new OpenLayers.Map("map", {
-            maxResolution: "auto",
-
-            maxExtent: new OpenLayers.Bounds(107.4414, 33.75, 110.0039, 34.73046)
-        }); //,maxResolution:1.40625
+            maxResolution: 2,
+            projection: "EPSG:3785",
+            center:new OpenLayers.LonLat(108.72265, 34.24023),
+            // resolutions: resolutions,
+            maxExtent: new OpenLayers.Bounds(107.4414, 32.75, 110.0039, 34.73046)
+        });
         map.events.register("zoomend", this, setZoomEnd);
 
         wmsLayer = new OpenLayers.Layer.TMS_PGIS("Name",
             imageUrl, {
                 type: 'png',
                 layername: 'pgis',
-                 maxZoomLevel:20, 
-                 numZoomLevels:21,
-                isBaseLayer: true
-             //  , tileOrigin: new OpenLayers.LonLat(107.4414, 33.75)
+                 maxZoomLevel:20,
+                // numZoomLevels:21,
+                maxResolution: 2,
+                tileOrigin: new OpenLayers.LonLat(0,0)
             });
         var pointLayer = new OpenLayers.Layer.Vector("Point Layer");
         var lineLayer = new OpenLayers.Layer.Vector("Line Layer");
         var polygonLayer = new OpenLayers.Layer.Vector("Polygon Layer");
         var boxLayer = new OpenLayers.Layer.Vector("Box layer");
-        // map.addLayer(layer);
+        // map.addLayer(wmsLayer);
         map.addLayers([wmsLayer, pointLayer, lineLayer, polygonLayer, boxLayer]);
-        // map.addControl(new OpenLayers.Control.PanZoomBar());
+        // Create a vector layers
+        vector = new OpenLayers.Layer.Vector("Features", {
+            renderers: ['SVG'], //'Canvas',
+            strategies: [
+                new OpenLayers.Strategy.AnimatedCluster({
+                    distance: 45,
+                    animationMethod: OpenLayers.Easing.Expo.easeOut,
+                    animationDuration: 20
+                })
+            ],
+            styleMap: new OpenLayers.StyleMap(style)
+        });
+        map.addLayer(vector);
+        //使用jQuery获取json脚本，并转换为pointInfo对象。
+        var xmin = 108.50732;
+        var xmax = 109.41357;
+        var ymin = 33.74308;
+        var ymax = 34.06241;
+        var list = [];
+        for (var i = 0; i < 50000; i++) {
+            var x = Math.random() * (xmax - xmin) +xmin;
+            var y = Math.random() * (ymax - ymin) +ymin;
+            list.push(
+            {
+                "lon": x,
+                "lat": y
+            });
+
+        };
+        initPoint(list);
+
+
         map.addControl(new OpenLayers.Control.ScaleLine());
         map.addControl(new OpenLayers.Control.LayerSwitcher());
         map.addControl(new OpenLayers.Control.MousePosition());
         $(".olControlZoomIn.olButton").click(setZoomStart);
         $(".olControlZoomOut.olButton").click(setZoomStart);
-        map.zoomTo(12);
+        //map.zoomTo(12);
+           map.setCenter(new OpenLayers.LonLat(108.68603,33.84177), 10);
+
 
         drawControls = {
             point: new OpenLayers.Control.DrawFeature(pointLayer,
@@ -77,38 +205,51 @@
         document.getElementById('noneToggle').checked = true;
     }
 
-    function toggleControl(element) {
-        for (key in drawControls) {
-            var control = drawControls[key];
-            if (element.value == key && element.checked) {
-                control.activate();
-            } else {
-                control.deactivate();
+        function initPoint(pointInfo) {
+            var features = [];
+            for (var i = 0; i < pointInfo.length; i++) {
+                var info = pointInfo[i];
+                var lonlat = new OpenLayers.LonLat(info.lon, info.lat);
+
+                var f = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(info.lon, info.lat));
+
+                features.push(f);
+            }
+            vector.addFeatures(features);
+
+        }
+        function toggleControl(element) {
+            for (key in drawControls) {
+                var control = drawControls[key];
+                if (element.value == key && element.checked) {
+                    control.activate();
+                } else {
+                    control.deactivate();
+                }
             }
         }
-    }
 
-    function allowPan(element) {
-        var stop = !element.checked;
-        for (var key in drawControls) {
-            drawControls[key].handler.stopDown = stop;
-            drawControls[key].handler.stopUp = stop;
+        function allowPan(element) {
+            var stop = !element.checked;
+            for (var key in drawControls) {
+                drawControls[key].handler.stopDown = stop;
+                drawControls[key].handler.stopUp = stop;
+            }
         }
-    }
-    //计时功能
+        //计时功能
 
-    function calcTime(zoom) {
-        setZoomStart();
-        map.zoomTo(zoom);
-    }
+        function calcTime(zoom) {
+            setZoomStart();
+            map.zoomTo(zoom);
+        }
 
-    function setZoomStart() {
-        startTime = new Date();
-    }
+        function setZoomStart() {
+            startTime = new Date();
+        }
 
-    function setZoomEnd() {
-        document.getElementById("calctime").innerHTML = new Date() - startTime;
-    }
+        function setZoomEnd() {
+            document.getElementById("calctime").innerHTML = new Date() - startTime;
+        }
     </script>
 </head>
 <!-- body.onload is called once the page is loaded (call the 'init' function) -->
