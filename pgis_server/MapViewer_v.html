@@ -1,0 +1,113 @@
+?
+
+
+
+
+
+
+<HTML xmlns:v ="urn:schemas-microsoft-com:vml">
+  <head>
+	<meta http-equiv="content-type" content="text/html; charset=GB2312"/>
+	<title>地图测试页面</title>
+	<LINK href="css/EzServer.css" type="text/css" rel="stylesheet">
+	<SCRIPT type="text/javascript" src="../Maps/V/js/EzMapAPI.jsp"></SCRIPT>
+
+	<script type="text/javascript">
+		_MapApp=null;
+		
+		function onLoad() {
+			
+			if(typeof EzMap =="undefined"){
+				window.setTimeout("onLoad()",10);
+				return;
+			}
+			
+			_mCopyright="公安部信息中心";
+	
+			if(_compatIE()){
+				_MapApp=new EzMap(document.getElementById("map"));
+				var pOverview=new OverView();
+				pOverview.minLevel=8;
+				pOverview.maxLevel=10;
+				_MapApp.addOverView(pOverview);
+				_MapApp.hideMapServer();
+				_MapApp.showStandMapControl();
+				_MapApp.hideMapScale();
+			}else if(_MapApp==null){
+				var pEle=document.getElementById("map");
+			}
+		}
+		
+		function getLevel(pEle){
+			pEle.value=_MapApp.getZoomLevel();
+		}
+		
+		function getBounds(){
+			_MapApp.changeDragMode('drawRect',datainput,datainput);
+		}
+		
+		function download(){
+			
+			var pPointArry=datainput.value.split(",");
+			var iZoom=parseInt(setLevel.value);
+			if(pPointArry.length<4){
+				alert("请设置边框坐标");
+				return;
+			}
+			iZoom+=_ZoomOffset;
+			if(isNaN(iZoom) || iZoom>16  || iZoom<-3){
+				alert("请设置级别,或级别错误");
+				return;
+			}
+			// 变成投影后的
+			for(var i=0;i<pPointArry.length;i++){
+				pPointArry[i] = parseFloat(pPointArry[i]);
+			}
+			_MapApp.downloadMap(pPointArry[0],pPointArry[1],pPointArry[2],pPointArry[3],iZoom,"image");
+		}
+	</script>
+  </head>
+  
+
+
+  <body onload="onLoad()">
+  <table style="width:100%;height:95%">
+  	<tr height="*">
+	  <td colspan=2 >
+	  	<fieldset style="width:100%;height:92%">
+			<legend>地图窗口</legend>
+				<table border="0" cellpadding="0" cellspacing="0" style="width:100%;height:100%" >
+				<tr height="*">
+					<td>
+						<div id="map" style="height:100%;width:100%" > </div>
+					</td>
+				</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+  
+  	<tr height="60px">
+	  <td colspan=2>
+	  	<fieldset style="width:100%;height:100%">
+			<legend>下载设置</legend>
+				<table>
+					<tbody>
+						<tr>
+							<td style="80%" align="right"><input value="获取范围" type="button" onclick="getBounds()" ></td>
+							<td><input name="datainput" value="" type="text" size=80  ></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td style="80%" align="right"><input value="获取级别" type="button" onclick="getLevel(setLevel)"></td>
+							<td><input name=setLevel value="" type="text" size=80 ></td>
+							<td align="center"><input value="  下载  " type="button" onclick="download()"></td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

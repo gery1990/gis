@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0095)http://localhost:8080/pgis_server/10.173.2.20/PGIS_S_TileMapServer/index.jsp@content=enviroment -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>PGIS栅格地图图片服务</title>
+<link href="./enviroment_files/default.css" rel="stylesheet" type="text/css">
+<style type="text/css"></style><style id="clearly_highlighting_css" type="text/css">/* selection */ html.clearly_highlighting_enabled ::-moz-selection { background: rgba(246, 238, 150, 0.99); } html.clearly_highlighting_enabled ::selection { background: rgba(246, 238, 150, 0.99); } /* cursor */ html.clearly_highlighting_enabled {    /* cursor and hot-spot position -- requires a default cursor, after the URL one */    cursor: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--cursor.png") 14 16, text; } /* highlight tag */ em.clearly_highlight_element {    font-style: inherit !important; font-weight: inherit !important;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow.png");    background-repeat: repeat-x; background-position: top left; background-size: 100% 100%; } /* the delete-buttons are positioned relative to this */ em.clearly_highlight_element.clearly_highlight_first { position: relative; } /* delete buttons */ em.clearly_highlight_element a.clearly_highlight_delete_element {    display: none; cursor: pointer;    padding: 0; margin: 0; line-height: 0;    position: absolute; width: 34px; height: 34px; left: -17px; top: -17px;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite.png"); background-repeat: no-repeat; background-position: 0px 0px; } em.clearly_highlight_element a.clearly_highlight_delete_element:hover { background-position: -34px 0px; } /* retina */ @media (min--moz-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {    em.clearly_highlight_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow@2x.png"); }    em.clearly_highlight_element a.clearly_highlight_delete_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite@2x.png"); background-size: 68px 34px; } } </style><script type="text/javascript" charset="utf-8" src="./enviroment_files/extension.js"></script><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style></head>
+<body>
+<div class="document">
+<table class="client" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td colspan="2">
+		<h1 class="title">PGIS栅格地图图片服务</h1>
+		<div class="subtitle"></div>
+		</td>
+	</tr>
+	<tr>
+		<td id="mainmenu">
+			<h2>浏览导航</h2>
+		<a href="introduction.htm" target="_self"> 服务功能简介 </a>
+			<a href="specification.html" target="_self"> 服务功能定义 </a>
+			<a href="enviroment.html" target="_self"> 运行环境说明 </a>
+			<a href="configuration.htm" target="_self"> 服务器配置 </a>
+			<a href="interface.html" target="_self"> 服务接口地址 </a>
+			<a href="testing.html" target="_self"> 服务测试页面 </a>
+			<!--<a href="index.jsp?content=version" target="_self"> 版本信息列表 </a>-->
+		</td>
+		
+		<td class="content">
+			<h2>浏览内容</h2>
+			
+			
+
+<script type="text/javascript" src="./enviroment_files/LicenseClientHelp@Method=getLicenseInfo"></script>
+
+<!-- 具体内容-运行环境说明 开始 -->
+<div class="subject">
+    <div class="tabh">
+        <div class="l"></div>
+        <div class="m">运行环境说明</div>
+        <div class="r"></div>
+    </div>
+    <div class="clear"></div>
+    
+	<div>
+		<div>
+			<div class="emphasize">硬件环境依赖</div>
+			<ol class="Content List" type="a">
+				<li>硬盘空间：1G以上，并在程序部署的目录下，程序有完全文件访问权限</li>
+				<li>实可用内存：200M以上</li>
+				<li>可用的TCP/IP协议网络</li>
+			</ol>
+		</div>
+				
+		<div>
+			<div class="emphasize">软件环境依赖</div>
+			<ol class="Content List" type="a">
+				<li>SUN JDK1.5.0以上版本(确保JAXP 1.3以上)</li>
+				<li>支持 J2EE 1.3 版本以上的Servlet/JSP WEB容器</li>
+				<li>W3C DOM3 实现</li>
+			</ol>
+		</div>
+		
+		<div>
+			<div class="emphasize">软件许可证</div>
+			<ol class="Content List" type="a">
+				<li>许可证说明
+
+					<div>
+						<ul>
+							<li>许可证文件，有两种格式，v6.3.4格式和v6.3.6格式</li>
+							<li>v6.3.4格式适用于v6.3.4,v6.3.5,v6.3.6服务器
+
+								<ol>
+									<li>申请v6.3.4许可证文件，保存于WEB-INF/conf/EzServer_License.xml位置</li>
+									<li>申请时，需要填写 申请单位名称，起始使用时间，终止使用时间，机器码</li>
+									<li>
+										机器码：
+										<script type="text/javascript">
+						    				if( typeof machineCode != "undefined" ){
+						    					document.writeln('<SPAN class="emphasize">'+machineCode+'</SPAN>');
+						    				}else{
+						    					document.writeln('<SPAN class="emphasize">服务器程序损坏</SPAN>');
+						    				}
+						    			</script><span class="emphasize">4524ed68f0a512106f30e31468dd0f7d</span>
+	
+									</li>
+								</ol>
+							</li>
+							<li>v6.3.6格式适用于v6.3.6服务器
+
+								<ol>
+									<li>申请v6.3.6许可证文件，保存于WEB-INF/License.lic位置或者<font color="red">根据项目管理员提供的文件位置</font>存放</li>
+									<li>申请时，需要填写内容需要申请时另行决定</li>
+								</ol>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li>当前许可证配置
+
+					<div style="margin-left:10px;">
+						<script type="text/javascript">
+		    				if( typeof licenseValid != "undefined" ){
+		    					if( licenseValid ){
+		    						document.writeln('<DIV class="emphasize">服务器许可正确</DIV>');
+		    					}else{
+		    						document.writeln('<DIV class="emphasize">服务器许可配置不正确</DIV>');
+		    						if( typeof licenseErrors != "undefined"){
+		    							for(i=0;i<licenseErrors.length;i++){
+		    								document.writeln('<DIV class="emphasize">'+licenseErrors[i]+'</DIV>');
+		    							}
+		    						}
+		    					}
+		    				}else{
+		    					document.writeln('<DIV class="emphasize">服务器配置不正确或者没有启动成功</DIV>');
+		    				}
+		    			</script><div class="emphasize">服务器许可正确</div>
+
+	    			</div>
+				</li>
+			</ol>
+		</div>
+	</div>
+    
+</div>
+<!-- 具体内容-运行环境说明 结束 -->
+
+		</td>
+	</tr>
+</tbody></table>
+</div>
+
+</body></html>

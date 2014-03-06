@@ -1,0 +1,6 @@
+// --------- BasicInfo Object Begin----------- 
+ licenseValid = true; 
+licenseErrors = [];// --------- BasicInfo Object End----------- 
+// --------- machineCode Object Begin----------- 
+ machineCode = '4524ed68f0a512106f30e31468dd0f7d'; 
+// --------- machineCode Object End----------- 

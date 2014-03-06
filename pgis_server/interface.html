@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0094)http://localhost:8080/pgis_server/10.173.2.20/PGIS_S_TileMapServer/index.jsp@content=interface -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>PGIS栅格地图图片服务</title>
+<link href="./interface_files/default.css" rel="stylesheet" type="text/css">
+<style id="clearly_highlighting_css" type="text/css">/* selection */ html.clearly_highlighting_enabled ::-moz-selection { background: rgba(246, 238, 150, 0.99); } html.clearly_highlighting_enabled ::selection { background: rgba(246, 238, 150, 0.99); } /* cursor */ html.clearly_highlighting_enabled {    /* cursor and hot-spot position -- requires a default cursor, after the URL one */    cursor: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--cursor.png") 14 16, text; } /* highlight tag */ em.clearly_highlight_element {    font-style: inherit !important; font-weight: inherit !important;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow.png");    background-repeat: repeat-x; background-position: top left; background-size: 100% 100%; } /* the delete-buttons are positioned relative to this */ em.clearly_highlight_element.clearly_highlight_first { position: relative; } /* delete buttons */ em.clearly_highlight_element a.clearly_highlight_delete_element {    display: none; cursor: pointer;    padding: 0; margin: 0; line-height: 0;    position: absolute; width: 34px; height: 34px; left: -17px; top: -17px;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite.png"); background-repeat: no-repeat; background-position: 0px 0px; } em.clearly_highlight_element a.clearly_highlight_delete_element:hover { background-position: -34px 0px; } /* retina */ @media (min--moz-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {    em.clearly_highlight_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow@2x.png"); }    em.clearly_highlight_element a.clearly_highlight_delete_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite@2x.png"); background-size: 68px 34px; } } </style><style type="text/css"></style><script type="text/javascript" charset="utf-8" src="./interface_files/extension.js"></script><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style></head>
+<body>
+<div class="document">
+<table class="client" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td colspan="2">
+		<h1 class="title">PGIS栅格地图图片服务</h1>
+		<div class="subtitle"></div>
+		</td>
+	</tr>
+	<tr>
+		<td id="mainmenu">
+			<h2>浏览导航</h2>
+		<a href="introduction.htm" target="_self"> 服务功能简介 </a>
+			<a href="specification.html" target="_self"> 服务功能定义 </a>
+			<a href="enviroment.html" target="_self"> 运行环境说明 </a>
+			<a href="configuration.htm" target="_self"> 服务器配置 </a>
+			<a href="interface.html" target="_self"> 服务接口地址 </a>
+			<a href="testing.html" target="_self"> 服务测试页面 </a>
+			<!--<a href="index.jsp?content=version" target="_self"> 版本信息列表 </a>-->
+		</td>
+		
+		<td class="content">
+			<h2>浏览内容</h2>
+			
+			
+
+
+<!-- 具体内容-服务接口地址 开始 -->
+<div class="subject">
+<div class="tabh">
+<div class="l"></div>
+<div class="m">服务接口地址</div>
+<div class="r"></div>
+</div>
+<div class="clear"></div>
+
+<div class="emphasize">变量 {地图名称} 代表程序要引用的地图名称，地图名称使用地图配置文件配置。</div>
+
+
+
+<div class="tabh2">
+<div class="l"></div>
+<div class="m">一般地图服务客户端引用URL</div>
+<div class="r"></div>
+</div>
+<div class="clear"></div>
+
+<div>
+<p>URL地址：<code>http://10.173.2.11:80/PGIS_S_TileMapServer/Maps/{地图名称}</code></p>
+</div>
+
+<div class="tabh2">
+<div class="l"></div>
+<div class="m">地图服务查询接口</div>
+<div class="r"></div>
+</div>
+<div class="clear"></div>
+
+<div>
+<p>接口地址如下： <code>http://10.173.2.11:80/PGIS_S_TileMapServer/Maps/{地图名称}/EzMap
+</code></p>
+</div>
+
+<p>接口参数列表:</p>
+<div style="text-align: center">
+<table class="info" style="text-align: left">
+	<thead>
+		<tr>
+			<th style="width: 100px">参数名称</th>
+			<th style="width: 200px">描述</th>
+			<th style="width: 250px">参数约束</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Service</td>
+			<td>服务类型</td>
+			<td>必须的，且必须是“getImage”</td>
+		</tr>
+		<tr>
+			<td>Type</td>
+			<td>图像像素格式</td>
+			<td>必须的，且必须是“RGB”</td>
+		</tr>
+		<tr>
+			<td>ZoomOffset</td>
+			<td>缩放等级偏移量</td>
+			<td>非必须的，默认值是“0”</td>
+		</tr>
+		<tr>
+			<td>Col</td>
+			<td>图片列号</td>
+			<td>必须的</td>
+		</tr>
+		<tr>
+			<td>Row</td>
+			<td>图片行号</td>
+			<td>必须的</td>
+		</tr>
+		<tr>
+			<td>Zoom</td>
+			<td>图片缩放等级</td>
+			<td>必须的</td>
+		</tr>
+		<tr>
+			<td>V</td>
+			<td>版本</td>
+			<td>必须是“0.3”</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div>
+<p>典型的请求格式如下：</p>
+<code>http://10.173.2.11:80/PGIS_S_TileMapServer/Maps/{地图名称}/EzMap?Service=getImage&amp;Type=RGB&amp;ZoomOffset=3&amp;Col=232&amp;Row=79&amp;Zoom=5&amp;V=0.3</code>
+</div>
+
+<div class="tabh2">
+<div class="l"></div>
+<div class="m">地图快照服务查询接口</div>
+<div class="r"></div>
+</div>
+<div class="clear"></div>
+
+<div>
+<p>接口地址如下：<code>http://10.173.2.11:80/PGIS_S_TileMapServer/Maps/{地图名称}/EzMap
+</code></p>
+</div>
+
+<p>接口参数列表:</p>
+<div style="text-align: center">
+<table class="info" style="text-align: left">
+	<thead>
+		<tr>
+			<th style="width: 100px">参数名称</th>
+			<th style="width: 200px">描述</th>
+			<th style="width: 250px">参数约束</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Service</td>
+			<td>服务类型</td>
+			<td>必须的，且必须是“getRectImg”</td>
+		</tr>		
+		<tr>
+			<td>minx</td>
+			<td>地图X轴最小区域边界</td>
+			<td>必须的</td>
+		</tr>
+		<tr>
+			<td>miny</td>
+			<td>地图Y轴最小区域边界</td>
+			<td>必须的</td>
+		</tr>
+		<tr>
+			<td>maxx</td>
+			<td>地图X轴最大区域边界</td>
+			<td>必须的</td>
+		</tr>
+		<tr>
+			<td>maxy</td>
+			<td>地图Y轴最大区域边界</td>
+			<td>必须的</td>
+		</tr>
+		<tr>
+			<td>zoom</td>
+			<td>图片缩放等级</td>
+			<td>必须的</td>
+		</tr>
+		<tr>
+			<td>result</td>
+			<td>输出文件格式</td>
+			<td>必须的,可选择（zip|html|image）</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div>
+<p>典型的请求格式如下：</p>
+<code>http://10.173.2.11:80/PGIS_S_TileMapServer/Maps/{地图名称}/EzMap?Service=getRectImg&amp;result=html&amp;minx=116.38393&amp;miny=39.91252&amp;maxx=116.40194&amp;maxy=39.93126&amp;zoom=3</code>
+</div>
+
+</div>
+<!-- 具体内容-服务接口地址 结束 -->
+		</td>
+	</tr>
+</tbody></table>
+</div>
+
+</body></html>

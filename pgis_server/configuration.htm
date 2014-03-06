@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0098)http://localhost:8080/pgis_server/10.173.2.20/PGIS_S_TileMapServer/index.jsp@content=configuration -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>PGIS栅格地图图片服务</title>
+<link href="./configuration_files/default.css" rel="stylesheet" type="text/css">
+<style id="clearly_highlighting_css" type="text/css">/* selection */ html.clearly_highlighting_enabled ::-moz-selection { background: rgba(246, 238, 150, 0.99); } html.clearly_highlighting_enabled ::selection { background: rgba(246, 238, 150, 0.99); } /* cursor */ html.clearly_highlighting_enabled {    /* cursor and hot-spot position -- requires a default cursor, after the URL one */    cursor: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--cursor.png") 14 16, text; } /* highlight tag */ em.clearly_highlight_element {    font-style: inherit !important; font-weight: inherit !important;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow.png");    background-repeat: repeat-x; background-position: top left; background-size: 100% 100%; } /* the delete-buttons are positioned relative to this */ em.clearly_highlight_element.clearly_highlight_first { position: relative; } /* delete buttons */ em.clearly_highlight_element a.clearly_highlight_delete_element {    display: none; cursor: pointer;    padding: 0; margin: 0; line-height: 0;    position: absolute; width: 34px; height: 34px; left: -17px; top: -17px;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite.png"); background-repeat: no-repeat; background-position: 0px 0px; } em.clearly_highlight_element a.clearly_highlight_delete_element:hover { background-position: -34px 0px; } /* retina */ @media (min--moz-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {    em.clearly_highlight_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow@2x.png"); }    em.clearly_highlight_element a.clearly_highlight_delete_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite@2x.png"); background-size: 68px 34px; } } </style><style type="text/css"></style><script type="text/javascript" charset="utf-8" src="./configuration_files/extension.js"></script><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style></head>
+<body>
+<div class="document">
+<table class="client" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td colspan="2">
+		<h1 class="title">PGIS栅格地图图片服务</h1>
+		<div class="subtitle"></div>
+		</td>
+	</tr>
+	<tr>
+		<td id="mainmenu">
+			<h2>浏览导航</h2>
+			<a href="introduction.htm" target="_self"> 服务功能简介 </a>
+			<a href="specification.html" target="_self"> 服务功能定义 </a>
+			<a href="enviroment.html" target="_self"> 运行环境说明 </a>
+			<a href="configuration.htm" target="_self"> 服务器配置 </a>
+			<a href="interface.html" target="_self"> 服务接口地址 </a>
+			<a href="testing.html" target="_self"> 服务测试页面 </a>
+			<!--<a href="index.jsp?content=version" target="_self"> 版本信息列表 </a>-->
+		</td>
+		
+		<td class="content">
+			<h2>浏览内容</h2>
+			
+			
+
+<!-- 具体内容-地图来源配置 开始 -->
+<div class="subject">
+    <div class="tabh">
+        <div class="l"></div>
+        <div class="m">地图数据源配置</div>
+        <div class="r"></div>
+    </div>
+    <div class="clear"></div>
+    <div>
+		<table class="info" style="width:400px">
+			<thead>
+				<tr>
+					<th style="width: 100px;">参数名称</th>
+					<th style="width: 200px;">参数描述</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="width: 100px;">配置文件作用</td>
+					<td style="width: 200px;">配置地图服务的地图信息，包括数据源，空间区域等</td>
+				</tr>
+				<tr>
+					<td>配置文件位置</td>
+					<td> WEB-INF/conf/EzServer_Maps.xml </td>
+				</tr>
+				<tr>
+					<td>配置文件Schema</td>
+					<td> <a href="http://localhost:8080/pgis_server/10.173.2.20/PGIS_S_TileMapServer/xsd/EzServer_Maps.xsd">xsd/EzServer_Maps.xsd</a> </td>
+				</tr>
+				<tr>
+					<td>配置文件语法参考</td>
+					<td> <a href="http://localhost:8080/pgis_server/10.173.2.20/PGIS_S_TileMapServer/help/manual/maps/maps.htm">xsd/EzServer_Maps.xsd</a> </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+    
+    <div class="tabh">
+        <div class="l"></div>
+        <div class="m">地图服务许可配置</div>
+        <div class="r"></div>
+    </div>
+    <div class="clear"></div>
+    <div>
+		<table class="info" style="width:400px">
+			<thead>
+				<tr>
+					<th style="width: 100px;">参数名称</th>
+					<th style="width: 200px;">参数描述</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="width: 100px;">配置文件作用</td>
+					<td style="width: 200px;">v6.3.4格式服务许可证</td>
+				</tr>
+				<tr>
+					<td>配置文件位置</td>
+					<td> WEB-INF/conf/EzServer_License.xml </td>
+				</tr>
+				<tr>
+					<td>配置文件Schema</td>
+					<td> <a href="http://localhost:8080/pgis_server/10.173.2.20/PGIS_S_TileMapServer/xsd/EzServer_License.xsd">xsd/EzServer_License.xsd</a> </td>
+				</tr>
+				<tr>
+					<td>配置文件语法参考</td>
+					<td><a href="http://localhost:8080/pgis_server/10.173.2.20/PGIS_S_TileMapServer/help/manual/license/license.htm">xsd/EzServer_License.xsd</a></td>
+				</tr>
+				
+				<tr>
+					<td style="width: 100px;">配置文件作用</td>
+					<td style="width: 200px;">v6.3.6格式服务许可证</td>
+				</tr>
+				<tr>
+					<td>配置文件位置</td>
+					<td> WEB-INF/License.lic </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+    
+    <div class="tabh">
+        <div class="l"></div>
+        <div class="m">地图服务用户配置</div>
+        <div class="r"></div>
+    </div>
+    <div class="clear"></div>
+    <div>
+		<table class="info" style="width:400px">
+			<thead>
+				<tr>
+					<th style="width: 100px;">参数名称</th>
+					<th style="width: 200px;">参数描述</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="width: 100px;">配置文件作用</td>
+					<td style="width: 200px;">配制服务的使用用户</td>
+				</tr>
+				<tr>
+					<td>配置文件位置</td>
+					<td> WEB-INF/conf/EzServer_Users.xml </td>
+				</tr>
+				<tr>
+					<td>配置文件Schema</td>
+					<td> <a href="http://localhost:8080/pgis_server/10.173.2.20/PGIS_S_TileMapServer/xsd/EzServer_Users.xsd">xsd/EzServer_Users.xsd</a> </td>
+				</tr>
+				<tr>
+					<td>配置文件语法参考</td>
+					<td><a href="http://localhost:8080/pgis_server/10.173.2.20/PGIS_S_TileMapServer/help/manual/users/users.htm">xsd/EzServer_Users.xsd</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+    
+    <div class="tabh">
+        <div class="l"></div>
+        <div class="m">地图服务日志配置</div>
+        <div class="r"></div>
+    </div>
+    <div class="clear"></div>
+    <div>
+		<table class="info" style="width:400px">
+			<thead>
+				<tr>
+					<th style="width: 100px;">参数名称</th>
+					<th style="width: 200px;">参数描述</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="width: 100px;">配置文件作用</td>
+					<td style="width: 200px;">配置服务的日志选项</td>
+				</tr>
+				<tr>
+					<td>配置文件位置</td>
+					<td> WEB-INF/conf/EzServer_Logging.xml </td>
+				</tr>
+				<tr>
+					<td>配置文件Schema</td>
+					<td> <a href="http://localhost:8080/pgis_server/10.173.2.20/PGIS_S_TileMapServer/xsd/EzServer_Logging.xsd">xsd/EzServer_Logging.xsd</a> </td>
+				</tr>
+				<tr>
+					<td>配置文件语法参考</td>
+					<td><a href="http://localhost:8080/pgis_server/10.173.2.20/PGIS_S_TileMapServer/help/manual/logging/logging.htm">xsd/EzServer_Logging.xsd</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	
+</div>
+<!-- 具体内容-地图来源配置 结束 -->
+		</td>
+	</tr>
+</tbody></table>
+</div>
+
+</body></html>
